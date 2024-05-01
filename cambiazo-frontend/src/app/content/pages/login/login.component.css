@@ -148,3 +148,17 @@ main {
   margin: 5px 0 20px 0;
 }
 
+@media(max-width: 915px){
+  .col2 img, .col2{
+    display: none;
+  }
+
+  .login{
+    height: auto;
+  }
+
+  .form-container{
+    margin: 5rem 0 5rem 0;
+  }
+
+}
