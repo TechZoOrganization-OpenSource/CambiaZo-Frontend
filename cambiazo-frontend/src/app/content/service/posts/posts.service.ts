@@ -12,6 +12,9 @@ export class PostsService {
   constructor(private http: HttpClient) {
   }
 
+  getProducs():Observable<any>{
+    return this.http.get(`${this.baseUrl}/products`)
+  }
 
   getCategoriesProducts():Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/categories-objects`)
