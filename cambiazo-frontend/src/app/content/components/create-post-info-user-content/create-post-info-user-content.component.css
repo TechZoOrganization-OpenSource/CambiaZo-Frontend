@@ -22,19 +22,17 @@
   margin:0;
 }
 
-.text-area textarea{
-  resize: inherit;
-  height:8rem;
+.section-2 .title-boost{
+  display: flex;
+  justify-content: space-between;
 }
 
-/***** cambia el disenio del input amount *****/
-.example-right-align {
-  text-align: right;
+.title-boost h3{
+  font-weight: bolder;
+
 }
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
+
+.section-2 p{
+  text-align: justify;
 }
-input.example-right-align {
-  -moz-appearance: textfield;
-}
+
