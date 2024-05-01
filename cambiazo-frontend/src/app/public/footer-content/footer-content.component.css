@@ -1,11 +1,16 @@
+
 footer{
   background: #000;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   padding:50px;
   text-align: center;
-  color: #ffffff;
 }
+
+.row:not(:last-child){
+  margin-bottom: 50px;
+}
+
 /*etiquetas reestablecidas*/
 li{
   list-style: none;
@@ -57,4 +62,22 @@ h2{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;
+}
+/*-------------------- Row 2--------------------------------------*/
+
+.info{
+  display: flex;
+  justify-content: center;
+  font-size: 18px;
+  color: #C2C2C2;
+}
+
+.info li:not(:last-of-type){
+  margin-right:25px;
+}
+
+/*-------------------- Row 3--------------------------------------*/
+.copy{
+  color:#FFD146;
+  font-size: 18px;
 }
