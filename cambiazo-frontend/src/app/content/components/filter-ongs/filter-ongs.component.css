@@ -44,3 +44,17 @@ mat-form-field,ng-container, p,mat-checkbox,h4 {
 hr{
   border: solid 1px rgba(0,0,0,0.1);
 }
+
+
+@media(max-width: 1000px) {
+
+  .filter-section{
+    width: 32rem;
+  }
+}
+
+@media(max-width: 650px) {
+  .filter-section{
+    width:80%;
+  }
+}
