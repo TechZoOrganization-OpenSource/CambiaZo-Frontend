@@ -35,6 +35,18 @@ li{
   margin-bottom: 1rem;
 }
 
+@media (max-width: 700px) {
+  .container{
+    margin:2rem 10% 2rem 10%;
+  }
+
+  .title{
+    padding:0;
+    font-size: 3rem;
+  }
+
+}
+
 
 
 
