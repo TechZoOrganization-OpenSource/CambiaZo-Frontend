@@ -26,3 +26,43 @@ button{
   font-family: inherit;
   font-weight: inherit;
 }
+
+
+/********* Logo ************/
+.container-logo{
+  height: 75%;
+  align-content: center;
+}
+img{
+  height:inherit;
+}
+
+/************ Nav *********/
+.container-nav{
+  color: white;
+  font-size: 18px;
+}
+
+.container-nav ul{
+  display: flex;
+}
+
+.container-nav li:not(:last-child){
+  margin-right: 48px;
+}
+.button-register{
+  background: #ffffff;
+}
+.button-login{
+  border-color: #FFD146;
+  color: #FFD146;
+  background: inherit;
+  margin-right: 10px;
+}
+button{
+  padding: 12px 22px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+}
+
