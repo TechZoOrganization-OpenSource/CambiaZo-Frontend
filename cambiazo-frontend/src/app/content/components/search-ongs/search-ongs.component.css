@@ -79,19 +79,6 @@ mat-card-title{
 
 }
 
-/*
-mat-card-actions{
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-mat-card-actions button{
-  border-radius: 25px;
-  background-color: #FFD146;
-  width: 100%;
-}
-*/
 @media (max-width: 500px){
   mat-card-header{
     padding-left:0;
