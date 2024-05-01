@@ -1,1 +1,46 @@
-<p>register works!</p>
+<div class="register">
+  <div class="boxB col1">
+    <form class="form-container">
+      <div class="logo">
+        <input type="image" src="../../../assets/images/logos/logo-2.png" alt="cambiazo-logo" class="img-logo"/>
+      </div>
+      <h1 class="title">Registrarse</h1>
+      <button mat-button routerLink="/home" (click)="register()" class="gmail">
+        <div class="gmail-logo-name">
+          <input type="image" src="https://rotulosmatesanz.com/wp-content/uploads/2017/09/2000px-Google_G_Logo.svg_.png" height="18px" width="18px" style="padding-right: 10px" alt="Logo gmail"/>
+          <span>Registrarse con Google</span>
+        </div>
+      </button>
+      <div class="line-text">
+        <div class="left"></div>
+        <p class="subtitle">o registrate con correo</p>
+        <div class="right"></div>
+      </div>
+      <mat-label><b>Nombre</b></mat-label>
+      <input name="username" placeholder="" class="mat-input-element">
+
+      <mat-label><b>Contraseña</b></mat-label>
+      <input  type="password" placeholder="" class="mat-input-element">
+
+      <mat-label><b>Repetir contraseña</b></mat-label>
+      <input  type="password" placeholder="" class="mat-input-element">
+
+      <mat-label><b>Correo electrónico</b></mat-label>
+      <input  type="email" placeholder="" class="mat-input-element">
+
+      <mat-label><b>Teléfono</b></mat-label>
+      <input  type="tel" placeholder="" class="mat-input-element">
+      <div class="checkbox-accept">
+        <input type="checkbox" class="accept"><mat-label class="checkbox-text"><b>Aceptar <a routerLink="/terms-of-use">Términos y condiciones</a></b></mat-label>
+      </div>
+
+
+      <button mat-button routerLink="/home" (click)="register()" class="button"><b>Crear Cuenta</b></button>
+
+      <p class="login">¿Ya tienes una cuenta? <a routerLink="/login"> Inicia Sesión</a></p>
+
+    </form>
+  </div>
+
+</div>
+<app-footer-content-2></app-footer-content-2>
