@@ -50,3 +50,13 @@
 .box-categories button:hover{
   background-color: black;
 }
+
+@media (max-width: 700px){
+  .box-categories {
+    width: 94%;
+  }
+
+  .form-content {
+    width: 90%;
+  }
+}
