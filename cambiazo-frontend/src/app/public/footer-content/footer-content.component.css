@@ -1,0 +1,28 @@
+footer{
+  background: #000;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  padding:50px;
+  text-align: center;
+  color: #ffffff;
+}
+/*etiquetas reestablecidas*/
+li{
+  list-style: none;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
+h2{
+  font-size: inherit;
+  font-family: inherit;
+  margin:0;
+  font-weight: inherit;
+}
