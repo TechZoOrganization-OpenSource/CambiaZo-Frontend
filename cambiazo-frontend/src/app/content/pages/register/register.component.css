@@ -168,3 +168,18 @@ main {
   text-decoration: none;
   font-weight: bold;
 }
+
+@media(max-width: 915px){
+  .col2 img, .col2{
+    display: none;
+  }
+
+  .login{
+    height: auto;
+  }
+
+  .form-container{
+    margin: 5rem 0 5rem 0;
+  }
+
+}
