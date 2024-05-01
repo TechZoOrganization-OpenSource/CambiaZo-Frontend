@@ -60,3 +60,17 @@
   background-color: #000000;
   color:white;
 }
+
+@media (max-width: 1000px) {
+  .title{
+    line-height: 0.8;
+    font-size: 3rem;
+
+  }
+  .container{
+    margin-right:1rem;
+    margin-left: 1rem;
+    margin-bottom: 2rem;
+  }
+
+}
