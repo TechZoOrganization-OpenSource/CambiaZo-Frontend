@@ -26,3 +26,35 @@ h2{
   margin:0;
   font-weight: inherit;
 }
+
+/*-------------------- Row 1--------------------------------------*/
+.nav{
+  display: flex;
+  justify-content: space-between;
+  color:#ffffff;
+  font-size: 22px;
+}
+
+.column{
+  height: 150px;
+  display:flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+/*--------column 1-------------*/
+.logo img{
+  width: 320px;
+}
+
+/*--------column 2-------------*/
+
+
+/*--------column 3-------------*/
+
+.socials ul{
+  width: 320px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
