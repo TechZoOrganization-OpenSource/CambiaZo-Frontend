@@ -16,6 +16,31 @@
     <button class="button-register" routerLink="/login">Iniciar Sesión</button>
   </div>
 
+  <button mat-icon-button [matMenuTriggerFor]="menu" class="burger">
+    <mat-icon style="color: #ffffff">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <div class="burger-content">
+      <div class="option">
+        <p><a routerLink="" title="Inicio">Inicio</a></p>
+      </div>
+      <div class="option">
+        <p><a routerLink="" title="Donaciones">Donaciones</a></p>
+      </div>
+      <div class="option">
+        <p><a routerLink="" title="Membresías">Membresías</a></p>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="burger-content">
+      <div class="option">
+        <p><a routerLink="" title="Publicar">Publicar</a></p>
+      </div>
+      <div class="option">
+        <p><a routerLink="" title="Iniciar Sesión">Iniciar Sesión</a></p>
+      </div>
+    </div>
+  </mat-menu>
 
 </mat-toolbar>
 <div class="toolbar-template"></div>
