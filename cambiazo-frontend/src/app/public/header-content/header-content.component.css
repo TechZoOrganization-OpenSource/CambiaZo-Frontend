@@ -26,8 +26,6 @@ button{
   font-family: inherit;
   font-weight: inherit;
 }
-
-
 /********* Logo ************/
 .container-logo{
   height: 75%;
@@ -66,3 +64,38 @@ button{
   border-radius: 25px;
 }
 
+/**************** */
+.toolbar-template{
+  height:127px;
+  width: 100%;
+}
+.burger{
+  display:none;
+}
+
+.burger-content{
+  margin: 10px 20px 10px 20px;
+  display: block;
+  align-items: center;
+}
+.line{
+  margin: 5px 10px 5px 10px;
+  border: solid 1px #FFD146;
+}
+.option:hover{
+  color: #FFD146;
+}
+
+@media screen and (max-width: 1035px) {
+  .container-nav,
+  .container-button{
+    display:none;
+  }
+
+  .burger{
+    display:block;
+  }
+  .container-logo img{
+    height: 60%;
+  }
+}
