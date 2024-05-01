@@ -7,6 +7,7 @@ import {TermsOfUseComponent} from "./content/pages/terms-of-use/terms-of-use.com
 import {PrivacyPolicyComponent} from "./content/pages/privacy-policy/privacy-policy.component";
 import{LoginComponent} from "./content/pages/login/login.component";
 import {RegisterComponent} from "./content/pages/register/register.component";
+import {ContactComponent} from "./content/pages/contact/contact.component";
 
 export const routes: Routes = [
   {path:'home',component: HomeComponent},
@@ -17,6 +18,7 @@ export const routes: Routes = [
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'login',component: LoginComponent },
   {path:'register',component: RegisterComponent },
+  {path:'contact', component: ContactComponent},
   {path:'',pathMatch:'full',redirectTo:'home'},
   {path:'**',pathMatch:'full',redirectTo:'home'}
 ];
