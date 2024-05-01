@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-assist',
+  selector: 'app-help',
   standalone: true,
   imports: [],
   templateUrl: './assist.component.html',
