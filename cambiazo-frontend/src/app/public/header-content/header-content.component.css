@@ -1,0 +1,28 @@
+mat-toolbar{
+  background-color: #000;
+  justify-content: space-between;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  height: 8rem;
+  position: fixed;
+  z-index: 1;
+}
+/* reestablecer etiquetas */
+li{
+  list-style: none;
+}
+ul{
+  margin: 0;
+  padding: 0;
+}
+a{
+  text-decoration: none;
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
+button{
+  color: inherit;
+  font-family: inherit;
+  font-weight: inherit;
+}
