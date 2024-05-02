@@ -28,7 +28,7 @@ export class MembershipsComponent implements OnInit{
   }
 
   getMemberAllMemberships() {
-    this.membershipsService.getMemberShips().subscribe(
+    this.membershipsService.getMemberships().subscribe(
       (res:any)=> {
         this.memberships = res
       },error => console.log(error)
