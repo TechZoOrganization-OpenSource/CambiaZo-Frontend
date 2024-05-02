@@ -9,9 +9,21 @@ import {Observable} from "rxjs";
 export class MembershipsService {
 
   baseUrl = environment.baseUrl;
-  constructor(private htpp: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  getMemberShips(): Observable<any> {
-    return this.htpp.get<any>(`${this.baseUrl}/memberships`)
+  getMemberships(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/memberships`)
+  }
+  postMemberships(data:any):Observable<any>{
+    return this.http.post<any>(`${this.baseUrl}/memberships`,data)
+  }
+  deleteMemberships(id:string):Observable<any>{
+    return this.http.delete(`${this.baseUrl}/memberships/${id}`)
+  }
+  putMemberships(id:string,data:any):Observable<any>{
+    return this.http.put(`${this.baseUrl}/memberships/${id}`,data)
+  }
+  getMembershipsById(id:string):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/memberships/${id}`)
   }
 }

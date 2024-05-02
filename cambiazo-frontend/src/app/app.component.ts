@@ -20,7 +20,7 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showNavFooter = !(event.url === '/login'|| event.url === '/register');
+        this.showNavFooter = !(event.url === '/login'|| event.url === '/register'|| event.url.startsWith('/admin'));
       }
     });
 
