@@ -6,6 +6,8 @@ import {MatIcon} from "@angular/material/icon";
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatDrawerContainer} from "@angular/material/sidenav";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogLoginRegisterComponent} from "../components/dialog-login-register/dialog-login-register.component";
 
 @Component({
   selector: 'app-header-content',
@@ -25,12 +27,15 @@ import {MatDrawerContainer} from "@angular/material/sidenav";
   styleUrl: './header-content.component.css'
 })
 export class HeaderContentComponent {
+  userValidation = false
 
-  constructor(private router:Router) {}
+  constructor(private router:Router,private dialogLoginRegister: MatDialog) {}
 
-
-  createPost(){
-    this.router.navigateByUrl('home/post');
+  onCallCreatePost(){
+    if(this.userValidation)this.router.navigateByUrl('home/post');
+    else{
+      this.dialogLoginRegister.open(DialogLoginRegisterComponent,{disableClose: true})
+    }
   }
 
 }

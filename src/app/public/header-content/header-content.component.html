@@ -12,7 +12,7 @@
   </nav>
 
   <div class="container-button">
-    <button class="button-login" (click)="createPost()">Publicar</button>
+    <button class="button-login" (click)="onCallCreatePost()">Publicar</button>
     <button class="button-register" routerLink="/login">Iniciar Sesión</button>
   </div>
 
@@ -34,7 +34,7 @@
     <div class="line"></div>
     <div class="burger-content">
       <div class="option">
-        <p><a routerLink="home/post" title="Publicar">Publicar</a></p>
+        <p><a (click)="onCallCreatePost()" title="Publicar">Publicar</a></p>
       </div>
       <div class="option">
         <p><a routerLink="/login" title="Iniciar Sesión">Iniciar Sesión</a></p>
