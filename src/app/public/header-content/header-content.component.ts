@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterModule} from "@angular/router";
@@ -8,6 +8,9 @@ import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatDrawerContainer} from "@angular/material/sidenav";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogLoginRegisterComponent} from "../components/dialog-login-register/dialog-login-register.component";
+import {LoginComponent} from "../../content/pages/login/login.component";
+import {NgIf} from "@angular/common";
+import {UsersService} from "../../content/service/users/users.service";
 
 @Component({
   selector: 'app-header-content',
@@ -21,21 +24,28 @@ import {DialogLoginRegisterComponent} from "../components/dialog-login-register/
     MatMenuTrigger,
     MatMenuItem,
     MatDrawerContainer,
-    MatSidenavModule
+    MatSidenavModule,
+    NgIf
   ],
   templateUrl: './header-content.component.html',
   styleUrl: './header-content.component.css'
 })
-export class HeaderContentComponent {
+export class HeaderContentComponent implements OnInit{
   userValidation = false
+  constructor(private router:Router,private dialogLoginRegister: MatDialog,public userService:UsersService){
+  }
+  ngOnInit() {
+    this.checkToken()
+  }
 
-  constructor(private router:Router,private dialogLoginRegister: MatDialog) {}
+  checkToken(){
+    const token = localStorage.getItem('token');
+    if(token){this.userService.isLogged = true}
+  }
 
   onCallCreatePost(){
-    if(this.userValidation)this.router.navigateByUrl('home/post');
-    else{
-      this.dialogLoginRegister.open(DialogLoginRegisterComponent,{disableClose: true})
-    }
+    if(this.userService.isLogged)this.router.navigateByUrl('home/post');
+    else this.dialogLoginRegister.open(DialogLoginRegisterComponent,{disableClose: true})
   }
 
 }

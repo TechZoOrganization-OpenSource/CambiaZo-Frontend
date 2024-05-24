@@ -12,8 +12,10 @@
   </nav>
 
   <div class="container-button">
-    <button class="button-login" (click)="onCallCreatePost()">Publicar</button>
-    <button class="button-register" routerLink="/login">Iniciar Sesión</button>
+    <button  class="button-login" (click)="onCallCreatePost()">Publicar</button>
+    <button *ngIf="!userService.isLogged" class="button-register" routerLink="/login">Iniciar Sesión</button>
+    <button *ngIf="userService.isLogged" class="button-register" routerLink="/login">Perfil</button>
+
   </div>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" class="burger">
@@ -37,7 +39,8 @@
         <p><a (click)="onCallCreatePost()" title="Publicar">Publicar</a></p>
       </div>
       <div class="option">
-        <p><a routerLink="/login" title="Iniciar Sesión">Iniciar Sesión</a></p>
+        <p *ngIf="!userService.isLogged"><a routerLink="/login" title="Iniciar Sesión">Iniciar Sesión</a></p>
+        <p *ngIf="userService.isLogged"><a routerLink="/login" title="Iniciar Sesión">Perfil</a></p>
       </div>
     </div>
   </mat-menu>

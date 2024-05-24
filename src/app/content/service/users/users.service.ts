@@ -1,18 +1,35 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {Observable} from "rxjs";
+import {Observable,tap} from "rxjs";
+import {Users} from "../../model/users/users.model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UsersService {
   baseUrl = environment.baseUrl;
-  constructor(private http: HttpClient) {
-  }
+  loggedIn = false
+  get isLogged(){return this.loggedIn;}
+  set isLogged(val:boolean){this.loggedIn = val;}
 
-  getUsers(): Observable<any>{
-    return this.http.get(`${this.baseUrl}/users`)
+  constructor(private http: HttpClient) {}
+
+  login(data:any): Observable<any>{
+
+    return this.http.get(`${this.baseUrl}/users`).pipe(
+      tap((res:any)=>{
+         const user_obj = res.find((user: any) => data.username == user.email);
+        if (user_obj) {
+         if( user_obj.phone === data.password){
+            localStorage.setItem('token',user_obj.id)
+            this.loggedIn = true;
+           } else console.log('password incorrect')
+        } else console.log('user not found')
+        return this.loggedIn;
+    })
+    )
+
   }
 
   postUser(data: any): Observable<any>{
@@ -23,5 +40,4 @@ export class UsersService {
     return this.http.delete(`${this.baseUrl}/users/${id}`)
   }
 
-  
 }
