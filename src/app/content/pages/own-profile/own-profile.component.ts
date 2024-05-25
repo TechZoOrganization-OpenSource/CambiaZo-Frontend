@@ -2,13 +2,17 @@ import { Component, OnInit } from '@angular/core';
 import {UsersService} from "../../service/users/users.service";
 import {MatTabsModule} from '@angular/material/tabs';
 import {HeaderProfileComponent} from "../../components/header-profile/header-profile.component";
+import {MyPostsComponent} from "../../components/my-posts/my-posts.component";
+import {MyReviewsComponent} from "../../components/my-reviews/my-reviews.component";
 
 @Component({
   selector: 'app-own-profile',
   standalone: true,
   imports: [
     HeaderProfileComponent,
-    MatTabsModule
+    MatTabsModule,
+    MyPostsComponent,
+    MyReviewsComponent
   ],
   templateUrl: './own-profile.component.html',
   styleUrl: './own-profile.component.css'
