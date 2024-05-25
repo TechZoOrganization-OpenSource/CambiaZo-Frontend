@@ -11,6 +11,7 @@ import {DialogLoginRegisterComponent} from "../components/dialog-login-register/
 import {LoginComponent} from "../../content/pages/login/login.component";
 import {NgIf} from "@angular/common";
 import {UsersService} from "../../content/service/users/users.service";
+import {MatCardAvatar} from "@angular/material/card";
 
 @Component({
   selector: 'app-header-content',
@@ -25,13 +26,14 @@ import {UsersService} from "../../content/service/users/users.service";
     MatMenuItem,
     MatDrawerContainer,
     MatSidenavModule,
-    NgIf
+    NgIf,
+    MatCardAvatar
   ],
   templateUrl: './header-content.component.html',
   styleUrl: './header-content.component.css'
 })
 export class HeaderContentComponent implements OnInit{
-  userValidation = false
+  user:any = {};
   constructor(private router:Router,private dialogLoginRegister: MatDialog,public userService:UsersService){
   }
   ngOnInit() {
@@ -40,7 +42,12 @@ export class HeaderContentComponent implements OnInit{
 
   checkToken(){
     const token = localStorage.getItem('id');
-    if(token){this.userService.isLogged = true}
+    if(token){
+      this.userService.isLogged = true
+      this.userService.getUserById(Number(localStorage.getItem('id'))).subscribe((res:any)=>{
+        this.user = res
+      })
+    }
   }
 
   onCallCreatePost(){
