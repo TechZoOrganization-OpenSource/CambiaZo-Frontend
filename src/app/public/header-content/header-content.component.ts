@@ -39,7 +39,7 @@ export class HeaderContentComponent implements OnInit{
   }
 
   checkToken(){
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem('id');
     if(token){this.userService.isLogged = true}
   }
 

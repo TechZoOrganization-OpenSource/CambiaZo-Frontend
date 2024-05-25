@@ -32,7 +32,8 @@ export class LoginComponent {
 
 
   login():void{
-    const log  = this.userService.login({username:this.username,password:this.password}).subscribe()
-    if(log)this.router.navigateByUrl('/home')
+    this.userService.login({username:this.username,password:this.password}).subscribe((login:boolean) => {
+      if(login)this.router.navigateByUrl('/home')
+    })
   }
 }

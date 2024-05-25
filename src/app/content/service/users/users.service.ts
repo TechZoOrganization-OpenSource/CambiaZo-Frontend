@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {Observable,tap} from "rxjs";
+import {Observable,map} from "rxjs";
 import {Users} from "../../model/users/users.model";
 
 @Injectable({
@@ -18,11 +18,11 @@ export class UsersService {
   login(data:any): Observable<any>{
 
     return this.http.get(`${this.baseUrl}/users`).pipe(
-      tap((res:any)=>{
+      map((res:any)=>{
          const user_obj = res.find((user: any) => data.username == user.email);
         if (user_obj) {
          if( user_obj.phone === data.password){
-            localStorage.setItem('token',user_obj.id)
+            localStorage.setItem('id',user_obj.id)
             this.loggedIn = true;
            } else console.log('password incorrect')
         } else console.log('user not found')
