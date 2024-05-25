@@ -19,6 +19,7 @@ import {
 import {ProductsAdminComponent} from "./admin/pages/products-admin/products-admin.component";
 import {MembershipsAdminComponent} from "./admin/pages/memberships-admin/memberships-admin.component";
 import {UsersAdminComponent} from "./admin/pages/users-admin/users-admin.component";
+import {OwnProfileComponent} from "./content/pages/own-profile/own-profile.component";
 
 export const routes: Routes = [
   {path:'home',component: HomeComponent},
@@ -31,6 +32,7 @@ export const routes: Routes = [
   {path:'register',component: RegisterComponent },
   {path:'contact', component: ContactComponent},
   {path:'help', component: AssistComponent},
+  {path:'profile',component:OwnProfileComponent},
 
   /**************   Admin    *********************/
   {path: 'admin', component: HomeAdminComponent},
