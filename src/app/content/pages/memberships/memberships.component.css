@@ -104,6 +104,8 @@ mat-card-content p{
 
 
 
+
+
 @media (max-width: 1000px) {
   .container-memberships {
     flex-direction: column;
