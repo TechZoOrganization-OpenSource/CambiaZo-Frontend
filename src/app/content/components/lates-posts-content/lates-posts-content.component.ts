@@ -29,7 +29,6 @@ export class LatesPostsContentComponent implements OnInit{
   getAllProducts(){
     this.postPervice.getProducs().subscribe((res:any)=>{
       this.items = res
-      console.log(res)
     })
   }
 }

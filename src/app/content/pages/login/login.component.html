@@ -14,21 +14,23 @@
           <span>Iniciar Sesión con Google</span>
         </div>
       </button>
+
       <div class="line-text">
         <div class="left"></div>
         <p class="subtitle">o inicia sesión con correo</p>
         <div class="right"></div>
       </div>
+
       <mat-label><b>Usuario</b></mat-label>
-      <input  name="username" placeholder="" class="mat-input-element">
+      <input  name="username" placeholder="username or email" class="mat-input-element" [(ngModel)]="username">
 
       <div class="forgot-password">
         <mat-label><b>Contraseña</b></mat-label>
         <a class="remember-password" routerLink="/home"><b>¿No recuerdas la contraseña?</b></a>
       </div>
-      <input  type="password" placeholder="" class="mat-input-element">
+      <input  name="password" type="password" placeholder="password" class="mat-input-element" [(ngModel)]="password">
 
-      <button mat-button routerLink="/home" (click)="login()" class="button"><b>Iniciar Sesión</b></button>
+      <button mat-button (click)="login()" class="button"><b>Iniciar Sesión</b></button>
 
       <p class="register">¿No tienes una cuenta? <a routerLink="/register"> Crea tu cuenta</a></p>
 

@@ -12,8 +12,12 @@
   </nav>
 
   <div class="container-button">
-    <button class="button-login" (click)="createPost()">Publicar</button>
-    <button class="button-register" routerLink="/login">Iniciar Sesión</button>
+    <button  class="button-login" (click)="onCallCreatePost()">Publicar</button>
+    <button *ngIf="!userService.isLogged" class="button-register" routerLink="/login">Iniciar Sesión</button>
+    <div *ngIf="userService.isLogged" mat-card-avatar class="container-img-profile" routerLink="/profile">
+      <img [src]="user['img']">
+    </div>
+
   </div>
 
   <button mat-icon-button [matMenuTriggerFor]="menu" class="burger">
@@ -34,10 +38,11 @@
     <div class="line"></div>
     <div class="burger-content">
       <div class="option">
-        <p><a routerLink="home/post" title="Publicar">Publicar</a></p>
+        <p><a (click)="onCallCreatePost()" title="Publicar">Publicar</a></p>
       </div>
       <div class="option">
-        <p><a routerLink="/login" title="Iniciar Sesión">Iniciar Sesión</a></p>
+        <p *ngIf="!userService.isLogged"><a routerLink="/login" title="Iniciar Sesión">Iniciar Sesión</a></p>
+        <p *ngIf="userService.isLogged"><a routerLink="/login" title="Iniciar Sesión">Perfil</a></p>
       </div>
     </div>
   </mat-menu>
