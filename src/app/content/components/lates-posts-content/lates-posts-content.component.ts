@@ -18,17 +18,39 @@ import {Products} from "../../model/products/products.model";
   styleUrl: './lates-posts-content.component.css'
 })
 export class LatesPostsContentComponent implements OnInit{
-  items:Products[]= []
+  items:Products[]=[]
 
-  constructor(private postPervice:PostsService) {
+  constructor(private postService:PostsService) {
   }
   ngOnInit() {
     this.getAllProducts()
   }
 
-  getAllProducts(){
-    this.postPervice.getProducs().subscribe((res:any)=>{
-      this.items = res
+  getAllProducts() {
+    this.postService.getProducs().subscribe((res:any)=>{
+      res.forEach((product: any) => {
+        this.items.push(new Products(
+          product.id,
+          product.user_id,
+          product.category_id,
+          product.product_name,
+          product.description,
+          product.change_for,
+          product.price,
+          product.images,
+          product.boost,
+          product.location)
+        )
+
+      })
+
+      this.postService.getCategoriesProducts().subscribe((categories:any)=>{
+        this.items.map((item:Products)=>{
+          item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
+        })
+      })
+
     })
   }
+
 }

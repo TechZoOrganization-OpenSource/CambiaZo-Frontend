@@ -23,7 +23,29 @@ export class FeaturePostsContentComponent implements OnInit{
 
   getAllFeaturePosts(){
     this.postsService.getProducs().subscribe((res:any)=>{
-      this.items = res
+      res.forEach((product: any) => {
+        this.items.push(new Products(
+          product.id,
+          product.user_id,
+          product.category_id,
+          product.product_name,
+          product.description,
+          product.change_for,
+          product.price,
+          product.images,
+          product.boost,
+          product.location)
+        )
+
     })
+
+        this.postsService.getCategoriesProducts().subscribe((categories:any)=>{
+          this.items.map((item:Products)=>{
+            item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
+          })
+        })
+
+  })
   }
+
 }
