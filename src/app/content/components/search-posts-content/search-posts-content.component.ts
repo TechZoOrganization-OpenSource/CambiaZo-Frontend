@@ -29,7 +29,6 @@ export class SearchPostsContentComponent implements OnInit{
   getAllProductsCategories(){
     this.postsService.getCategoriesProducts().subscribe((response:any)=>{
       this.categories = response
-      console.log(this.categories)
     })
   }
 

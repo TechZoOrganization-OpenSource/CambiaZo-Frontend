@@ -2,15 +2,15 @@
 <div class="container-card">
   <ng-container *ngFor="let item of items" >
 
-    <mat-card class="example-card" *ngIf="item.boost == false">
+    <mat-card class="example-card" *ngIf="!item.boost">
       <div class="container-post-image">
         <img mat-card-image src='{{item.images[0]}}' alt="Photo Product">
       </div>
 
-      <div class="location"><mat-icon style="color: #FFD146">place</mat-icon>{{item.contact_information.district}}</div>
+      <div class="location"><mat-icon style="color: #FFD146">place</mat-icon>{{item.location.district}}</div>
       <mat-card-header>
         <mat-card-title>{{item.product_name}}</mat-card-title>
-        <mat-card-subtitle>{{item.category.name}}</mat-card-subtitle>
+        <mat-card-subtitle>{{item.getCategory}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
         <p class="description">{{item.description}} </p>
