@@ -21,7 +21,7 @@ export class UsersService {
       map((res:any)=>{
          const user_obj = res.find((user: any) => data.username == user.email);
         if (user_obj) {
-         if( user_obj.phone === data.password){
+         if( user_obj.password === data.password){
             localStorage.setItem('id',user_obj.id)
             this.loggedIn = true;
            } else console.log('password incorrect')
@@ -32,16 +32,22 @@ export class UsersService {
 
   }
 
-  getUserById(id:number):Observable<any>{
-    return this.http.get(`${this.baseUrl}/users/${id}`)
-  }
 
-  postUser(data: any): Observable<any>{
-    return this.http.post(`${this.baseUrl}/users`, data)
+  getUsers(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/users`)
   }
-
-  deleteUser(id:number):Observable<any>{
+  postUser(data: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/users`, data);
+  }
+  deleteUser(id:string):Observable<any>{
     return this.http.delete(`${this.baseUrl}/users/${id}`)
   }
+  putUser(id:string,data:any):Observable<any>{
+    return this.http.put(`${this.baseUrl}/users/${id}`,data)
+  }
+  getUserById(id:number):Observable<any>{
+    return this.http.get<any>(`${this.baseUrl}/users/${id}`)
+  }
+
 
 }
