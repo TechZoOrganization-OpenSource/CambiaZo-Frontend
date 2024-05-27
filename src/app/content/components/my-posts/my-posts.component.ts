@@ -5,6 +5,12 @@ import {UsersService} from "../../service/users/users.service";
 import {PostsService} from "../../service/posts/posts.service";
 import {NgForOf, NgIf} from "@angular/common";
 import {Products} from "../../model/products/products.model";
+import {MatMenuModule} from "@angular/material/menu";
+import {MatButtonModule} from "@angular/material/button";
+import {MatIconButton} from "@angular/material/button";
+import {RouterLink} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DialogDeletePostComponent} from "../../../public/components/dialog-delete-post/dialog-delete-post.component";
 
 @Component({
   selector: 'app-my-posts',
@@ -13,7 +19,12 @@ import {Products} from "../../model/products/products.model";
     MatCardModule,
     MatIconModule,
     NgForOf,
-    NgIf
+    NgIf,
+    MatMenuModule,
+    MatIconModule,
+    MatIconButton,
+    MatButtonModule,
+    RouterLink
   ],
   templateUrl: './my-posts.component.html',
   styleUrl: './my-posts.component.css'
@@ -21,7 +32,7 @@ import {Products} from "../../model/products/products.model";
 export class MyPostsComponent implements OnInit{
   user : any = {};
   items: any = [];
-  constructor(private userService:UsersService, private postService:PostsService) {}
+  constructor(private userService:UsersService,private dialogDeletePost: MatDialog, private postService:PostsService) {}
   ngOnInit() {
     this.getUser();
     this.getAllProducts()
@@ -56,5 +67,8 @@ export class MyPostsComponent implements OnInit{
       })
 
     })
+  };
+  onCallDeletePost(id:number){
+    this.dialogDeletePost.open(DialogDeletePostComponent,{data: id})
   }
 }
