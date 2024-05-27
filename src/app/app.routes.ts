@@ -34,7 +34,7 @@ export const routes: Routes = [
   {path:'contact', component: ContactComponent},
   {path:'help', component: AssistComponent},
   {path:'profile',component:OwnProfileComponent},
-  {path:'donations/name_ong',component: OngDetailComponent},
+  {path:'donations/:ong',component: OngDetailComponent},
   /**************   Admin    *********************/
   {path: 'admin', component: HomeAdminComponent},
   {path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent},

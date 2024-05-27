@@ -1,45 +1,5 @@
-<button routerLink="/donations">< Todas las ONG's</button>
-<div class="information-ong">
-
-  <h3>Detalles</h3>
-
-  <section>
-  <h1 class="title-name">{{ong.nameUpper}}</h1>
-  </section>
-
-  <section class="socials">
-    <button *ngFor="let social of ong.social_networks" class="social-button">
-      <a [href]="social.url" target="_blank">
-        <img [src]="social.icon" alt="{{ social.name }} icon" class="social-icon">
-        {{ social.name }}
-      </a>
-    </button>
-  </section>
-
-
-  <section class="about-us">
-    <h3>Acerca de nosotros</h3>
-    <p>{{ong.information[0].about}}</p>
-  </section>
-
-  <section class="mission-vision">
-    <h3>Misión y Vision</h3>
-    <p>{{ong.information[0].mission_vision}}</p>
-
-  </section>
-
-  <section class="support">
-    <h3>Formas de apoyo</h3>
-      <p>{{ong.information[0].forms_of_support}}</p>
-    <ul>
-      <li *ngFor="let project of ong.projects">
-        <h4>{{project.name}}</h4>
-        <p>{{project.description}}</p>
-      </li>
-    </ul>
-    <ul>
-
-    </ul>
-  </section>
-
+<button routerLink="/donations"><mat-icon>arrow_back_ios</mat-icon> Todas las ONG's</button>
+<div class="ong">
+  <app-detail-ong [ong]="ong"></app-detail-ong>
+  <app-contact-ong [ong]="ong"></app-contact-ong>
 </div>

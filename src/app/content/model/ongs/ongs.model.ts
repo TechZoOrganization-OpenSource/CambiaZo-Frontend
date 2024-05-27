@@ -60,6 +60,12 @@ export class Ongs {
     return this.name.toUpperCase();
   }
 
+  get addressText(){
+    return `${this.address.street}, ${this.address.district}, ${this.address.city}, ${this.address.country}`;
+  }
+
+
+
 
 
 }

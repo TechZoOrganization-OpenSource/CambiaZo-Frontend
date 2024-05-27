@@ -1,9 +1,14 @@
-import { Component,OnInit } from '@angular/core';
-import {RouterLink} from "@angular/router";
+import {Component, OnInit, Output} from '@angular/core';
+import {ActivatedRoute, RouterLink} from "@angular/router";
 import {NgForOf} from "@angular/common";
 import {Ongs} from "../../model/ongs/ongs.model";
 import {OngsService} from "../../service/ongs/ongs.service";
 import {MatIcon} from "@angular/material/icon";
+import {MatCardModule} from "@angular/material/card";
+import {MatButton} from "@angular/material/button";
+import {DetailOngComponent} from "../../components/detail-ong/detail-ong.component";
+import {ContactComponent} from "../contact/contact.component";
+import {ContactOngComponent} from "../../components/contact-ong/contact-ong.component";
 
 @Component({
   selector: 'app-ong-detail',
@@ -12,23 +17,31 @@ import {MatIcon} from "@angular/material/icon";
     RouterLink,
     NgForOf,
     MatIcon,
+    MatCardModule,
+    MatButton,
+    DetailOngComponent,
+    ContactComponent,
+    ContactOngComponent,
   ],
   templateUrl: './ong-detail.component.html',
   styleUrl: './ong-detail.component.css'
 })
 export class OngDetailComponent implements OnInit{
-
+  @Output() ong_obj: any;
   ong: any;
-
-  constructor(private ongService:OngsService){}
+  constructor(private ongService:OngsService,private route: ActivatedRoute){}
 
   ngOnInit() {
-    this.getOng()
+    this.route.paramMap.subscribe(params => {
+      /*this is the var params: mathias&Id=1 adn i want the id after &Id=*/
+      const ong = params.get('ong')/*ong have this value: mathias&Id=1*/
+      const id = ong ? ong.split('&Id=')[1] : ''/*id have this value: 1*/
+      this.getOng(id);
+    });
   }
 
-  getOng(){
-    this.ongService.getOngById('4').subscribe((res:any)=>{
-
+  getOng(id: string){
+    this.ongService.getOngById(id).subscribe((res:any)=>{
       this.ong = new Ongs(
         res.name,
         res.type,
@@ -45,6 +58,7 @@ export class OngDetailComponent implements OnInit{
         res.social_networks,
         res.id
       )
+      this.ong_obj = this.ong;
     })
   }
 
