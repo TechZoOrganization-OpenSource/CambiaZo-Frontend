@@ -5,30 +5,13 @@
 <div class="cards-container">
   <ng-container *ngFor="let posts of items">
     <div class="container-products" *ngIf="posts.user_id == user.id">
-      <div class="cards-responsive">
-        <mat-card class="example-card-responsive">
-          <div class="container-post-image">
-            <img mat-card-image src='{{posts.images[0]}}' alt="Photo Product">
-          </div>
-
-          <div class="location"><mat-icon style="color: #FFD146">place</mat-icon>{{posts.location.district}}</div>
-          <mat-card-header>
-            <mat-card-title>{{posts.product_name}}</mat-card-title>
-            <mat-card-subtitle>{{posts.getCategory}}</mat-card-subtitle>
-          </mat-card-header>
-          <mat-card-content>
-            <p class="description">{{posts.description}} </p>
-            <hr>
-            <p class="change-object">{{posts.change_for}}</p>
-          </mat-card-content>
-
-          <mat-card-footer>S/{{posts.price}} valor aprox.</mat-card-footer>
-        </mat-card>
-      </div>
       <div class="container-image-products">
         <img src="{{posts.images}}">
       </div>
       <mat-card class="example-card">
+        <div class="container-image-products-responsive">
+          <img src="{{posts.images}}">
+        </div>
         <mat-card-header>
           <mat-card-title>{{posts.product_name}}</mat-card-title>
           <div class="post-burger-content">
