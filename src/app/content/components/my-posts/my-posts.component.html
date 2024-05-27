@@ -11,20 +11,20 @@
       <mat-card class="example-card">
         <mat-card-header>
           <mat-card-title>{{posts.product_name}}</mat-card-title>
-          <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-            <mat-icon>more_vert</mat-icon>
-          </button>
+          <div class="post-burger-content">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </div>
           <mat-menu #menu="matMenu">
-            <div>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="onCallEditPost(posts.id)" title="Editar">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>
-              <button mat-menu-item>
+              <button mat-menu-item (click)="onCallDeletePost(posts.id)" title="Eliminar">
                 <mat-icon>delete</mat-icon>
-                <span><a (click)="onCallDeletePost(posts.id)" title="Eliminar">Eliminar</a></span>
+                <span>Eliminar</span>
               </button>
-            </div>
           </mat-menu>
           <mat-card-subtitle>{{posts.getCategory}}</mat-card-subtitle>
         </mat-card-header>

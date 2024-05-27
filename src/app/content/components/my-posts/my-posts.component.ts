@@ -11,6 +11,7 @@ import {MatIconButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogDeletePostComponent} from "../../../public/components/dialog-delete-post/dialog-delete-post.component";
+import {DialogEditPostComponent} from "../../../public/components/dialog-edit-post/dialog-edit-post.component";
 
 @Component({
   selector: 'app-my-posts',
@@ -69,6 +70,9 @@ export class MyPostsComponent implements OnInit{
     })
   };
   onCallDeletePost(id:number){
-    this.dialogDeletePost.open(DialogDeletePostComponent,{data: id})
+    this.dialogDeletePost.open(DialogDeletePostComponent,{disableClose: true})
+  };
+  onCallEditPost(id:number){
+    this.dialogDeletePost.open(DialogEditPostComponent,{disableClose: true})
   }
 }
