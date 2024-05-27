@@ -1,0 +1,63 @@
+.information-ong{
+  font-family: 'Montserrat', sans-serif;
+  width:50%;
+  padding: 2rem 7rem 2rem 7rem;
+  text-align: justify;
+}
+.socials{
+  display: flex;
+  flex-direction: row;
+  margin:3rem 0;
+}
+.social-button {
+  font-family: inherit;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 5px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+
+}
+
+.social-button a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+}
+
+.social-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+}
+
+.social-button:hover {
+  background-color: #f0f0f0;
+  border-color: #ccc;
+}
+
+.social-button:active {
+  background-color: #e0e0e0;
+  border-color: #bbb;
+}
+
+p {
+  white-space: pre-line;
+}
+
+h1,h2,h3,h4{
+  font-family: inherit;
+  font-weight: bolder;
+
+}
+h1{
+  font-size: 2rem;
+}
+section h3{
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
