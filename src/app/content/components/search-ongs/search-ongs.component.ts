@@ -7,6 +7,7 @@ import {NgForOf, NgIf} from "@angular/common";
 import {MatButton} from "@angular/material/button";
 import {OngsService} from "../../service/ongs/ongs.service";
 import {Ongs} from "../../model/ongs/ongs.model";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-search-ongs',
@@ -18,7 +19,8 @@ import {Ongs} from "../../model/ongs/ongs.model";
     MatCardModule,
     NgForOf,
     MatButton,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './search-ongs.component.html',
   styleUrl: './search-ongs.component.css'
