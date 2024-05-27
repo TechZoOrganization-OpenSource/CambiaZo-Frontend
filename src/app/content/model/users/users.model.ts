@@ -3,7 +3,7 @@ export class Users {
   name: string;
   email: string;
   phone:string;
-  city: string;
+  password: string;
   membership: number;
   img: string;
 
@@ -12,7 +12,7 @@ export class Users {
     name: string,
     email: string,
     phone: string,
-    city: string,
+    password: string,
     membership: number,
     img: string
   ){
@@ -20,7 +20,7 @@ export class Users {
     this.name = name;
     this.email = email;
     this.phone = phone;
-    this.city = city;
+    this.password = password;
     this.membership = membership;
     this.img = img;
   }
