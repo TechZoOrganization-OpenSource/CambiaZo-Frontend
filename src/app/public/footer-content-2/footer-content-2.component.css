@@ -31,3 +31,28 @@ footer {
 .footer-links a:hover {
   color:#ffffff;
 }
+
+@media screen and (max-width: 915px) {
+  .footer-content {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-section {
+    margin-bottom: 10px;
+  }
+
+  .footer-links li {
+    display: block;
+    margin-bottom: 10px;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .footer-section {
+    display: inline-block;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+}
+
