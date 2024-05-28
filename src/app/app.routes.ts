@@ -20,6 +20,7 @@ import {ProductsAdminComponent} from "./admin/pages/products-admin/products-admi
 import {MembershipsAdminComponent} from "./admin/pages/memberships-admin/memberships-admin.component";
 import {UsersAdminComponent} from "./admin/pages/users-admin/users-admin.component";
 import {OwnProfileComponent} from "./content/pages/own-profile/own-profile.component";
+import {OngDetailComponent} from "./content/pages/ong-detail/ong-detail.component";
 
 export const routes: Routes = [
   {path:'home',component: HomeComponent},
@@ -33,7 +34,7 @@ export const routes: Routes = [
   {path:'contact', component: ContactComponent},
   {path:'help', component: AssistComponent},
   {path:'profile',component:OwnProfileComponent},
-
+  {path:'donations/:ong',component: OngDetailComponent},
   /**************   Admin    *********************/
   {path: 'admin', component: HomeAdminComponent},
   {path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent},

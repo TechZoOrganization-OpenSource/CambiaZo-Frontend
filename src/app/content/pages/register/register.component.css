@@ -1,7 +1,10 @@
 .register {
   width: 100%;
-  height: 100%;
+  height: auto;
   display: flex;
+}
+.requisito{
+  color: rgb(255, 0, 0);
 }
 .form-container{
   display: flow;
@@ -68,6 +71,21 @@ main {
 }
 .col2{
   display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.col11{
+  width: 85%;
+  display: block;
+  justify-content: center;
+  flex-direction: column;
+  background: #ffffff;
+
+}
+.col22{
+  width: 15px;
+  display: block;
   justify-content: center;
   flex-direction: column;
   align-items: center;
@@ -151,6 +169,29 @@ main {
   padding: 10px;
   margin: 5px 0 5px 0;
 }
+.input-password{
+  border: 1px solid #C2C2C2;
+  width: 95%;
+  height: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 14px 10px 6px;
+  margin: 5px 0 5px 0;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.visibility{
+  background-color: white;
+  border: none;
+}
+.text-input-password{
+  width: 100%;
+  border: none;
+}
 .checkbox-accept{
   display: flex;
   flex-direction: row;
@@ -174,12 +215,15 @@ main {
     display: none;
   }
 
-  .login{
+  .register{
     height: auto;
   }
 
   .form-container{
-    margin: 5rem 0 5rem 0;
+    margin: 3rem 0 3rem 0;
+  }
+  .img-logo{
+    width:100%;
   }
 
 }

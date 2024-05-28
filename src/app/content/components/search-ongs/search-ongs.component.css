@@ -38,7 +38,7 @@ mat-card{
   box-shadow: none;
   font-family: inherit;
   padding:0.5rem;
-
+  cursor: pointer;
   align-items: center;
 
 }
