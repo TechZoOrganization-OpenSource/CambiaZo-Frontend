@@ -2,7 +2,6 @@
   <div class="search-by-category">
     <h1>Categorías</h1>
       <div class="box-categories">
-        <!--chage the routerLink for the click event [routerLink]="['/home/','products&Id='+category.id]"-->
         <button mat-button class='chip-category' *ngFor="let category of categories"  (click)="filterProducts(category.name)" [routerLink]="['/home/','products&'+category.name]">{{category.name}}</button>
       </div>
   </div>

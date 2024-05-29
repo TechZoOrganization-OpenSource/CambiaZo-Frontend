@@ -30,7 +30,7 @@ export class FilterProductsComponent implements OnInit{
 
   getProductCategory(){
     this.router.paramMap.subscribe(params=> {
-      const urlProductCategory = params.get('products')/*ong have this value: mathias&Id=1*/
+      const urlProductCategory = params.get('products')
       this.categoryName = urlProductCategory ? urlProductCategory.split('&')[1] : ''
     })
     }

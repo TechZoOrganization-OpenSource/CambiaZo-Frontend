@@ -82,7 +82,6 @@ export class ProductsFoundComponent implements OnInit{
           product.boost,
           product.location)
         )
-
       })
 
       this.postService.getCategoriesProducts().subscribe((categories: any) => {
