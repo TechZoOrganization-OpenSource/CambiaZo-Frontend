@@ -21,6 +21,8 @@ import {MembershipsAdminComponent} from "./admin/pages/memberships-admin/members
 import {UsersAdminComponent} from "./admin/pages/users-admin/users-admin.component";
 import {OwnProfileComponent} from "./content/pages/own-profile/own-profile.component";
 import {OngDetailComponent} from "./content/pages/ong-detail/ong-detail.component";
+import {FilterOngsComponent} from "./content/components/filter-ongs/filter-ongs.component";
+import {FilterProductsComponent} from "./content/pages/filter-products/filter-products.component";
 
 export const routes: Routes = [
   {path:'home',component: HomeComponent},
@@ -35,6 +37,7 @@ export const routes: Routes = [
   {path:'help', component: AssistComponent},
   {path:'profile',component:OwnProfileComponent},
   {path:'donations/:ong',component: OngDetailComponent},
+  {path:'home/:products',component: FilterProductsComponent},
   /**************   Admin    *********************/
   {path: 'admin', component: HomeAdminComponent},
   {path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent},

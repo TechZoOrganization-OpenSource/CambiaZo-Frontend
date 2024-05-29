@@ -1,0 +1,58 @@
+<div class="container">
+  <div class="search-by-category">
+    <h1>Categorías</h1>
+      <div class="box-categories">
+        <button mat-button class='chip-category' *ngFor="let category of categories" (click)="changeCategory(category.id)">{{category.name}}</button>
+      </div>
+  </div>
+
+
+  <div class="search-by-information">
+    <form [formGroup]="formProduct" (ngSubmit)="onSubmit()">
+    <h1>Buscar</h1>
+    <section>
+      <mat-label>Palabra Clave</mat-label>
+      <input matInput formControlName="wordKey" placeholder="Buscar..." class="search-input">
+    </section>
+
+    <section>
+      <mat-label>Ubicacion</mat-label>
+
+      <select formControlName="countries" (change)="onCountrySelectionChange()" >
+        <option value="" selected>...</option>
+        <option *ngFor="let country of countries" [value]='country.country'>{{country.country}}</option>
+      </select>
+
+      <select formControlName="departments"  (change)="onCitiesSelectionChange()">
+        <option *ngIf="!departments || departments.length === 0" disabled>No hay departamentos disponibles</option>
+        <option  *ngIf="departments && departments.length !==0" value="" selected>...</option>
+        <option  *ngFor="let departments of departments" [value]='departments.name'>{{ departments.name }}</option>
+      </select>
+
+      <select formControlName="cities" class="search-input" >
+        <option *ngIf="!cities || cities.length === 0" disabled>No hay ciudades disponibles</option>
+        <option  *ngIf="cities && cities.length !==0" value="" selected>...</option>
+        <option *ngFor="let city of cities" [value]='city'>{{city}}</option>
+
+      </select>
+    </section>
+    <section>
+      <mat-label>Valor aproximado</mat-label>
+      <div class="range-price">
+        <input type="number"  placeholder="min" formControlName="priceMin">
+        <div class="box-icon"><mat-icon> compare_arrows</mat-icon></div>
+        <input type="number"  placeholder="máx" formControlName="priceMax">
+      </div>
+    </section>
+
+      <button>Buscar</button>
+      <button (click)="onClear()">Reiniciar</button>
+
+    </form>
+  </div>
+
+  {{formProduct.value | json}}
+
+</div>
+
+

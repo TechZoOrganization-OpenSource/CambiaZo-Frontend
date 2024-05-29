@@ -9,18 +9,20 @@ import {MatButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {Ongs} from "../../model/ongs/ongs.model";
+import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-lates-posts-content',
   standalone: true,
-    imports: [
-        MatCardModule,
-        CommonModule,
-        FeaturePostsContentComponent,
-        MatIcon,
-        MatButton,
-        MatFormField,
-        MatInput
-    ],
+  imports: [
+    MatCardModule,
+    CommonModule,
+    FeaturePostsContentComponent,
+    MatIcon,
+    MatButton,
+    MatFormField,
+    MatInput,
+    RouterLink
+  ],
   templateUrl: './lates-posts-content.component.html',
   styleUrl: './lates-posts-content.component.css'
 })

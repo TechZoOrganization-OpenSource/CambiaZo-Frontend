@@ -1,0 +1,8 @@
+<div class="container">
+
+  <div class='filter-section'>
+  <app-search-products (productSearched)="handleFilterProduct($event)" (productCategory)="handleCategoryProduct($event)"></app-search-products>
+  <app-products-found [categoryIdSearched]="categorId"></app-products-found>
+
+  </div>
+</div>

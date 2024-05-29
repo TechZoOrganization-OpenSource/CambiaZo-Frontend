@@ -1,0 +1,55 @@
+
+.search-by-category, .search-by-information{
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  padding: 1rem;
+}
+.box-categories{
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+}
+.box-categories button{
+  color: #FFD146;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  border: solid 1.6px #FFD146;
+  border-radius: 5px;
+  margin:0.4rem;
+}
+
+.box-categories button:hover{
+  background-color: black;
+}
+
+/* Search */
+
+.container-search{
+  display: flex;
+  justify-content: center;
+}
+
+section{
+  display: flex;
+  flex-direction: column;
+}
+
+.range-price{
+  display: flex;
+  flex-direction: row;
+}
+
+.range-price input{
+  width: 50%;
+}
+
+.box-icon{
+  border: solid 1px #000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
