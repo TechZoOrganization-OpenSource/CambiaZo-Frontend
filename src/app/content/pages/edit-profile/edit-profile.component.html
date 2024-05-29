@@ -1,0 +1,98 @@
+<div class="container-image-background">
+  <img class="image-background" src="https://png.pngtree.com/thumb_back/fh260/background/20200731/pngtree-blue-carbon-background-with-sport-style-and-golden-light-image_371487.jpg">
+  <div class="mesh-background">
+    <button mat-button routerLink="/profile" class="button-back">
+      <div class="back-icon">
+        <mat-icon fontIcon="keyboard_backspace"></mat-icon>
+      </div>
+    </button>
+  </div>
+  <div class="container-profile">
+    <mat-card>
+      <mat-card-header>
+        <div class="container-avatar">
+          <img [src]="user['img']" alt="User img" class="user-img">
+        </div>
+      </mat-card-header>
+      <mat-card-content>
+        <h1>{{user.name}}</h1>
+        <button class="button" routerLink="/profile/edit" mat-flat-button>Cambiar Imagen</button>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>
+<div class="edit-profile-content">
+  <div class="edit-profile-title">
+    <p>Configuración de Perfil:</p>
+    <hr>
+  </div>
+  <div class="content-edit">
+    <div class="boxB col1">
+      <form class="form-container" [formGroup]="editProfileForm">
+        <div class="form-outline mb-4">
+          <mat-label><b>Nombre</b></mat-label>
+          <input
+            [class.border-danger]="editProfileForm.controls['name'].errors && (editProfileForm.controls['name'].touched || submitted)"
+            formControlName="name"
+            type="text"
+            class="mat-input-element"/>
+          <div *ngIf="(editProfileForm.controls['name'].touched || submitted) && editProfileForm.controls['name'].getError('required')" class="requisito">
+            Nombre es requerido.
+          </div>
+        </div>
+
+        <div class="form-outline mb-4">
+          <mat-label><b>Correo electrónico</b></mat-label>
+          <input
+            [class.border-danger]="(editProfileForm.controls['email'].errors && (editProfileForm.controls['email'].touched || submitted))"
+            formControlName="email"
+            type="email"
+            class="mat-input-element"/>
+          <div *ngIf="(editProfileForm.controls['email'].touched || submitted) && editProfileForm.controls['email'].getError('required')" class="requisito">
+          </div>
+          <div *ngIf="editProfileForm.controls['email'].touched && editProfileForm.controls['email'].getError('validEmail')" class="requisito">
+            Por favor, introduce un correo electrónico válido.
+          </div>
+        </div>
+
+        <div class="form-outline mb-4">
+          <mat-label><b>Teléfono</b></mat-label>
+          <input
+            [class.border-danger]="editProfileForm.controls['phone'].errors && (editProfileForm.controls['phone'].touched || submitted)"
+            formControlName="phone"
+            type="tel"
+            maxlength="9"
+            class="mat-input-element"/>
+          <div *ngIf="(editProfileForm.controls['phone'].touched || submitted) && editProfileForm.controls['phone'].getError('required')" class="requisito">
+            Teléfono es requerido.
+          </div>
+          <div *ngIf="(editProfileForm.controls['phone'].touched || submitted) && editProfileForm.controls['phone'].getError('onlyNumbers')" class="requisito">
+          </div>
+          <div *ngIf="(editProfileForm.controls['phone'].touched || submitted) && editProfileForm.controls['phone'].getError('minlength')" class="requisito">
+          </div>
+          <div *ngIf="(editProfileForm.controls['phone'].touched || submitted) && editProfileForm.controls['phone'].getError('maxlength')" class="requisito">
+          </div>
+        </div>
+
+        <button
+          mat-button
+          type="button"
+          (click)="onSubmit()"
+          class="button"
+        >
+          <b>Guardar Cambios</b>
+        </button>
+      </form>
+    </div>
+    <div class="boxB col2">
+      <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?q=80&w=2080&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Imagen de Donación">
+    </div>
+  </div>
+
+
+
+</div>
+
+
+
+
