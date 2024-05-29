@@ -15,11 +15,5 @@ import {MatIcon} from "@angular/material/icon";
   styleUrl: './dialog-delete-post-favorites.component.css'
 })
 export class DialogDeletePostFavoritesComponent {
-  constructor(private dialogRef: DialogRef<DialogDeletePostFavoritesComponent>, private router: Router) {}
-
-  confirmDelete(){
-    this.router.navigateByUrl('/home')
-    this.dialogRef.close();
-  }
-
+  constructor(){}
 }
