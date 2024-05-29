@@ -24,7 +24,7 @@ export class UsersService {
   get isLogged(){return this.loggedIn;}
   set isLogged(val:boolean){this.loggedIn = val;}
 
-  constructor(private http: HttpClient) {localStorage.removeItem('id');}
+  constructor(private http: HttpClient) {}
 
   login(data: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/users`).pipe(
