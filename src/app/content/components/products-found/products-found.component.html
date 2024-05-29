@@ -1,7 +1,7 @@
 <div class="container-card">
+  <h1 *ngIf="!productsFiltered.length">No hay productos encontrados</h1>
   <ng-container *ngFor="let product of productsFiltered" >
-
-    <mat-card class="example-card" *ngIf="product.category===categoryIdSearched">
+    <mat-card class="example-card">
       <div class="container-post-image">
         <img mat-card-image src='{{product.images[0]}}' alt="Photo Product">
       </div>

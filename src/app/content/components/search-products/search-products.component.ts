@@ -32,13 +32,16 @@ import {MatSelect} from "@angular/material/select";
   styleUrl: './search-products.component.css'
 })
 export class SearchProductsComponent implements OnInit{
+
+  @Output() categorySearched = new EventEmitter<any>();
+  @Output() productSearched = new EventEmitter<any>();
+
   categories:any[] = []
 
   countries: any[]= []
   departments: any[]=[]
   cities: string[]=[]
 
-  @Output() productSearched = new EventEmitter<any>();
 
   formProduct = new FormGroup({
     'wordKey': new FormControl(null, Validators.required),
@@ -57,6 +60,9 @@ export class SearchProductsComponent implements OnInit{
     this.getAllCountries()
   }
 
+  filterProducts(category_name:string){
+    this.categorySearched.emit(category_name)
+  }
   getAllProductCategories() {
     this.postService.getCategoriesProducts().subscribe((categories:any)=>{
       this.categories = categories

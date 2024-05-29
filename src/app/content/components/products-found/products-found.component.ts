@@ -40,7 +40,6 @@ export class ProductsFoundComponent implements OnInit{
 
   allProducts:Products[]=[]
   productsFiltered:Products[]=[]
-
   categories:any[] = []
 
   constructor(private postService:PostsService) {
@@ -50,13 +49,15 @@ export class ProductsFoundComponent implements OnInit{
     this.getAllProducts()
   }
 
-  filterProductsByCategory(categoryId:string){
-    this.categoryIdSearched = categoryId
-    this.productsFiltered = this.allProducts.filter((item: Products) => item.category_id ===  this.categoryIdSearched)
+  filterProductsByCategory(category_name:string){
+    this.categoryIdSearched = category_name;
+    this.productsFiltered = this.allProducts.filter((item: Products) => item.category ===  this.categoryIdSearched)
   }
+
 
   filterProducts(product:any) {
           this.productsFiltered = this.allProducts.filter((item: Products) =>
+            item.category === this.categoryIdSearched &&
             (product.wordKey  ? item.product_name.includes(product.wordKey) : true) &&
             (product.countries ? item.location.country == product.countries : true) &&
             (product.departments ? item.location.departament == product.departments : true) &&
@@ -89,9 +90,8 @@ export class ProductsFoundComponent implements OnInit{
         this.allProducts.map((item: Products) => {
           item.setCategory = categories.find((category: any) => category.id === item.category_id).name
         })
+        this.productsFiltered = this.allProducts.filter((item: Products) => item.category === this.categoryIdSearched)
       })
-
-      this.productsFiltered = this.allProducts
 
     })
   }

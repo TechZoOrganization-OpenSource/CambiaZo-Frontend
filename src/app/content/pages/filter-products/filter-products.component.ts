@@ -21,11 +21,11 @@ export class FilterProductsComponent implements OnInit{
 
   categoryName:string = '';
 
-  constructor(private router:ActivatedRoute,private postService:PostsService){
+  constructor(private router:ActivatedRoute){
   }
 
   ngOnInit() {
-      this.getProductCategory()
+    this.getProductCategory()
   }
 
   getProductCategory(){
@@ -35,7 +35,12 @@ export class FilterProductsComponent implements OnInit{
     })
     }
 
+
   handleFilterProduct(form:any){
     this.productsFoundComponent.filterProducts(form)
+  }
+
+  handleFilterByCategory(category_name:string){
+    this.productsFoundComponent.filterProductsByCategory(category_name)
   }
 }
