@@ -13,11 +13,5 @@ export class ReviewsService {
 
   getReviews(){
     return this.http.get(`${this.baseUrl}/reviews`)
-  };
-  getScore(){
-    return this.http.get(`${this.baseUrl}/reviews/score`)
-  }
-  getScoreByUserId(get_user_id: string){
-    return this.http.get(`${this.baseUrl}/reviews/score/${get_user_id}`)
   }
 }
