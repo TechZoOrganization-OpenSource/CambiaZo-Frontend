@@ -33,10 +33,7 @@ h1{
   font-weight: bolder;
 
 }
-.container-search{
-  display: flex;
-  justify-content: center;
-}
+
 .search-by-information{
   padding: 2rem;
   margin-top:2rem;
