@@ -25,6 +25,7 @@ import {FilterOngsComponent} from "./content/components/filter-ongs/filter-ongs.
 import {FilterProductsComponent} from "./content/pages/filter-products/filter-products.component";
 import {VerifyEmailComponent} from "./content/pages/verify-email/verify-email.component";
 import {ChangePasswordComponent} from "./content/pages/change-password/change-password.component";
+import {EditProfileComponent} from "./content/pages/edit-profile/edit-profile.component";
 
 
 export const routes: Routes = [
@@ -41,6 +42,7 @@ export const routes: Routes = [
   {path:'contact', component: ContactComponent},
   {path:'help', component: AssistComponent},
   {path:'profile',component:OwnProfileComponent},
+  {path:'profile/edit',component:EditProfileComponent},
   {path:'donations/:ong',component: OngDetailComponent},
   {path:'home/:products',component: FilterProductsComponent},
   /**************   Admin    *********************/
