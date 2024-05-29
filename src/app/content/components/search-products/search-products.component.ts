@@ -39,7 +39,6 @@ export class SearchProductsComponent implements OnInit{
   cities: string[]=[]
 
   @Output() productSearched = new EventEmitter<any>();
-  @Output() productCategory = new EventEmitter<any>();
 
   formProduct = new FormGroup({
     'wordKey': new FormControl(null, Validators.required),
@@ -65,10 +64,6 @@ export class SearchProductsComponent implements OnInit{
   }
   onSubmit(){
     this.productSearched.emit(this.formProduct.value);
-  }
-
-  changeCategory(categoryId:string){
-    this.productCategory.emit(categoryId);
   }
 
   getAllCountries(){

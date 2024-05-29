@@ -13,7 +13,7 @@
 
 <div class="container-categories">
   <div class="box-categories">
-    <button mat-button class='chip-category' *ngFor="let category of categories" [routerLink]="['/home/','products&Id='+category.id]">{{category.name}}</button>
+    <button mat-button class='chip-category' *ngFor="let category of categories" [routerLink]="['/home/','products&'+category.name]">{{category.name}}</button>
   </div>
 </div>
 

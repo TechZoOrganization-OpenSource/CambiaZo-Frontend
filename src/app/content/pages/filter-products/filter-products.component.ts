@@ -3,6 +3,7 @@ import {SearchProductsComponent} from "../../components/search-products/search-p
 import {ProductsFoundComponent} from "../../components/products-found/products-found.component";
 import {JsonPipe} from "@angular/common";
 import {ActivatedRoute} from "@angular/router";
+import {PostsService} from "../../service/posts/posts.service";
 
 @Component({
   selector: 'app-filter-products',
@@ -18,25 +19,23 @@ import {ActivatedRoute} from "@angular/router";
 export class FilterProductsComponent implements OnInit{
   @ViewChild(ProductsFoundComponent) productsFoundComponent!: ProductsFoundComponent;
 
-  categorId:string = '';
+  categoryName:string = '';
 
-  constructor(private router:ActivatedRoute){
+  constructor(private router:ActivatedRoute,private postService:PostsService){
   }
+
   ngOnInit() {
       this.getProductCategory()
   }
 
   getProductCategory(){
-    this.router.paramMap.subscribe(params=>{
+    this.router.paramMap.subscribe(params=> {
       const urlProductCategory = params.get('products')/*ong have this value: mathias&Id=1*/
-      this.categorId = urlProductCategory ? urlProductCategory.split('&Id=')[1] : ''
+      this.categoryName = urlProductCategory ? urlProductCategory.split('&')[1] : ''
     })
     }
+
   handleFilterProduct(form:any){
     this.productsFoundComponent.filterProducts(form)
-  }
-
-  handleCategoryProduct(categoryId:string){
-    this.productsFoundComponent.filterProductsByCategory(categoryId)
   }
 }
