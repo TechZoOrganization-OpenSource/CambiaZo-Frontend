@@ -23,6 +23,9 @@ import {OwnProfileComponent} from "./content/pages/own-profile/own-profile.compo
 import {OngDetailComponent} from "./content/pages/ong-detail/ong-detail.component";
 import {FilterOngsComponent} from "./content/components/filter-ongs/filter-ongs.component";
 import {FilterProductsComponent} from "./content/pages/filter-products/filter-products.component";
+import {VerifyEmailComponent} from "./content/pages/verify-email/verify-email.component";
+import {ChangePasswordComponent} from "./content/pages/change-password/change-password.component";
+
 
 export const routes: Routes = [
   {path:'home',component: HomeComponent},
@@ -33,6 +36,8 @@ export const routes: Routes = [
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'login',component: LoginComponent },
   {path:'register',component: RegisterComponent },
+  {path:'verify-email',component: VerifyEmailComponent},
+  {path:'change-password',component: ChangePasswordComponent},
   {path:'contact', component: ContactComponent},
   {path:'help', component: AssistComponent},
   {path:'profile',component:OwnProfileComponent},

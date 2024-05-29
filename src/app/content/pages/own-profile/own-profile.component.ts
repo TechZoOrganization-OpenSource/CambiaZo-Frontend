@@ -4,6 +4,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {HeaderProfileComponent} from "../../components/header-profile/header-profile.component";
 import {MyPostsComponent} from "../../components/my-posts/my-posts.component";
 import {MyReviewsComponent} from "../../components/my-reviews/my-reviews.component";
+import {MyFavoritesComponent} from "../../components/my-favorites/my-favorites.component";
 
 @Component({
   selector: 'app-own-profile',
@@ -12,7 +13,8 @@ import {MyReviewsComponent} from "../../components/my-reviews/my-reviews.compone
     HeaderProfileComponent,
     MatTabsModule,
     MyPostsComponent,
-    MyReviewsComponent
+    MyReviewsComponent,
+    MyFavoritesComponent
   ],
   templateUrl: './own-profile.component.html',
   styleUrl: './own-profile.component.css'
@@ -26,6 +28,7 @@ export class OwnProfileComponent implements OnInit{
   getUser(){
     this.userService.getUserById(Number(localStorage.getItem('id'))).subscribe((data)=>{
       this.user = data;
+      console.log(this.user)
     });
   }
 }
