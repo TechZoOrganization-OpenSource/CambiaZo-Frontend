@@ -1,26 +1,7 @@
-<h1 class="title-latest-posts">Ultimos Trueques Publicados</h1>
-
-
-<div class="container-search">
-  <mat-form-field class="form-content">
-    <div class="search-wrapper">
-      <mat-icon class="search-icon" style="color: #FFD146">search</mat-icon>
-      <input matInput placeholder="Buscar..." required class="search-input" (input)="searchProduct($event)">
-
-    </div>
-  </mat-form-field>
-</div>
-
-<div class="container-categories">
-  <div class="box-categories">
-    <button mat-button class='chip-category' *ngFor="let category of categories" [routerLink]="['/home/','products&'+category.name]">{{category.name}}</button>
-  </div>
-</div>
-
 <div class="container-card">
-  <ng-container *ngFor="let product of items" >
-
-    <mat-card class="example-card" *ngIf="!product.boost">
+  <h1 *ngIf="!productsFiltered.length">No hay productos encontrados</h1>
+  <ng-container *ngFor="let product of productsFiltered" >
+    <mat-card class="example-card">
       <div class="container-post-image">
         <img mat-card-image src='{{product.images[0]}}' alt="Photo Product">
       </div>
@@ -40,4 +21,5 @@
     </mat-card>
   </ng-container>
 </div>
+
 
