@@ -19,19 +19,19 @@
       <mat-label>Ubicacion</mat-label>
 
       <select formControlName="countries" (change)="onCountrySelectionChange()" >
-        <option value="" selected>...</option>
+        <option value="" selected></option>
         <option *ngFor="let country of countries" [value]='country.country'>{{country.country}}</option>
       </select>
 
       <select formControlName="departments"  (change)="onCitiesSelectionChange()">
         <option *ngIf="!departments || departments.length === 0" disabled>No hay departamentos disponibles</option>
-        <option  *ngIf="departments && departments.length !==0" value="" selected>...</option>
+        <option  *ngIf="departments && departments.length !==0" value="" selected></option>
         <option  *ngFor="let departments of departments" [value]='departments.name'>{{ departments.name }}</option>
       </select>
 
       <select formControlName="cities" class="search-input" >
         <option *ngIf="!cities || cities.length === 0" disabled>No hay ciudades disponibles</option>
-        <option  *ngIf="cities && cities.length !==0" value="" selected>...</option>
+        <option  *ngIf="cities && cities.length !==0" value="" selected></option>
         <option *ngFor="let city of cities" [value]='city'>{{city}}</option>
 
       </select>
@@ -45,8 +45,10 @@
       </div>
     </section>
 
-      <button>Buscar</button>
-      <button (click)="onClear()">Reiniciar</button>
+      <section class="btn-actions">
+      <button class="btn-search">Buscar</button>
+      <button (click)="onClear()" class="btn-clear">Reiniciar</button>
+      </section>
 
     </form>
   </div>
