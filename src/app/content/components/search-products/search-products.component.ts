@@ -79,6 +79,8 @@ export class SearchProductsComponent implements OnInit{
   onCountrySelectionChange(){
     this.departments = []
     this.cities = []
+    this.formProduct.get('departments')?.reset()
+    this.formProduct.get('cities')?.reset()
     if(this.formProduct.value.countries) {
       const selectedCountryObj = this.countries.find(c => c.country === this.formProduct.value.countries);
         this.departments = selectedCountryObj.departments;
@@ -87,6 +89,7 @@ export class SearchProductsComponent implements OnInit{
   }
   onCitiesSelectionChange(){
     this.cities = []
+    this.formProduct.get('cities')?.reset()
     if(this.formProduct.value.departments) {
       const selectedDepartmentObj = this.departments.find(c => c.name === this.formProduct.value.departments);
       this.cities = selectedDepartmentObj.cities;

@@ -19,20 +19,20 @@
       <mat-label>Ubicacion</mat-label>
 
       <select formControlName="countries" (change)="onCountrySelectionChange()">
-        <option [value]="null" label="Seleccionar un pais" selected></option>
-        <option *ngFor="let country of countries" [value]='country.country'>{{country.country}}</option>
+        <option [ngValue]="null" selected [hidden]="!formProduct.value.countries">{{!formProduct.value.countries ? 'Seleccionar un pais' : '..'}}</option>
+        <option *ngFor="let country of countries" [ngValue]='country.country'>{{country.country}}</option>
       </select>
 
       <select formControlName="departments"  (change)="onCitiesSelectionChange()">
+        <option   [ngValue]="null" selected [hidden]="!formProduct.value.departments">{{!formProduct.value.departments ? 'Seleccionar un departamento' : '..'}}</option>
         <option *ngIf="!departments.length" disabled>No hay departamentos disponibles</option>
-        <option   [value]="null" label="Seleccionar un departamento" selected></option>
-        <option  *ngFor="let departments of departments" [value]='departments.name'>{{ departments.name }}</option>
+        <option  *ngFor="let departments of departments" [ngValue]='departments.name'>{{ departments.name }}</option>
       </select>
 
       <select formControlName="cities" class="search-input" >
+        <option  [ngValue]="null" selected [hidden]="!formProduct.value.cities">{{!formProduct.value.cities ? 'Seleccionar un distrito' : '..'}}</option>
         <option *ngIf="!cities.length" disabled>No hay ciudades disponibles</option>
-        <option   [value]="null" label="Seleccionar un distrito" selected></option>
-        <option *ngFor="let city of cities" [value]='city'>{{city}}</option>
+        <option *ngFor="let city of cities" [ngValue]='city'>{{city}}</option>
 
       </select>
     </section>
