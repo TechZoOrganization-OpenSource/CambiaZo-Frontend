@@ -1,8 +1,7 @@
 <div class="container">
-
+  <section><h1>Publicaciones Encontradas</h1></section>
   <div class='filter-section'>
   <app-search-products (productSearched)="handleFilterProduct($event)" (productCategory)="handleCategoryProduct($event)"></app-search-products>
   <app-products-found [categoryIdSearched]="categorId"></app-products-found>
-
   </div>
 </div>
