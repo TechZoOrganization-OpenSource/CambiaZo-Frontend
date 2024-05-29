@@ -2,3 +2,12 @@
   display: flex;
   flex-direction: row;
 }
+
+app-search-products{
+  width: 25%;
+  padding: 2rem;
+}
+
+app-products-found {
+  width: 75%;
+}
