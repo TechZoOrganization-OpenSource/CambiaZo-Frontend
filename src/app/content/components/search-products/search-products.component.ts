@@ -42,12 +42,12 @@ export class SearchProductsComponent implements OnInit{
   @Output() productCategory = new EventEmitter<any>();
 
   formProduct = new FormGroup({
-    'wordKey': new FormControl('', Validators.required),
-    'countries': new FormControl('', Validators.required),
-    'departments': new FormControl('', Validators.required),
-    'cities': new FormControl('', Validators.required),
-    'priceMin': new FormControl('', Validators.required),
-    'priceMax': new FormControl('', Validators.required),
+    'wordKey': new FormControl(null, Validators.required),
+    'countries': new FormControl(null, Validators.required),
+    'departments': new FormControl(null, Validators.required),
+    'cities': new FormControl(null, Validators.required),
+    'priceMin': new FormControl(null, Validators.required),
+    'priceMax': new FormControl(null, Validators.required),
   })
 
   constructor(private postService:PostsService,private countriesService: CountriesService) {
@@ -77,26 +77,24 @@ export class SearchProductsComponent implements OnInit{
     })
   }
   onCountrySelectionChange(){
-    this.departments = ['']
-    const selectedCountryObj = this.countries.find(c => c.country === this.formProduct.value.countries);
-    this.departments = selectedCountryObj.departments;
+    this.departments = []
+    this.cities = []
+    if(this.formProduct.value.countries) {
+      const selectedCountryObj = this.countries.find(c => c.country === this.formProduct.value.countries);
+        this.departments = selectedCountryObj.departments;
+    }
 
   }
   onCitiesSelectionChange(){
-    this.cities = ['']
-    const selectedDepartmentObj = this.departments.find(c => c.name === this.formProduct.value.departments);
-    this.cities = selectedDepartmentObj.cities;
+    this.cities = []
+    if(this.formProduct.value.departments) {
+      const selectedDepartmentObj = this.departments.find(c => c.name === this.formProduct.value.departments);
+      this.cities = selectedDepartmentObj.cities;
+    }
   }
 
   onClear(){
-    this.formProduct.value.wordKey = '';
-    this.formProduct.value.countries = '';
-    this.formProduct.value.departments = '';
-    this.formProduct.value.cities = '';
-    this.formProduct.value.priceMin = '';
-    this.formProduct.value.priceMax = '';
+    this.formProduct.reset()
   }
-
-
 
 }

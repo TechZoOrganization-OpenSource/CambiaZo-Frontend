@@ -57,12 +57,12 @@ export class ProductsFoundComponent implements OnInit{
 
   filterProducts(product:any) {
           this.productsFiltered = this.allProducts.filter((item: Products) =>
-            (product.wordKey !== '' ? item.product_name.includes(product.wordKey) : true) &&
-            (product.countries !== '' ? item.location.country == product.countries : true) &&
-            (product.departments !== '' ? item.location.departament == product.departments : true) &&
-            (product.cities !== '' ? item.location.district == product.cities : true) &&
-            (item.price >= (product.priceMin !== '' ? product.priceMin: 0) &&
-              item.price <= (product.priceMax!== ''  ? product.priceMax:Infinity)))
+            (product.wordKey  ? item.product_name.includes(product.wordKey) : true) &&
+            (product.countries ? item.location.country == product.countries : true) &&
+            (product.departments ? item.location.departament == product.departments : true) &&
+            (product.cities ? item.location.district == product.cities : true) &&
+            (item.price >= (product.priceMin ? product.priceMin: 0) &&
+              item.price <= (product.priceMax ? product.priceMax:Infinity)))
   }
 
 

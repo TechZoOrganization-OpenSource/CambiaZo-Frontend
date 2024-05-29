@@ -12,26 +12,26 @@
     <h1>Buscar</h1>
     <section>
       <mat-label>Palabra Clave</mat-label>
-      <input matInput formControlName="wordKey" placeholder="Buscar..." class="search-input">
+      <input matInput formControlName="wordKey" placeholder="Buscar..." class="search-input" >
     </section>
 
     <section>
       <mat-label>Ubicacion</mat-label>
 
-      <select formControlName="countries" (change)="onCountrySelectionChange()" >
-        <option value="" selected></option>
+      <select formControlName="countries" (change)="onCountrySelectionChange()">
+        <option [value]="null" label="Seleccionar un pais" selected></option>
         <option *ngFor="let country of countries" [value]='country.country'>{{country.country}}</option>
       </select>
 
       <select formControlName="departments"  (change)="onCitiesSelectionChange()">
-        <option *ngIf="!departments || departments.length === 0" disabled>No hay departamentos disponibles</option>
-        <option  *ngIf="departments && departments.length !==0" value="" selected></option>
+        <option *ngIf="!departments.length" disabled>No hay departamentos disponibles</option>
+        <option   [value]="null" label="Seleccionar un departamento" selected></option>
         <option  *ngFor="let departments of departments" [value]='departments.name'>{{ departments.name }}</option>
       </select>
 
       <select formControlName="cities" class="search-input" >
-        <option *ngIf="!cities || cities.length === 0" disabled>No hay ciudades disponibles</option>
-        <option  *ngIf="cities && cities.length !==0" value="" selected></option>
+        <option *ngIf="!cities.length" disabled>No hay ciudades disponibles</option>
+        <option   [value]="null" label="Seleccionar un distrito" selected></option>
         <option *ngFor="let city of cities" [value]='city'>{{city}}</option>
 
       </select>
@@ -39,9 +39,9 @@
     <section>
       <mat-label>Valor aproximado</mat-label>
       <div class="range-price">
-        <input type="number"  placeholder="min" formControlName="priceMin">
+        <input type="number"  placeholder="min" formControlName="priceMin" >
         <div class="box-icon"><mat-icon> compare_arrows</mat-icon></div>
-        <input type="number"  placeholder="máx" formControlName="priceMax">
+        <input type="number"  placeholder="máx" formControlName="priceMax" >
       </div>
     </section>
 

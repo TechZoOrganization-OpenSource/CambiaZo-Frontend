@@ -85,7 +85,7 @@ input, select{
   background-color: #FFFFFF;
   color:  #939393;
   border: solid 2px #D9D9D9;
-} 
+}
 
 section mat-label{
   margin: 1rem 0;
@@ -141,6 +141,17 @@ option{
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+/*input number*/
+nput[type=number]::-webkit-outer-spin-button,
+input[type=number]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
 }
 
 @media (max-width: 735px){
