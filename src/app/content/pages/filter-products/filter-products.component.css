@@ -1,6 +1,9 @@
+
 .filter-section{
   display: flex;
   flex-direction: row;
+  padding: 1rem 2rem;
+
 }
 
 app-search-products{
@@ -10,4 +13,6 @@ app-search-products{
 
 app-products-found {
   width: 75%;
+  padding: 2rem 0;
+
 }
