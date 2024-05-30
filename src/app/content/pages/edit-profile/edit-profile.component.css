@@ -175,7 +175,9 @@ button {
   background-color: #000000;
   color: #ffffff;
 }
-.close-session{
+.close-session,
+.delete-account
+{
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -201,15 +203,43 @@ button {
 .button-close-session:hover {
   background-color: #000000;
   color: #ffffff;
-}
-
-.close-session {
-  display: flex;
-  align-items: center;
+  border: none;
 }
 
 .close-session mat-icon {
   margin-right: 20px;
+}
+.delete-account mat-icon{
+  margin-right: 20px;
+}
+
+.button-delete-account {
+  background-color: transparent;
+  border: solid 3px #ff0000;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.delete-account span,
+.delete-account mat-icon {
+  color: #ff0000;
+}
+
+.button-delete-account:hover {
+  background-color: #ff0000;
+  color: #ffffff;
+  border: none;
+  .delete-account span,
+  .delete-account mat-icon {
+    color: #ffffff;
+  }
 }
 
 
@@ -222,6 +252,9 @@ button {
   .col1, .col2 {
     width: 100%;
     order: unset;
+  }
+  .delete-account mat-icon{
+    margin-right: 10px;
   }
 }
 
