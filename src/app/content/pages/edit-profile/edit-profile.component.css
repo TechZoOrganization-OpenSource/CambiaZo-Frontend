@@ -183,10 +183,10 @@ button-change-password{
   color: #FFD146;
 }
 .button-change-password:hover {
-  background-color: #FFD146;
+  background-color: #000000;
 }
 .button-change-password:hover span{
-  color: #000000;
+  color: #ffffff;
 }
 
 .close-session,
