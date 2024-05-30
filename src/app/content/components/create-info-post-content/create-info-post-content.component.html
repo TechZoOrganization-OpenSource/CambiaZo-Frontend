@@ -1,39 +1,41 @@
-<div class="container">
+<form [formGroup]="formProduct">
   <section class="section-1">
+    <mat-label class="title">Informacion de tu publicacion</mat-label>
 
-    <h2 class="title">Informacion de tu publicacion</h2>
+    <mat-label>Categorias</mat-label>
+    <select formControlName="category">
+      <option  [ngValue]="null" [hidden]="!formProduct.value.category" selected>{{!formProduct.value.category ? '' : '..'}}</option>
+      <option  *ngFor="let category of categories" [ngValue]='category.id'>{{ category.name }}</option>
+    </select>
+    <div *ngIf="formProduct.get('category')?.invalid && formProduct.get('category')?.touched">
+      *Seleccion requerida
+    </div>
 
-    <h3 class="subtitle" >Categorias</h3>
-    <mat-form-field>
-      <mat-select>
-        <mat-option *ngFor="let category of categories" value="category.id">{{category.name}}</mat-option>
-      </mat-select>
-    </mat-form-field>
+    <mat-label>Producto</mat-label>
+      <input matInput formControlName="name" >
+    <div *ngIf="formProduct.get('name')?.invalid && formProduct.get('name')?.touched">
+      *Seleccion requerida
+    </div>
+    <mat-label  >Describe tu producto</mat-label>
+      <textarea  formControlName="description"></textarea>
+    <div *ngIf="formProduct.get('description')?.invalid && formProduct.get('description')?.touched">
+      *Seleccion requerida
+    </div>
+    <mat-label>¿Que quieres a Cambio?</mat-label>
+      <textarea  formControlName="change"></textarea>
+    <div *ngIf="formProduct.get('change')?.invalid && formProduct.get('change')?.touched">
+      *Seleccion requerida
+    </div>
 
-    <h3 class="subtitle" >Producto</h3>
-    <mat-form-field>
-      <input matInput placeholder="Producto">
-    </mat-form-field>
+    <mat-label >Valor Aproximado</mat-label>
+      <input  type="number" formControlName="price" class="example-right-align" placeholder="0">
+    <div *ngIf="formProduct.get('price')?.invalid && formProduct.get('price')?.touched">
+      *Seleccion requerida
+    </div>
 
-    <h3 class="subtitle" >Describe tu producto</h3>
-    <mat-form-field class="text-area">
-      <mat-label>Textarea</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
-
-    <h3 class="subtitle" >¿Que quieres a Cambio?</h3>
-    <mat-form-field class="text-area">
-      <mat-label>Textarea</mat-label>
-      <textarea matInput></textarea>
-    </mat-form-field>
-
-
-    <h3 class="subtitle" >Valor Aproximado</h3>
-    <mat-form-field floatLabel="always">
-      <input matInput type="number" class="example-right-align" placeholder="0">
-      <span matTextPrefix>S/&nbsp;</span>
-    </mat-form-field>
 
   </section>
 
-</div>
+</form>
+<button type="submit" (click)="onSubmit()">Submit</button>
+{{formProduct.value | json}}

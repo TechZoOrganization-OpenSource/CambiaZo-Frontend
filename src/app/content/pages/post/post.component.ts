@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {
   CreatePostInfoUserContentComponent
 } from "../../components/create-post-info-user-content/create-post-info-user-content.component";
@@ -8,7 +8,6 @@ import {
 import {MatFormField} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
-import {FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {MatButton} from "@angular/material/button";
 
 @Component({
@@ -20,7 +19,6 @@ import {MatButton} from "@angular/material/button";
     MatFormField,
     MatIcon,
     MatInput,
-    ReactiveFormsModule,
     MatButton
   ],
   templateUrl: './post.component.html',
@@ -28,5 +26,18 @@ import {MatButton} from "@angular/material/button";
 })
 export class PostComponent {
 
-  protected readonly toppings = FormGroup;
+  @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
+  @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
+
+  onPost(){
+    const infoProduct = this.createInfoPostContentComponent.onSubmit()
+    const contactProduct = this.createPostInfoUserContentComponent.onSubmit()
+
+    if(infoProduct && contactProduct){
+      console.log(infoProduct)
+      console.log(contactProduct)
+    }
+
+  }
+
 }
