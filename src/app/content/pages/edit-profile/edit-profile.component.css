@@ -157,7 +157,7 @@ img {
   padding: 10px 1.5% 10px 1.5%;
   margin: 5px 0 5px 0;
 }
-.requisito{
+.required{
   color: rgb(255, 0, 0);
 }
 button,
@@ -227,7 +227,8 @@ button-change-password{
   margin-right: 20px;
 }
 
-.button-delete-account {
+.button-delete-account,
+.cancel-membership{
   background-color: transparent;
   border: solid 3px #ff0000;
   width: 100%;
@@ -241,12 +242,17 @@ button-change-password{
   align-items: center;
   justify-content: center;
 }
+.cancel-membership{
+  font-size: 16px;
+}
+
 .delete-account span,
 .delete-account mat-icon {
   color: #ff0000;
 }
 
-.button-delete-account:hover {
+.button-delete-account:hover,
+.cancel-membership:hover{
   background-color: #ff0000;
   color: #ffffff;
   border: none;
@@ -257,6 +263,43 @@ button-change-password{
 }
 
 
+
+.card {
+  background: white;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin: 20px auto;
+  padding: 10px;
+}
+
+.title {
+  color: #FFD146;
+  font-weight: bold;
+  font-size: 26px;
+  margin-bottom: 15px;
+}
+.content{
+  text-align: center;
+}
+.membership-name,
+.membership-price{
+  color: #000000;
+  font-weight: bold;
+  margin: 20px 0 20px 0;
+}
+.membership-name{
+  font-size: 25px;
+}
+.membership-price {
+  font-size: 30px;
+}
+.info-price,
+.membership-date {
+  margin: 20px 0 20px 0;
+  font-size: 20px;
+  color: #000000;
+}
 
 
 @media (max-width: 450px) {
