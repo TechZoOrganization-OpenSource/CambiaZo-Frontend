@@ -9,6 +9,8 @@ import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/
 import {CustomValidators} from "../../service/validators/validators.service";
 import {NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
+import {DialogDeleteAccountComponent} from "../../components/dialog-delete-account/dialog-delete-account.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-edit-profile',
@@ -35,7 +37,7 @@ export class EditProfileComponent implements OnInit {
   editProfileForm: FormGroup;
   submitted = false;
 
-  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router) {
+  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router, private dialog: MatDialog) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, CustomValidators.validEmail]],
@@ -64,14 +66,30 @@ export class EditProfileComponent implements OnInit {
     if (this.editProfileForm.valid) {
       const userId = String(localStorage.getItem('id'));
       this.userService.putUser(userId, this.editProfileForm.value).subscribe(() => {
-          window.location.reload();
+        window.location.reload();
       });
     }
   }
-  closeSession(){
+
+  closeSession() {
     localStorage.removeItem('id');
     this.router.navigateByUrl('/login').then(() => {
       window.location.reload();
+    });
+  }
+
+  deleteAccount() {
+    const dialogRef = this.dialog.open(DialogDeleteAccountComponent);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        const userId = String(localStorage.getItem('id'));
+        this.userService.deleteUser(userId).subscribe(() => {
+          localStorage.removeItem('id');
+          this.router.navigateByUrl('/login').then(() => {
+            window.location.reload();
+          });
+        });
+      }
     });
   }
 }
