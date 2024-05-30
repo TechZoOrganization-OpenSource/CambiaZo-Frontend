@@ -3,17 +3,17 @@
     <mat-label class="title">Informacion de tu publicacion</mat-label>
 
     <mat-label>Categorias</mat-label>
-    <select formControlName="category">
-      <option  [ngValue]="null" [hidden]="!formProduct.value.category" selected>{{!formProduct.value.category ? '' : '..'}}</option>
+    <select formControlName="category_id">
+      <option  [ngValue]="null" [hidden]="!formProduct.value.category_id" selected>{{!formProduct.value.category_id ? '' : '..'}}</option>
       <option  *ngFor="let category of categories" [ngValue]='category.id'>{{ category.name }}</option>
     </select>
-    <div *ngIf="formProduct.get('category')?.invalid && formProduct.get('category')?.touched">
+    <div *ngIf="formProduct.get('category_id')?.invalid && formProduct.get('category_id')?.touched">
       *Seleccion requerida
     </div>
 
     <mat-label>Producto</mat-label>
-      <input matInput formControlName="name" >
-    <div *ngIf="formProduct.get('name')?.invalid && formProduct.get('name')?.touched">
+      <input matInput formControlName="product_name" >
+    <div *ngIf="formProduct.get('product_name')?.invalid && formProduct.get('product_name')?.touched">
       *Seleccion requerida
     </div>
     <mat-label  >Describe tu producto</mat-label>
@@ -22,8 +22,8 @@
       *Seleccion requerida
     </div>
     <mat-label>¿Que quieres a Cambio?</mat-label>
-      <textarea  formControlName="change"></textarea>
-    <div *ngIf="formProduct.get('change')?.invalid && formProduct.get('change')?.touched">
+      <textarea  formControlName="change_for"></textarea>
+    <div *ngIf="formProduct.get('change_for')?.invalid && formProduct.get('change_for')?.touched">
       *Seleccion requerida
     </div>
 
@@ -32,6 +32,16 @@
     <div *ngIf="formProduct.get('price')?.invalid && formProduct.get('price')?.touched">
       *Seleccion requerida
     </div>
+
+    <mat-label >Image</mat-label>
+    <input type="file" (change)="onFilesSelected($event)" multiple>
+    <div class="container-images">
+      <div *ngFor="let imageUrl of imagesUrls">
+        <img [src]="imageUrl" alt="Imagen seleccionada" style="width: 100%; height: 100%;">
+      </div>
+    </div>
+
+
 
 
   </section>

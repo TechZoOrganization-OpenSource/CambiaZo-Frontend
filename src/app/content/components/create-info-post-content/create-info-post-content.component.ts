@@ -31,11 +31,11 @@ export class CreateInfoPostContentComponent implements OnInit{
   categories: CategoriesObjects[]=[]
 
   formProduct = new FormGroup({
-    'name': new FormControl(null, Validators.required),
+    'category_id': new FormControl(null, Validators.required),
+    'product_name': new FormControl(null, Validators.required),
     'description': new FormControl(null, Validators.required),
+    'change_for': new FormControl(null, Validators.required),
     'price': new FormControl(null, Validators.required),
-    'category': new FormControl(null, Validators.required),
-    'change': new FormControl(null, Validators.required),
     }
   )
   constructor(private postService:PostsService) {
@@ -43,9 +43,9 @@ export class CreateInfoPostContentComponent implements OnInit{
 
   ngOnInit() {
     this.getCategoriesPostOptions()
-    this.formProduct.get('name')?.valueChanges.subscribe(value => {
+    this.formProduct.get('product_name')?.valueChanges.subscribe(value => {
       if (value === '') {
-        this.formProduct.get('name')?.setValue(null, { emitEvent: false });
+        this.formProduct.get('product_name')?.setValue(null, { emitEvent: false });
       }
     });
 
@@ -55,9 +55,9 @@ export class CreateInfoPostContentComponent implements OnInit{
       }
     });
 
-    this.formProduct.get('change')?.valueChanges.subscribe(value => {
+    this.formProduct.get('change_for')?.valueChanges.subscribe(value => {
       if (value === '') {
-        this.formProduct.get('change')?.setValue(null, { emitEvent: false });
+        this.formProduct.get('change_for')?.setValue(null, { emitEvent: false });
       }
     });
 
@@ -75,4 +75,30 @@ export class CreateInfoPostContentComponent implements OnInit{
         this.categories = res
       },error => console.log(error)
     )};
+
+   imagesUrls: any[]= [];
+  maxFiles: number = 8;
+  onFilesSelected(event: any) {
+
+    const files: FileList = event.target.files;
+    if (files.length > this.maxFiles) {
+      alert(`Solo puedes seleccionar hasta ${this.maxFiles} archivos.`);
+      this.imagesUrls = [];
+      event.target.value = "";
+      return
+    }
+    if (files && files.length > 0) {
+      this.imagesUrls = []; // Reseteamos el array de URLs
+      const totalFiles = Math.min(files.length, this.maxFiles);
+      for (let i = 0; i < totalFiles; i++) {
+        const file: File = files[i];
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagesUrls.push(reader.result as string);
+        };
+        reader.readAsDataURL(file);
+      }
+
+    }
+  }
 }

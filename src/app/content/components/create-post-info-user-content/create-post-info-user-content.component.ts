@@ -44,11 +44,10 @@ export class CreatePostInfoUserContentComponent implements OnInit{
 
 
   formProduct = new FormGroup({
-     'user_id': new FormControl(localStorage.getItem('id'),Validators.required),
+      'boost': new FormControl(false),
       'country': new FormControl(null,Validators.required),
       'departament': new FormControl(null,Validators.required),
       'district': new FormControl(null,Validators.required),
-      'boost': new FormControl(false)
   });
   acceptPolicy = new FormControl(false, Validators.requiredTrue);
 
@@ -86,7 +85,6 @@ export class CreatePostInfoUserContentComponent implements OnInit{
         data.img,
         []
       );
-      console.log(this.user.name)
     })
   }
 

@@ -9,6 +9,8 @@ import {MatFormField} from "@angular/material/form-field";
 import {MatIcon} from "@angular/material/icon";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
+import {Products} from "../../model/products/products.model";
+import {PostsService} from "../../service/posts/posts.service";
 
 @Component({
   selector: 'app-post',
@@ -26,6 +28,8 @@ import {MatButton} from "@angular/material/button";
 })
 export class PostComponent {
 
+  constructor(private productsService: PostsService){
+  }
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
   @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
 
@@ -34,8 +38,21 @@ export class PostComponent {
     const contactProduct = this.createPostInfoUserContentComponent.onSubmit()
 
     if(infoProduct && contactProduct){
-      console.log(infoProduct)
-      console.log(contactProduct)
+      const newProduct =
+        {
+           user_id: localStorage.getItem('id'),
+          ...infoProduct,
+          'images':['https://proserquisa.com/principal/inicio/uploads/producto-sin-imagen.png'],
+          'boost': contactProduct.boost,
+          location:{
+            country: contactProduct.country,
+            departament:contactProduct.departament,
+            district: contactProduct.district
+            }
+        }
+
+      this.productsService.postProduct(newProduct).subscribe()
+
     }
 
   }
