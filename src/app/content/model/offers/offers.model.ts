@@ -9,6 +9,7 @@ export class Offers {
   status: string;
   user_get: any;
   product_get: any;
+  product_offers: any;
 
   constructor(
     id: string,
@@ -26,11 +27,15 @@ export class Offers {
     this.status=status;
     this.user_get = {};
     this.product_get = {};
+    this.product_offers = {};
   }
   set setUserGet(value: any) {
     this.user_get = value;
   }
   set setProductGet(value: any) {
     this.product_get = value;
+  }
+  set setProductOffers(value: any) {
+    this.product_offers = value;
   }
 }

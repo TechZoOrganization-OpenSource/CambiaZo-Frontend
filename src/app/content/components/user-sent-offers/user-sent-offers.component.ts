@@ -5,7 +5,7 @@ import { UsersService } from '../../service/users/users.service';
 import {Offers} from "../../model/offers/offers.model";
 import {MatCard, MatCardAvatar, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgStyle} from "@angular/common";
 
 @Component({
   selector: 'app-user-sent-offers',
@@ -17,7 +17,8 @@ import {NgForOf} from "@angular/common";
     MatCardHeader,
     MatCardTitle,
     MatIcon,
-    NgForOf
+    NgForOf,
+    NgStyle
   ],
   templateUrl: './user-sent-offers.component.html',
   styleUrl: './user-sent-offers.component.css'
@@ -52,13 +53,47 @@ export class UserSentOffersComponent implements OnInit{
           })
       });
       this.offers.map((offer: any) => {
-        this.usersService.getUserById(offer.id_user_get).subscribe((data: any) => {
-          offer.setUserGet = data;
+        this.postsService.getProductById(offer.id_product_offers).subscribe((data: any) => {
+          offer.setProductOffers = data;
         })
       });
-      console.log(this.offers);
-  })
+      this.offers.map((offer: any) => {
+        this.usersService.getUserById(offer.id_user_get).subscribe((data: any) => {
+          offer.setUserGet = data;
+        });
+      });
+  });
 }
-
   protected readonly Offers = Offers;
+
+  getStatusStyles(status: string) {
+    let styles = {};
+    switch (status) {
+      case 'Aceptado':
+        styles = {
+          'color': '#41DB0B',
+          'background-color': '#EAFFDD',
+          'border': '1px solid #41DB0B'
+        };
+        break;
+      case 'Pendiente':
+        styles = {
+          'color': '#FFA22A',
+          'background-color': '#FFF2CC',
+          'border': '1px solid #FFA22A'
+        };
+        break;
+      case 'Denegado':
+        styles = {
+          'color': '#FF502A',
+          'background-color': '#FFD7B9',
+          'border': '1px solid #FF502A'
+        };
+        break;
+      default:
+        styles = {};
+        break;
+    }
+    return styles;
+  }
 }

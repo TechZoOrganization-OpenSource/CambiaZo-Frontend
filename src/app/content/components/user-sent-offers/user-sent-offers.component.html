@@ -7,16 +7,50 @@
         </mat-card-header>
       </div>
       <mat-card class="example-card">
-        <div mat-card-avatar class="container-image">
-          <img src="{{sent.product_get.images}}">
+        <div class="left-section">
+          <div class="left-header-section">
+            <div mat-card-avatar class="container-image">
+              <img src="{{sent.user_get.img}}">
+            </div>
+            <h1>{{sent.user_get.name}}</h1>
+          </div>
+          <div class="left-content-section">
+            <p>{{sent.product_get.description}}</p>
+            <div mat-card-avatar class="container-image">
+              <img src="{{sent.product_get.images}}">
+            </div>
+          </div>
         </div>
-        <div class="cards-text-content">
-          <mat-card-header>
-            <mat-card-title>{{sent.give_user_name}}</mat-card-title>
-          </mat-card-header>
-          <mat-card-content>
-            <p>{{sent.content}}</p>
-          </mat-card-content>
+        <div class="vertical-line"></div>
+        <div class="right-section">
+          <div class="cards-text-content">
+            <mat-card-content>
+              <h1>Datos:</h1>
+              <p>Valor estimado: s/.{{sent.product_get.price}}</p>
+              <p>{{sent.product_get.location?.district}}, {{sent.product_get.location?.departament}}</p>
+              <h1>¿Qué solicita {{sent.user_get.name}}?</h1>
+              <p>{{sent.product_get.change_for}}</p>
+              <h1>¿Qué le ofreciste?</h1>
+              <div class="my-offer">
+                <div class="product-sent-image">
+                  <img src="{{sent.product_offers.images}}">
+                </div>
+                <div class="product-sent-text">
+                  <h2>Ofreciste tu {{sent.product_offers.product_name}}</h2>
+                  <h4>{{sent.product_offers.description}}</h4>
+                  <div class="footer">
+                    <p>Valor aproximado s/.{{sent.product_offers.price}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <h1>Estado de la oferta:</h1>
+                <div class="status" [ngStyle]="getStatusStyles(sent.status)">
+                  <h2>{{sent.status}}</h2>
+                </div>
+              </div>
+            </mat-card-content>
+          </div>
         </div>
       </mat-card>
     </div>
