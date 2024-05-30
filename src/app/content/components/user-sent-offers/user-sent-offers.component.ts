@@ -73,21 +73,33 @@ export class UserSentOffersComponent implements OnInit{
         styles = {
           'color': '#41DB0B',
           'background-color': '#EAFFDD',
-          'border': '1px solid #41DB0B'
+          'border': '1px solid #41DB0B',
+          'border-radius': '10px',
+          'width' : '8.5rem',
+          'height' : '2.2rem',
+          'text-align': 'center',
         };
         break;
       case 'Pendiente':
         styles = {
           'color': '#FFA22A',
           'background-color': '#FFF2CC',
-          'border': '1px solid #FFA22A'
+          'border': '1px solid #FFA22A',
+          'border-radius': '10px',
+          'width' : '8.5rem',
+          'height' : '2.2rem',
+          'text-align': 'center'
         };
         break;
       case 'Denegado':
         styles = {
           'color': '#FF502A',
           'background-color': '#FFD7B9',
-          'border': '1px solid #FF502A'
+          'border': '1px solid #FF502A',
+          'border-radius': '10px',
+          'width' : '8.5rem',
+          'height' : '2.2rem',
+          'text-align': 'center'
         };
         break;
       default:
