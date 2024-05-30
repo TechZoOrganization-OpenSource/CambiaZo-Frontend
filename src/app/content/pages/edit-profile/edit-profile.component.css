@@ -160,7 +160,8 @@ img {
 .requisito{
   color: rgb(255, 0, 0);
 }
-button {
+button,
+button-change-password{
   background-color: #FFD146;
   width: 100%;
   padding: 15px;
@@ -175,6 +176,19 @@ button {
   background-color: #000000;
   color: #ffffff;
 }
+.button-change-password{
+  background-color: #000000;
+}
+.button-change-password span{
+  color: #FFD146;
+}
+.button-change-password:hover {
+  background-color: #FFD146;
+}
+.button-change-password:hover span{
+  color: #000000;
+}
+
 .close-session,
 .delete-account
 {
@@ -243,6 +257,8 @@ button {
 }
 
 
+
+
 @media (max-width: 450px) {
   .content-edit {
     flex-direction: column;
@@ -283,6 +299,3 @@ button {
     width: 100%;
   }
 }
-
-
-
