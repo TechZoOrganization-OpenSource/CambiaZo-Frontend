@@ -38,15 +38,24 @@
         </mat-card>
       </div>
     </div>
+
+
+
+
     <div class="user-information" *ngIf="user">
       <div class="user-data">
         <mat-card>
+          <mat-card-header>
+
           <mat-card-title>
             <img [src]="user.img" alt="user-image">
           </mat-card-title>
-          <mat-card-content>
+            <mat-card-subtitle>
             <h1>{{ user.name }}</h1>
             <button mat-button class="view-profile">Ver perfil</button>
+            </mat-card-subtitle>
+          </mat-card-header>
+          <mat-card-content>
             <hr>
             <div class="user-interest">
               <h1>¿Estas interesado?</h1>
