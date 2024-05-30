@@ -11,6 +11,9 @@ import {NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {DialogDeleteAccountComponent} from "../../components/dialog-delete-account/dialog-delete-account.component";
 import {MatDialog} from "@angular/material/dialog";
+import {
+  DialogSuccessfullyChangeComponent
+} from "../../components/dialog-successfully-change/dialog-successfully-change.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -35,13 +38,23 @@ import {MatDialog} from "@angular/material/dialog";
 export class EditProfileComponent implements OnInit {
   user: any = {};
   editProfileForm: FormGroup;
+  changePasswordForm: FormGroup;
+  changePassword=false;
   submitted = false;
+  currentPasswordInvalid = false;
+  changePasswordError: string | null = null;
+  changePasswordSuccess: string | null = null;
 
   constructor(private fb: FormBuilder, private userService: UsersService, private router: Router, private dialog: MatDialog) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, CustomValidators.validEmail]],
       phone: ['', [Validators.required, CustomValidators.onlyNumbers, Validators.minLength(9), Validators.maxLength(9)]]
+    });
+
+    this.changePasswordForm = this.fb.group({
+      currentPassword: ['', Validators.required],
+      newPassword: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -56,7 +69,8 @@ export class EditProfileComponent implements OnInit {
       this.editProfileForm.patchValue({
         name: this.user.name,
         email: this.user.email,
-        phone: this.user.phone
+        phone: this.user.phone,
+        password: this.user.password
       });
     });
   }
@@ -66,14 +80,59 @@ export class EditProfileComponent implements OnInit {
     if (this.editProfileForm.valid) {
       const userId = String(localStorage.getItem('id'));
       this.userService.putUser(userId, this.editProfileForm.value).subscribe(() => {
-        window.location.reload();
+        const dialogRef = this.dialog.open(DialogSuccessfullyChangeComponent);
+        dialogRef.afterClosed().subscribe(() => {
+          window.location.reload();
+        });
       });
+    }
+  }
+
+  changePasswordButton(){
+    this.changePassword=true;
+  }
+
+  validateCurrentPassword() {
+    const currentPassword = this.changePasswordForm.get('currentPassword')?.value;
+    if (currentPassword !== this.user.password) {
+      this.currentPasswordInvalid = true;
+      this.changePasswordForm.get('currentPassword')?.setErrors({ incorrect: true });
+    } else {
+      this.currentPasswordInvalid = false;
+      this.changePasswordForm.get('currentPassword')?.setErrors(null);
+    }
+  }
+
+  onChangePassword() {
+    this.submitted = true;
+    this.changePasswordError = null;
+    this.changePasswordSuccess = null;
+
+    if (this.changePasswordForm.valid) {
+      const userId = String(localStorage.getItem('id'));
+      const newPassword = this.changePasswordForm.value.newPassword;
+
+      this.userService.changePassword(userId, newPassword).subscribe(() => {
+        const dialogRef = this.dialog.open(DialogSuccessfullyChangeComponent);
+        dialogRef.afterClosed().subscribe(() => {
+          window.location.reload();
+        });
+      });
+    } else {
+      if (this.changePasswordForm.controls['currentPassword'].invalid) {this.changePasswordForm.controls['currentPassword'].markAsTouched();}
+      if (this.changePasswordForm.controls['newPassword'].invalid) {this.changePasswordForm.controls['newPassword'].markAsTouched();}
     }
   }
 
   closeSession() {
     localStorage.removeItem('id');
     this.router.navigateByUrl('/login').then(() => {
+      window.location.reload();
+    });
+  }
+  forgotPassword() {
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/verify-email').then(() => {
       window.location.reload();
     });
   }
