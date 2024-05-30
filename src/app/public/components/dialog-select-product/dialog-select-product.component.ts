@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
@@ -11,6 +11,7 @@ import { OffersService } from "../../../content/service/offers/offers.service";
 import { MatCardModule } from '@angular/material/card';
 import { NgForOf, NgIf } from '@angular/common';
 import { Offers } from '../../../content/model/offers/offers.model';
+import { DialogOfferSuccessfulComponent} from "../dialog-offer-successful/dialog-offer-successful.component";
 
 @Component({
   selector: 'app-dialog-select-product',
@@ -39,7 +40,8 @@ export class DialogSelectProductComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UsersService,
     private postService: PostsService,
-    private offersService: OffersService
+    private offersService: OffersService,
+    private dialogSuccess: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -80,7 +82,10 @@ export class DialogSelectProductComponent implements OnInit {
   }
 
   closeDialog(): void {
-    this.dialogRef.close();
+    this.dialogRef.close()
+    this.dialogRef.afterClosed().subscribe(() => {
+      this.dialogSuccess.open(DialogOfferSuccessfulComponent)
+    })
   }
 
   offer(product: Products): void {
@@ -95,10 +100,11 @@ export class DialogSelectProductComponent implements OnInit {
     )
 
     this.offersService.postOffer(newOffer).subscribe((data: Offers) => {
-      console.log('Offer created:', data);
-      this.closeDialog();
     }, error => {
       console.error('Error creating offer:', error);
     });
+
+    this.closeDialog();
+
   }
 }
