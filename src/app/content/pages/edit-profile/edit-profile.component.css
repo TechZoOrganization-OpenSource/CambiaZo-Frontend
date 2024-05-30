@@ -81,6 +81,7 @@ h1{
 
 .edit-profile-title{
   font-size: 1.5rem;
+  line-height: 1.25;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
 }
@@ -174,6 +175,44 @@ button {
   background-color: #000000;
   color: #ffffff;
 }
+.close-session{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+
+.button-close-session {
+  background-color: transparent;
+  border: solid 3px #000000;
+  width: 100%;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-close-session:hover {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+.close-session {
+  display: flex;
+  align-items: center;
+}
+
+.close-session mat-icon {
+  margin-right: 20px;
+}
+
+
 @media (max-width: 450px) {
   .content-edit {
     flex-direction: column;

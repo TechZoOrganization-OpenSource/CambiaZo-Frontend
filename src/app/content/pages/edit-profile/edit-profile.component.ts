@@ -68,4 +68,10 @@ export class EditProfileComponent implements OnInit {
       });
     }
   }
+  closeSession(){
+    localStorage.removeItem('id');
+    this.router.navigateByUrl('/login').then(() => {
+      window.location.reload();
+    });
+  }
 }
