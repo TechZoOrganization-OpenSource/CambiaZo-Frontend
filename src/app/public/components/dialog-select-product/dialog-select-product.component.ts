@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import {Component, Inject, OnInit} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialogTitle, MatDialogContent, MatDialogActions, MatDialogClose } from '@angular/material/dialog';
@@ -36,6 +36,7 @@ export class DialogSelectProductComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<DialogSelectProductComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private userService: UsersService,
     private postService: PostsService,
     private offersService: OffersService
@@ -83,25 +84,21 @@ export class DialogSelectProductComponent implements OnInit {
   }
 
   offer(product: Products): void {
-    const loggedInUserId = Number(localStorage.getItem('id'));
-    if (loggedInUserId) {
-      const newOffer = new Offers(
-        String(loggedInUserId), // ID del usuario que hace la oferta
-        String(product.id), // ID del producto que ofrece
-        String(this.user.id), // ID del usuario que recibe la oferta
-        String(product.id), // ID del producto que recibe la oferta
-        'Pendiente', // Estado de la oferta
-        '' // ID de la oferta, lo puede generar el backend
-      );
 
-      this.offersService.postOffer(newOffer).subscribe((data: Offers) => {
-        console.log('Offer created:', data);
-        this.closeDialog();
-      }, error => {
-        console.error('Error creating offer:', error);
-      });
-    } else {
-      console.log('User is not logged in');
-    }
+    const newOffer = new Offers(
+      String(localStorage.getItem('id')), // ID del usuario que hace la oferta
+      String(product.id), // ID del producto que ofrece
+      this.data.user_id, // ID del usuario que recibe la oferta
+      this.data.product_id, // ID del producto que recibe la oferta
+      'Pendiente', // Estado de la oferta
+      '' // ID de la oferta, lo puede generar el backend
+    )
+
+    this.offersService.postOffer(newOffer).subscribe((data: Offers) => {
+      console.log('Offer created:', data);
+      this.closeDialog();
+    }, error => {
+      console.error('Error creating offer:', error);
+    });
   }
 }

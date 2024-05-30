@@ -46,17 +46,9 @@ export class ProductInformationComponent implements OnInit {
   }
 
   loadCategories(): void {
-    this.postsService.getCategoriesProducts().subscribe((categories: any) => {
-      this.categories = categories;
-      this.setProductCategory();
-    });
-  }
-
-  setProductCategory(): void {
-    const category = this.categories.find(cat => cat.id === this.product.category_id);
-    if (category) {
+    this.postsService.getCategoryProductById(this.product.category_id).subscribe((category: any) => {
       this.product.categoryName = category.name;
-    }
+    })
   }
 
   loadUser(userId: number): void {
@@ -90,6 +82,9 @@ export class ProductInformationComponent implements OnInit {
   }
 
   offer(): void {
-    this.dialog.open(DialogSelectProductComponent);
+    this.dialog.open(DialogSelectProductComponent,{data:{
+      product_id: this.product.id,
+        user_id: this.user.id
+      }});
   }
 }
