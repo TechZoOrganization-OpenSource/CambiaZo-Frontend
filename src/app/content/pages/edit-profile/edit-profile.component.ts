@@ -1,19 +1,27 @@
 import {Component, OnInit} from '@angular/core';
 import {MatButton, MatIconButton} from "@angular/material/button";
-import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
+import {MatCard, MatCardContent, MatCardFooter, MatCardHeader, MatCardSubtitle} from "@angular/material/card";
 import {Router, RouterLink} from "@angular/router";
 import {UsersService} from "../../service/users/users.service";
+import {MembershipsService} from "../../service/memberships/memberships.service";
 import {MatIcon} from "@angular/material/icon";
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {CustomValidators} from "../../service/validators/validators.service";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatInput} from "@angular/material/input";
 import {DialogDeleteAccountComponent} from "../../components/dialog-delete-account/dialog-delete-account.component";
 import {MatDialog} from "@angular/material/dialog";
 import {
   DialogSuccessfullyChangeComponent
 } from "../../components/dialog-successfully-change/dialog-successfully-change.component";
+import {Memberships} from "../../model/memberships/memberships.model";
+import {
+  DialogPasswordChangedSuccessfullyComponent
+} from "../../components/dialog-password-changed-successfully/dialog-password-changed-successfully.component";
+import {
+  DialogCancelMembershipComponent
+} from "../../components/dialog-cancel-membership/dialog-cancel-membership.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -30,7 +38,10 @@ import {
     ReactiveFormsModule,
     NgIf,
     MatInput,
-    MatLabel
+    MatLabel,
+    MatCardSubtitle,
+    NgForOf,
+    MatCardFooter
   ],
   templateUrl: './edit-profile.component.html',
   styleUrl: './edit-profile.component.css'
@@ -44,8 +55,9 @@ export class EditProfileComponent implements OnInit {
   currentPasswordInvalid = false;
   changePasswordError: string | null = null;
   changePasswordSuccess: string | null = null;
+  membership:  any = {};
 
-  constructor(private fb: FormBuilder, private userService: UsersService, private router: Router, private dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private userService: UsersService,private membershipService:MembershipsService, private router: Router, private dialog: MatDialog) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, CustomValidators.validEmail]],
@@ -70,10 +82,41 @@ export class EditProfileComponent implements OnInit {
         name: this.user.name,
         email: this.user.email,
         phone: this.user.phone,
-        password: this.user.password
+        password: this.user.password,
       });
+      this.getMembership();
     });
   }
+
+  getMembership() {
+    this.membershipService.getMembershipsById(this.user.membership).subscribe((data) => {
+      this.membership = data;
+      console.log(data)
+    });
+  }
+
+  cancelMembership() {
+
+    const dialogRef = this.dialog.open(DialogCancelMembershipComponent);
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result === 'confirm') {
+        const newMembership = 1;
+        const userId = localStorage.getItem('id');
+        if (userId && newMembership) {
+          this.userService.changeMembership(userId, newMembership).subscribe(
+            response => {
+              window.location.reload();
+            }
+          );
+        }
+
+      }
+    })
+  }
+
+
+
 
   onSubmit() {
     this.submitted = true;
@@ -136,6 +179,8 @@ export class EditProfileComponent implements OnInit {
       window.location.reload();
     });
   }
+
+
 
   deleteAccount() {
     const dialogRef = this.dialog.open(DialogDeleteAccountComponent);
