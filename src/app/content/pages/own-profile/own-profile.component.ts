@@ -5,6 +5,7 @@ import {HeaderProfileComponent} from "../../components/header-profile/header-pro
 import {MyPostsComponent} from "../../components/my-posts/my-posts.component";
 import {MyReviewsComponent} from "../../components/my-reviews/my-reviews.component";
 import {MyFavoritesComponent} from "../../components/my-favorites/my-favorites.component";
+import {UserOffersComponent} from "../../components/user-offers/user-offers.component";
 
 @Component({
   selector: 'app-own-profile',
@@ -14,7 +15,8 @@ import {MyFavoritesComponent} from "../../components/my-favorites/my-favorites.c
     MatTabsModule,
     MyPostsComponent,
     MyReviewsComponent,
-    MyFavoritesComponent
+    MyFavoritesComponent,
+    UserOffersComponent
   ],
   templateUrl: './own-profile.component.html',
   styleUrl: './own-profile.component.css'

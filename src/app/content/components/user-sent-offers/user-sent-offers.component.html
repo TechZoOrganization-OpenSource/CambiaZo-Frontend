@@ -1,0 +1,24 @@
+<div class="sent-offers-cards-container">
+  <ng-container *ngFor="let sent of offers">
+    <div class="container-sent-offers">
+      <div class="card-header">
+        <mat-card-header>
+          <mat-card-title>{{sent.product_get.product_name}}</mat-card-title>
+        </mat-card-header>
+      </div>
+      <mat-card class="example-card">
+        <div mat-card-avatar class="container-image">
+          <img src="{{sent.product_get.images}}">
+        </div>
+        <div class="cards-text-content">
+          <mat-card-header>
+            <mat-card-title>{{sent.give_user_name}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <p>{{sent.content}}</p>
+          </mat-card-content>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>
