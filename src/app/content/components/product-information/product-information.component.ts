@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {ActivatedRoute, RouterLink} from '@angular/router';
 import { PostsService } from '../../service/posts/posts.service';
 import { UsersService } from '../../service/users/users.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -17,7 +17,8 @@ import { MatButton } from '@angular/material/button';
     MatCardContent,
     MatCardTitle,
     CommonModule,
-    MatButton
+    MatButton,
+    RouterLink
   ],
   templateUrl: './product-information.component.html',
   styleUrls: ['./product-information.component.css']
@@ -87,4 +88,6 @@ export class ProductInformationComponent implements OnInit {
         user_id: this.user.id
       }});
   }
+
+  protected readonly localStorage = localStorage;
 }
