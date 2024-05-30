@@ -81,5 +81,8 @@ export class UsersService {
   changePassword(id: string, newPassword: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/users/${id}`, { password: newPassword });
   }
+  changeMembership(id: string, newMembership: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}`, { membership: newMembership });
+  }
 
 }
