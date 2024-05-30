@@ -85,4 +85,14 @@ export class UsersService {
     return this.http.put(`${this.baseUrl}/users/${id}`, { membership: newMembership });
   }
 
+  changeMembershipDate(id: string): Observable<any> {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 2;
+    const year = today.getFullYear();
+    const date = `${day}/${month}/${year}`;
+
+    return this.http.put(`${this.baseUrl}/users/${id}`, { membership_date: date });
+  }
+
 }

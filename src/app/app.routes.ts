@@ -26,6 +26,7 @@ import {FilterProductsComponent} from "./content/pages/filter-products/filter-pr
 import {VerifyEmailComponent} from "./content/pages/verify-email/verify-email.component";
 import {ChangePasswordComponent} from "./content/pages/change-password/change-password.component";
 import {EditProfileComponent} from "./content/pages/edit-profile/edit-profile.component";
+import {BuyMembershipComponent} from "./content/pages/buy-membership/buy-membership.component";
 
 
 export const routes: Routes = [
@@ -33,6 +34,7 @@ export const routes: Routes = [
   {path:'donations',component: DonationsComponent},
   {path:'home/post',component:PostComponent},
   {path:'memberships', component:MembershipsComponent},
+  {path:'memberships/:buy-membership', component:BuyMembershipComponent},
   {path:'terms-of-use', component: TermsOfUseComponent},
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'login',component: LoginComponent },
