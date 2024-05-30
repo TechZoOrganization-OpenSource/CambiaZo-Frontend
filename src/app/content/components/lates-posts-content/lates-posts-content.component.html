@@ -19,10 +19,9 @@
 
 <div class="container-card">
   <ng-container *ngFor="let product of items" >
-
-    <mat-card class="example-card" *ngIf="!product.boost">
+    <mat-card class="example-card" *ngIf="!product.boost" [routerLink]="['/product-information', product.id]">
       <div class="container-post-image">
-        <img mat-card-image src='{{product.images[0]}}' alt="Photo Product">
+        <img mat-card-image src="{{product.images[0]}}" alt="Photo Product">
       </div>
 
       <div class="location"><mat-icon style="color: #FFD146">place</mat-icon>{{product.location.district}}</div>
@@ -31,11 +30,10 @@
         <mat-card-subtitle>{{product.getCategory}}</mat-card-subtitle>
       </mat-card-header>
       <mat-card-content>
-        <p class="description">{{product.description}} </p>
+        <p class="description">{{product.description}}</p>
         <hr>
         <p class="change-object">{{product.change_for}}</p>
       </mat-card-content>
-
       <mat-card-footer>S/{{product.price}} valor aprox.</mat-card-footer>
     </mat-card>
   </ng-container>
