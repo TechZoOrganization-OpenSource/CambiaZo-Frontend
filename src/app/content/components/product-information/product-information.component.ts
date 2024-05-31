@@ -85,7 +85,9 @@ export class ProductInformationComponent implements OnInit {
   offer(): void {
     this.dialog.open(DialogSelectProductComponent,{data:{
       product_id: this.product.id,
-        user_id: this.user.id
+        user_id: this.user.id,
+        product_name: this.product.product_name,
+        user_name: this.user.name,
       }});
   }
 
