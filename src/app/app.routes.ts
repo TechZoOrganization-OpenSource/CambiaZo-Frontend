@@ -25,6 +25,7 @@ import { ChangePasswordComponent } from "./content/pages/change-password/change-
 import { EditProfileComponent } from "./content/pages/edit-profile/edit-profile.component";
 import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
 import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
+import { EditPostComponent } from "./content/pages/edit-post/edit-post.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -45,7 +46,8 @@ export const routes: Routes = [
   { path: 'donations/:ong', component: OngDetailComponent },
   { path: 'home/:products', component: FilterProductsComponent },
   { path: 'product-information/:id', component: ProductDetailsComponent },
-  
+  { path: 'post/:postId', component: EditPostComponent },
+
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
