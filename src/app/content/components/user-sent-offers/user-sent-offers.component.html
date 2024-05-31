@@ -1,0 +1,61 @@
+<div class="sent-offers-cards-container">
+  <ng-container *ngFor="let sent of offers">
+    <div class="container-sent-offers">
+      <div class="card-header">
+        <mat-card-header>
+          <mat-card-title>{{sent.product_get.product_name}}</mat-card-title>
+        </mat-card-header>
+      </div>
+      <mat-card class="example-card">
+        <div class="left-section">
+          <div class="left-header-section">
+            <div mat-card-avatar class="container-image">
+              <img src="{{sent.user_get.img}}">
+            </div>
+            <h1>{{sent.user_get.name}}</h1>
+          </div>
+          <div class="left-content-section">
+            <p>{{sent.product_get.description}}</p>
+          </div>
+          <div class="container-image-2">
+            <img src="{{sent.product_get.images}}">
+          </div>
+        </div>
+        <div class="right-section">
+          <div class="cards-text-content">
+            <mat-card-content>
+              <h1>Datos:</h1>
+              <p> <mat-icon style="color: #FFD146"> monetization_on</mat-icon> Valor estimado: s/.{{sent.product_get.price}}</p>
+              <p> <mat-icon style="color: #FFD146">place</mat-icon> {{sent.product_get.location?.district}}, {{sent.product_get.location?.departament}}</p>
+              <h1>¿Qué solicita {{sent.user_get.name}}?</h1>
+              <p><img src="./assets/images/icons/change.svg" style="height: 18px; width: 18px; padding-right: 5px">{{sent.product_get.change_for}}</p>
+              <h1>¿Qué le ofreciste?</h1>
+              <div class="my-offer">
+                <div class="product-sent-image">
+                  <img src="{{sent.product_offers.images}}">
+                </div>
+                <div class="product-sent-text">
+                  <div class="product-sent-image-responsive">
+                    <img src="{{sent.product_offers.images}}">
+                  </div>
+                  <h2>Ofreciste tu {{sent.product_offers.product_name}}</h2>
+                  <h4>{{sent.product_offers.description}}</h4>
+                  <div class="footer">
+                    <p>Valor aproximado s/.{{sent.product_offers.price}}</p>
+                  </div>
+                </div>
+              </div>
+              <div class="card-footer">
+                <h1>Estado de la oferta:</h1>
+                <div class="status" [ngStyle]="getStatusStyles(sent.status)">
+                  <h2>{{sent.status}}</h2>
+                </div>
+              </div>
+            </mat-card-content>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </ng-container>
+</div>
+

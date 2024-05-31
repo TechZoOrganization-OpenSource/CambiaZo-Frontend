@@ -1,4 +1,4 @@
-import {Offers} from "./offers.model";
+import { Offers } from './offers.model';
 
 describe('Offers', () => {
   it('should create an instance', () => {
