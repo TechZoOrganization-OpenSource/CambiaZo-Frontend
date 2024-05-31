@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
+import {Offers} from "../../model/offers/offers.model";
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,5 @@ export class OffersService {
 
   postOffer(offer: Offers): Observable<Offers> {
     return this.http.post<Offers>(this.baseUrl, offer);
-
   }
 }

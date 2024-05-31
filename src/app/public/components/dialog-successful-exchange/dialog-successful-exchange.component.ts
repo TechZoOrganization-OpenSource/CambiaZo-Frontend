@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {MatDialogModule} from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from "@angular/material/button";
 import {Router, RouterLink} from "@angular/router";
 import {DialogRef} from "@angular/cdk/dialog";
@@ -15,10 +15,6 @@ import {MatIcon} from "@angular/material/icon";
   styleUrl: './dialog-successful-exchange.component.css'
 })
 export class DialogSuccessfulExchangeComponent {
-  constructor(private dialogRef: DialogRef<DialogSuccessfulExchangeComponent>,private router: Router) {}
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
 
-  confirmDelete(){
-    this.router.navigateByUrl('/home')
-    this.dialogRef.close();
-  }
 }

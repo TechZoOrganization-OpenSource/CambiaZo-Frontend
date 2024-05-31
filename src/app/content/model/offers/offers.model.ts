@@ -13,12 +13,12 @@ export class Offers {
   product_offers: any;
 
   constructor(
+    id: string,
     id_user_offers: string,
     id_product_offers: string,
     id_user_get: string,
     id_product_get: string,
-    status: string,
-    id: string
+    status: string
   ) {
     this.id = id;
     this.id_user_offers = id_user_offers;
@@ -46,5 +46,9 @@ export class Offers {
 
   set setUserOffers(value: any) {
     this.user_offer = value;
+  }
+
+  get getUserOffers(){
+    return this.user_offer;
   }
 }
