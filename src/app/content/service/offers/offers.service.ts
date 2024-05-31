@@ -10,16 +10,12 @@ import {Offers} from "../../model/offers/offers.model";
 export class OffersService {
    baseUrl= environment.baseUrl;
   constructor(private http:HttpClient) { }
-  
+
 
   getOffers(){
     return this.http.get(`${this.baseUrl}/offers`)
   }
-  
 
-  getOffers(){
-    return this.http.get(`${this.baseUrl}/offers`)
-  }
   updateOfferStatus(id: string, status: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/offers/${id}`, { status: status });
   }
