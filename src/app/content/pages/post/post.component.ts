@@ -38,20 +38,21 @@ export class PostComponent {
     const contactProduct = this.createPostInfoUserContentComponent.onSubmit()
 
     if(infoProduct && contactProduct){
+      this.createInfoPostContentComponent.uploadImage().then((images:string[]) => {
       const newProduct =
         {
            user_id: localStorage.getItem('id'),
           ...infoProduct,
-          'images':['https://proserquisa.com/principal/inicio/uploads/producto-sin-imagen.png'],
+          'images':images,
           'boost': contactProduct.boost,
-          location:{
-            country: contactProduct.country,
-            departament:contactProduct.departament,
-            district: contactProduct.district
+          'location':{
+            'country': contactProduct.country,
+            'departament':contactProduct.departament,
+            'district': contactProduct.district
             }
         }
-
       this.productsService.postProduct(newProduct).subscribe()
+      })
 
     }
 

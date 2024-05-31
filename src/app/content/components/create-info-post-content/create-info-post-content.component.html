@@ -33,14 +33,20 @@
       *Seleccion requerida
     </div>
 
-    <mat-label >Image</mat-label>
-    <input type="file" (change)="onFilesSelected($event)" multiple>
-    <div class="container-images">
-      <div *ngFor="let imageUrl of imagesUrls">
-        <img [src]="imageUrl" alt="Imagen seleccionada" style="width: 100%; height: 100%;">
-      </div>
-    </div>
 
+
+    <div class="custom-dropzone">
+      <ngx-dropzone accept="image/*" (change)="onSelect($event)">
+        <ngx-dropzone-label>Subir image </ngx-dropzone-label>
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          [removable]="true"
+          *ngFor="let f of files"
+          [file]="f"
+          (removed)="onRemove(f)" style="object-fit: fill">
+        </ngx-dropzone-image-preview>
+      </ngx-dropzone>
+    </div>
 
 
 
