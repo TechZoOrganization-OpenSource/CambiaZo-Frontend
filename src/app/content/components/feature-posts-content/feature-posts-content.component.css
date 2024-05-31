@@ -11,6 +11,11 @@ mat-card{
   overflow: hidden;
   cursor: pointer;
 }
+
+mat-card mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
 .image{
   height:320px;
   width: 250px;
