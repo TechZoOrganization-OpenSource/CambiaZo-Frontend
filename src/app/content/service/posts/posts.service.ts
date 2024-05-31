@@ -16,6 +16,7 @@ export class PostsService {
   getProducs():Observable<any>{
     return this.http.get(`${this.baseUrl}/products`)
   }
+
   postProduct(data:any):Observable<any>{
     return this.http.post<any>(`${this.baseUrl}/products`,data)
   }

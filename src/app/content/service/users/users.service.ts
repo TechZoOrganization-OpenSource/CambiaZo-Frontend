@@ -61,7 +61,6 @@ export class UsersService {
     );
   }
 
-
   getUsers(): Observable<any> {
     return this.http.get<any>(`${this.baseUrl}/users`)
   }
@@ -79,6 +78,19 @@ export class UsersService {
   }
   changePassword(id: string, newPassword: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/users/${id}`, { password: newPassword });
+  }
+  changeMembership(id: string, newMembership: number): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}`, { membership: newMembership });
+  }
+
+  changeMembershipDate(id: string): Observable<any> {
+    const today = new Date();
+    const day = today.getDate();
+    const month = today.getMonth() + 2;
+    const year = today.getFullYear();
+    const date = `${day}/${month}/${year}`;
+
+    return this.http.put(`${this.baseUrl}/users/${id}`, { membership_date: date });
   }
 
 }

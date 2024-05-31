@@ -1,9 +1,8 @@
-
 <div class="container-slider">
   <div class="container-cards" *ngFor="let i of [1,2]">
     <ng-container *ngFor="let item of items">
 
-      <mat-card *ngIf="item.boost">
+      <mat-card *ngIf="item.boost" [routerLink]="['/product-information', item.id]">
         <div class="image" [style.background-image]="'url(' + item.images[0] + ')'"></div>
         <div class="info-card">
           <p class="location"><mat-icon style="color: #FFD146">place</mat-icon>{{item.location.district}}</p>
@@ -11,7 +10,7 @@
             <div class="container-titles">
               <mat-card-title>{{item.product_name}}</mat-card-title>
               <mat-card-subtitle>
-                <button >{{item.getCategory}}</button>
+                <button>{{item.getCategory}}</button>
               </mat-card-subtitle>
             </div>
           </mat-card-header>
@@ -22,6 +21,5 @@
         </div>
       </mat-card>
     </ng-container>
-
   </div>
 </div>
