@@ -12,6 +12,9 @@ export class OffersService {
 
   constructor(private http: HttpClient) {}
 
+  getOffers(): Observable<Offers[]> {
+    return this.http.get<Offers[]>(this.baseUrl);
+  }
 
   postOffer(offer: Offers): Observable<Offers> {
     return this.http.post<Offers>(this.baseUrl, offer);
