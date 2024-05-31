@@ -16,6 +16,10 @@ import {Offers} from "../../model/offers/offers.model";
 import {Products} from "../../model/products/products.model";
 import {DialogDeniedOfferComponent} from "../../../public/components/dialog-denied-offer/dialog-denied-offer.component";
 import {MatDialog} from "@angular/material/dialog";
+import {
+  DialogSuccessfulExchangeComponent
+} from "../../../public/components/dialog-successful-exchange/dialog-successful-exchange.component";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-user-get-offers',
@@ -43,7 +47,7 @@ export class UserGetOffersComponent implements OnInit {
     private offersService: OffersService,
     private postsService: PostsService,
     private usersService: UsersService,
-    private dialog:  MatDialog
+    private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -78,27 +82,36 @@ export class UserGetOffersComponent implements OnInit {
     });
   }
 
-
   setStatusAccepted(offerId: string) {
     this.offersService.updateOfferStatus(offerId, 'Aceptado').subscribe(() => {
-      this.offers = this.offers.filter((offer:Offers)=>offer.id !== offerId)
-    });
-  }
-
-  setStatusDenied(offerId: string) {
-    const dialogRef = this.dialog.open(DialogDeniedOfferComponent,{disableClose: true });
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result){
-        this.offersService.updateOfferStatus(offerId, 'Denegado').subscribe(() => {
-          this.offers = this.offers.filter((offer:Offers)=>offer.id !== offerId)
+      const offer = this.offers.find((offer: Offers) => offer.id === offerId);
+      if (offer) {
+        this.offers = this.offers.filter((offer: Offers) => offer.id !== offerId);
+        this.dialog.open(DialogSuccessfulExchangeComponent, {
+          data: {
+            name: offer.user_offer.name,
+            img: offer.user_offer.img,
+            phone: offer.user_offer.phone,
+            email: offer.user_offer.email
+          },
+          disableClose: true
         });
       }
     });
   }
 
+  setStatusDenied(offerId: string) {
+    const dialogRef = this.dialog.open(DialogDeniedOfferComponent, { disableClose: true });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.offersService.updateOfferStatus(offerId, 'Denegado').subscribe(() => {
+          this.offers = this.offers.filter((offer: Offers) => offer.id !== offerId);
+        });
+      }
+    });
+  }
 
   protected readonly Offers = Offers;
 }
-
 
 
