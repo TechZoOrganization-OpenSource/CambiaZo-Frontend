@@ -7,13 +7,14 @@ import { RouterLink } from '@angular/router';
 import { UsersService } from '../../service/users/users.service';
 import { ReviewsService } from '../../service/reviews/reviews.service';
 import { OffersService } from '../../service/offers/offers.service';
-import { PostsService } from '../../service/posts/posts.service'; // Import the PostsService
+import { PostsService } from '../../service/posts/posts.service';
 import { Users } from '../../model/users/users.model';
 import { Reviews } from '../../model/reviews/reviews.model';
 import { Offers } from '../../model/offers/offers.model';
-import { Products } from '../../model/products/products.model'; // Import the Products model
+import { Products } from '../../model/products/products.model';
 import { Clipboard } from '@angular/cdk/clipboard';
 import {MatIcon} from "@angular/material/icon";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-publisher-profile',
@@ -135,9 +136,27 @@ export class PublisherProfileComponent implements OnInit {
     return starRating;
   }
 
+  message() {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 1000,
+      timerProgressBar: false,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Enlace de perfil copiado"
+    });
+  }
+
   copyProfileLink(): void {
     const url = window.location.href;
     this.clipboard.copy(url);
-    alert('Profile link copied to clipboard');
+    this.message()
   }
 }
