@@ -88,8 +88,8 @@ export class PublisherProfileComponent implements OnInit {
 
 
   loadAcceptedOffersCount(userId: string): void {
-    this.offersService.getOffers().subscribe((offers: Offers[]) => {
-      this.acceptedOffersCount = offers.filter(offer =>
+    this.offersService.getOffers().subscribe((offers: any) => {
+      this.acceptedOffersCount = offers.filter((offer:any) =>
         (offer.id_user_get === userId || offer.id_user_offers === userId) && offer.status === 'Aceptado'
       ).length;
     });

@@ -8,15 +8,15 @@ import { environment } from '../../../../environments/environment';
   providedIn: 'root'
 })
 export class OffersService {
-  baseUrl = `${environment.baseUrl}/offers`;
+  baseUrl = environment.baseUrl;
 
   constructor(private http: HttpClient) {}
 
-  getOffers(): Observable<Offers[]> {
-    return this.http.get<Offers[]>(this.baseUrl);
+  getOffers(){
+    return this.http.get(`${this.baseUrl}/offers`)
   }
 
   postOffer(offer: Offers): Observable<Offers> {
-    return this.http.post<Offers>(this.baseUrl, offer);
+    return this.http.post<Offers>(`${this.baseUrl}/offers`, offer);
   }
 }
