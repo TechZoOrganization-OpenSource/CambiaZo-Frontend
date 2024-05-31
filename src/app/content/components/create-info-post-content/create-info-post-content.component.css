@@ -1,6 +1,7 @@
-.container, h1, h2, h3, span, div,p,section{
-  font-family: inherit;
+.container, h1,mat-labe,input,textarea,section,option{
+  font-family: 'Montserrat', sans-serif;
 }
+
 .section-1,.section-2{
   display: flex;
   flex-direction: column;
@@ -8,14 +9,43 @@
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombras en los bordes */
-
-
 }
+
+.section-1 input, .section-1 textarea,.section-1 select{;
+  outline: none;
+  border-radius: 5px;
+  height: 2rem;
+  border:solid 1px #C2C2C2;
+}
+
+.section-1 input:focus, .section-1 textarea:focus,.section-1 select:focus{;
+  border:solid 2px #FFD146;
+}
+
+.section-1 textarea{
+  height: 6rem;
+  padding:0.5rem;
+  resize: none;
+  overflow: auto;
+}
+
+.section-1 div{
+  color:red;
+  height: 1.2rem;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+mat-label{
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
 .title{
   text-align: center;
   font-weight: bolder;
-
-  margin:0;
+  margin-bottom: 1.5rem;
 }
 
 .subtitle{
@@ -27,14 +57,17 @@
   height:8rem;
 }
 
-/***** cambia el disenio del input amount *****/
-.example-right-align {
-  text-align: right;
+.box-price input{
+  width: 100%;
+  display: flex;
 }
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
+.box-price{
+  width: 100%;
+  flex-direction: row;
 }
-input.example-right-align {
-  -moz-appearance: textfield;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
+

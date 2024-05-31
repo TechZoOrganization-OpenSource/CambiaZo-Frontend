@@ -100,7 +100,6 @@ export class CreateInfoPostContentComponent implements OnInit{
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
     if (this.files.length < this.maxFiles && this.errorLimitFiles) {
-      console.log('hay espacio')
       this.errorLimitFiles = false;
     }
   }
@@ -125,4 +124,5 @@ export class CreateInfoPostContentComponent implements OnInit{
       if(!this.imagesUrl.length)return [this.imageDefault]
        return this.imagesUrl
   }
+
 }
