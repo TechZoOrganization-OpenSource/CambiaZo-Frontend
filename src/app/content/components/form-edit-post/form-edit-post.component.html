@@ -73,7 +73,7 @@
           <div class="img__container">
             <img *ngFor="let image of images" src="{{image}}" style="width: 100px">
             <label for="file-upload" class="custom-file-upload">
-              <input id="file-upload" type="file" multiple/> <!-- (change)="onselect($event)" -->
+              <input id="file-upload" type="file" (change)="onselect($event)" multiple/> <!-- (change)="onselect($event)" -->
               +
             </label>
 
