@@ -58,19 +58,23 @@ mat-label{
 
 .box-policy mat-checkbox{
   display: inline-flex;
-  --mdc-checkbox-unselected-hover-icon-color: #FFD146;
   --mdc-checkbox-selected-icon-color: #FFD146;
   --mdc-checkbox-selected-color: #FFD146;
   --mdc-checkbox-selected-focus-icon-color: #FFD146;
   --mdc-checkbox-selected-hover-icon-color: #FFD146;
+  --mdc-checkbox-unselected-focus-icon-color: black;
 
   --mdc-checkbox-selected-hover-state-layer-color: #FFD146;
-  --mdc-checkbox-selected-focus-state-layer-color: #FFD146;
+  --mdc-checkbox-selected-focus-state-layer-color: none;
+  --mdc-checkbox-unselected-hover-state-layer-color: none;/*sombra cuando pones mouse y esta apagado*/
+  --mdc-checkbox-unselected-focus-state-layer-color: none;
 
   --mat-full-pseudo-checkbox-selected-icon-color: #FFD146;
   --mat-minimal-pseudo-checkbox-selected-checkmark-color: #FFD146;
   --mdc-checkbox-selected-pressed-state-layer-color: #FFD146;
   --mdc-checkbox-selected-pressed-icon-color: #FFD146;
+  --mdc-checkbox-unselected-pressed-state-layer-color: rgba(182, 174, 150, 0.72)
+
 }
 
 .box-policy mat-label a{
