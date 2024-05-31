@@ -23,13 +23,15 @@ import { FilterProductsComponent } from "./content/pages/filter-products/filter-
 import { VerifyEmailComponent } from "./content/pages/verify-email/verify-email.component";
 import { ChangePasswordComponent } from "./content/pages/change-password/change-password.component";
 import { EditProfileComponent } from "./content/pages/edit-profile/edit-profile.component";
-import {ProductDetailsComponent} from "./content/pages/product-details/product-details.component";
+import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
+import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'donations', component: DonationsComponent },
   { path: 'home/post', component: PostComponent },
   { path: 'memberships', component: MembershipsComponent },
+  { path: 'memberships/:buy-membership', component: BuyMembershipComponent },
   { path: 'terms-of-use', component: TermsOfUseComponent },
   { path: 'privacy-policy', component: PrivacyPolicyComponent },
   { path: 'login', component: LoginComponent },
@@ -42,7 +44,8 @@ export const routes: Routes = [
   { path: 'profile/edit', component: EditProfileComponent },
   { path: 'donations/:ong', component: OngDetailComponent },
   { path: 'home/:products', component: FilterProductsComponent },
-  { path: 'product-information/:id', component: ProductDetailsComponent }, // Aquí está la ruta actualizada
+  { path: 'product-information/:id', component: ProductDetailsComponent },
+  
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
