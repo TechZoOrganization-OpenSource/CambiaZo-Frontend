@@ -8,6 +8,7 @@ export class Offers {
   id_product_get: string;
   status: string;
   user_get: any;
+  user_offer: any;
   product_get: any;
   product_offers: any;
 
@@ -26,6 +27,7 @@ export class Offers {
     this.id_product_get=id_product_get;
     this.status=status;
     this.user_get = {};
+    this.user_offer = {};
     this.product_get = {};
     this.product_offers = {};
   }
@@ -37,5 +39,8 @@ export class Offers {
   }
   set setProductOffers(value: any) {
     this.product_offers = value;
+  }
+  set setUserOffers(value: any) {
+    this.user_offer = value;
   }
 }

@@ -6,8 +6,8 @@
     <div class="line"></div>
   </div>
   <div class="offers-buttons">
-    <button class="sent" (click)="showSentOffers()">Enviadas</button>
-    <button class="get" (click)="showGetOffers()">Recibidas</button>
+    <button class="sent" (click)="showSentOffers()" [class.active]="showSent">Enviadas</button>
+    <button class="get" (click)="showGetOffers()" [class.active]="!showSent">Recibidas</button>
   </div>
   <div class="line-text">
     <div class="line"></div>

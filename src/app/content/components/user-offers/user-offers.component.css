@@ -1,4 +1,4 @@
-.user-offers-title{
+.user-offers-title {
   font-size: 1.5rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
@@ -6,11 +6,13 @@
   padding-left: 3rem;
   padding-bottom: 1rem;
 }
-.line-text{
+
+.line-text {
   display: flex;
   align-items: center;
   align-content: center;
 }
+
 .line {
   margin-bottom: 0.5rem;
   flex: 1;
@@ -19,34 +21,43 @@
   margin-left: 3rem;
   margin-right: 3rem;
 }
-.offers-buttons{
+
+.offers-buttons {
   display: flex;
   padding: 1rem 0 1rem 3rem;
 }
-button{
+
+button {
   font-size: 1rem;
   font-family: 'Montserrat', sans-serif;
   font-weight: bolder;
   border-radius: 10px;
   padding: 0.3rem 1rem;
 }
-button:hover{
-  cursor: pointer;
+
+button:hover {
+  background-color: #000000;
+  color: #ffffff;
 }
-.sent{
+
+.sent,
+.get{
   margin-right: 1rem;
-  border-color: black;
+  border: none;
+  background-color: #FFE493;
+  color: black;
+  font-weight: bold;
+}
+
+button.active {
+  border: none;
+  margin-right: 1rem;
   background-color: black;
   color: #FFD146;
 }
-.get{
-  border-color: #FFE493;
-  background-color: #FFE493;
-  color: black;
-}
 
-@media screen and (max-width: 1150px){
-  .user-offers-title{
+@media screen and (max-width: 1150px) {
+  .user-offers-title {
     padding-top: 2rem;
     padding-left: 1rem;
   }
