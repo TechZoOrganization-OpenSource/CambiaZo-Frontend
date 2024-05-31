@@ -125,4 +125,8 @@ export class CreateInfoPostContentComponent implements OnInit{
        return this.imagesUrl
   }
 
+  validateInput(event:any) {
+    if (event.data === '-' || event.data === '+')event.preventDefault();
+  }
+
 }
