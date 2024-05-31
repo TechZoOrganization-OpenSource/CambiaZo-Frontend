@@ -57,9 +57,10 @@ mat-label{
   height:8rem;
 }
 
-.box-price input{
+.section-1 input{
   width: 100%;
   display: flex;
+  border-radius: 0 5px 5px 0;
 }
 .box-price{
   width: 100%;
@@ -71,6 +72,20 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+
+
+.box-input-price{
+  display:flex;
+  flex-direction:
+    row; justify-content: left
+}
+
+.sign-money{
+  border-radius: 5px 0 0 5px;
+}
+
+
+
 /*img 2*/
 
 .section-2 p{
@@ -81,14 +96,60 @@ ngx-dropzone {
   display: flex;
   flex-wrap: wrap;
   height: auto;
+  justify-content: center;
 }
 
 ngx-dropzone-image-preview {
   width: 45%;
+  height: 10rem;
   object-fit: contain;
   overflow: hidden;
+  border: solid 1px red;
+}
+
+.sing-more {
+  width: 50%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+}
+
+ngx-dropzone-label{
+  height: 8.8rem;
+  display: flex;
+  align-items: center;
 }
 
 
 
+@media(max-width: 1100px){
+  ngx-dropzone {
+    flex-direction: column;
+  }
+  ngx-dropzone-image-preview {
+    width: 90%;
+  }
+}
 
+@media(max-width: 900px){
+  ngx-dropzone-image-preview {
+    width: 45%;
+  }
+  ngx-dropzone {
+    flex-direction: row;
+  }
+}
+@media(max-width: 565px){
+  ngx-dropzone {
+    flex-direction: column;
+  }
+  ngx-dropzone-image-preview {
+    width: 90%;
+  }
+
+  .section-1,.section-2{
+    padding:1.5rem;
+  }
+}

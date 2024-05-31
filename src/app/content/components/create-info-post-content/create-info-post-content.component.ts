@@ -9,6 +9,7 @@ import {PostsService} from "../../service/posts/posts.service";
 import {CategoriesObjects} from "../../model/categories-objects/categories-objects.model";
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import {MatIcon} from "@angular/material/icon";
 
 
 @Component({
@@ -25,7 +26,8 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
     ReactiveFormsModule,
     NgIf,
     JsonPipe,
-    NgxDropzoneModule
+    NgxDropzoneModule,
+    MatIcon
   ],
   templateUrl: './create-info-post-content.component.html',
   styleUrl: './create-info-post-content.component.css'

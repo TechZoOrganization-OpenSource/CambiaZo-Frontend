@@ -105,3 +105,10 @@ mat-label{
   --mdc-switch-selected-hover-track-color: #FFD146 /*color del slide cuando pasa el mouse encima*/;
   --mdc-switch-selected-track-color: #FFD146;/*color del slide cuando esta activado*/
 }
+
+
+@media(max-width: 565px){
+  .section-1{
+    padding:1.5rem;
+  }
+}
