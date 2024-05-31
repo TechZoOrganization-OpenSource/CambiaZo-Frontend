@@ -71,3 +71,22 @@ input[type="number"]::-webkit-outer-spin-button {
   margin: 0;
 }
 
+/*img 2*/
+
+.section-2 p{
+  text-align: center;
+}
+
+ngx-dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+}
+
+ngx-dropzone-image-preview {
+  width: 45%;
+  object-fit: contain;
+  overflow: hidden;
+}
+
+

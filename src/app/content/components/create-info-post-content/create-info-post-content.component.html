@@ -36,7 +36,7 @@
     </div>
 
     <mat-label >Valor Aproximado</mat-label>
-      <input type="number" (beforeinput)="validateInput($event)" placeholder="S/." >
+      <input formControlName="price" type="number" (beforeinput)="validateInput($event)" placeholder="S/." >
     <div>
       <span *ngIf="formProduct.get('price')?.invalid && formProduct.get('price')?.touched">
       *Seleccion requerida
@@ -47,17 +47,20 @@
 
 
 <section class="section-2">
-  <mat-label >Imagenes {{files.length}}/8 - Puedes agregar un maximo de 8 fotos</mat-label>
+  <h1 class="title">Imagenes</h1>
+  <p>Imagenes {{files.length}}/8 - Puedes agregar un maximo de 8 fotos</p>
+
   <div class="custom-dropzone">
     <ngx-dropzone accept="image/*" (change)="onSelect($event)">
-      <ngx-dropzone-label>Subir image </ngx-dropzone-label>
-      <ngx-dropzone-image-preview
-        ngProjectAs="ngx-dropzone-preview"
-        [removable]="true"
-        *ngFor="let f of files"
-        [file]="f"
-        (removed)="onRemove(f)" style="object-fit: fill">
-      </ngx-dropzone-image-preview>
+      <ngx-dropzone-label>Subir imagen</ngx-dropzone-label>
+        <ngx-dropzone-image-preview
+          ngProjectAs="ngx-dropzone-preview"
+          [removable]="true"
+          *ngFor="let f of files"
+          [file]="f"
+          (removed)="onRemove(f)"
+          style="object-fit: fill">
+        </ngx-dropzone-image-preview>
     </ngx-dropzone>
   </div>
 </section>
