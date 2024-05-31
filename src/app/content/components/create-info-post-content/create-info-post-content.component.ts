@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -34,6 +34,14 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class CreateInfoPostContentComponent implements OnInit{
 
+  @Input() category_id= null;
+  @Input() product_name = null;
+  @Input() description = null;
+  @Input() change_for = null;
+  @Input() price = null;
+  @Input() images = [];
+
+
   categories: CategoriesObjects[]=[]
   imagesUrl: string[] = [];
   files: File[] = [];
@@ -46,9 +54,22 @@ export class CreateInfoPostContentComponent implements OnInit{
     'price': new FormControl(null, Validators.required),
     }
   )
-  constructor(private postService:PostsService) {}
+  constructor(private postService:PostsService) {
+
+
+  }
 
   ngOnInit() {
+
+    this.formProduct = new FormGroup({
+        'category_id': new FormControl(this.category_id, Validators.required),
+        'product_name': new FormControl(this.product_name, Validators.required),
+        'description': new FormControl(this.description, Validators.required),
+        'change_for': new FormControl(this.change_for, Validators.required),
+        'price': new FormControl(this.price, Validators.required),
+      }
+    )
+    this.imagesUrl = this.images
     this.getCategoriesPostOptions()
     this.formProduct.get('product_name')?.valueChanges.subscribe(value => {
       if (value === '') {
@@ -65,6 +86,8 @@ export class CreateInfoPostContentComponent implements OnInit{
         this.formProduct.get('change_for')?.setValue(null, { emitEvent: false });
       }
     });
+
+
   }
 
   getCategoriesPostOptions(){
@@ -97,6 +120,13 @@ export class CreateInfoPostContentComponent implements OnInit{
       this.files.push(...event.addedFiles.slice(0, allowedFiles));
       this.errorLimitFiles = true
     }
+
+    console.log(this.category_id)
+    console.log(this.product_name)
+    console.log(this.description)
+    console.log(this.change_for)
+    console.log(this.price)
+    console.log(this.images)
   }
 
   onRemove(event: any) {

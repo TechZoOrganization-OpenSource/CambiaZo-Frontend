@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
@@ -39,9 +39,15 @@ import {RouterLink} from "@angular/router";
 })
 export class CreatePostInfoUserContentComponent implements OnInit{
 
+  @Input() boost = false
+  @Input() country = null;
+  @Input() department= null;
+  @Input() city = null
+
   countries: any[]= []
   departments: any[]=[]
   cities: string[]=[]
+
   user: any;
 
 
@@ -57,8 +63,9 @@ export class CreatePostInfoUserContentComponent implements OnInit{
   constructor(private countriesService: CountriesService,private usersService: UsersService) {}
 
   ngOnInit() {
-    this.getUser()
+    this.formProduct.get('boost')?.setValue(this.boost)
     this.getAllCountries()
+    this.getUser()
   }
   onSubmit() {
     this.formProduct.markAllAsTouched();
@@ -71,6 +78,14 @@ export class CreatePostInfoUserContentComponent implements OnInit{
   getAllCountries(){
     this.countriesService.getCountries().subscribe((res:any)=>{
       this.countries = res
+
+      if(this.country){
+        this.formProduct.get('country')?.setValue(this.country)
+        this.onCountrySelectionChange()
+        this.formProduct.get('departament')?.setValue(this.department)
+        this.onCitiesSelectionChange()
+        this.formProduct.get('district')?.setValue(this.city)
+      }
     })
 
   }
