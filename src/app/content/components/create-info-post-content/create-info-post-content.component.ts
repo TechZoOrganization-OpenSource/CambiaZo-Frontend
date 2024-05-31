@@ -81,12 +81,28 @@ export class CreateInfoPostContentComponent implements OnInit{
     }else return null
   }
 
+  maxFiles: number = 8;
+  errorLimitFiles = false
+
   onSelect(event: any) {
-    this.files.push(...event.addedFiles);
+    const totalFiles = this.files.length + event.addedFiles.length;
+
+    if (totalFiles <= this.maxFiles) {
+      this.files.push(...event.addedFiles);
+      this.errorLimitFiles = false;
+    } else {
+      const allowedFiles = this.maxFiles - this.files.length;
+      this.files.push(...event.addedFiles.slice(0, allowedFiles));
+      this.errorLimitFiles = true
+    }
   }
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+    if (this.files.length < this.maxFiles && this.errorLimitFiles) {
+      console.log('hay espacio')
+      this.errorLimitFiles = false;
+    }
   }
 
 
