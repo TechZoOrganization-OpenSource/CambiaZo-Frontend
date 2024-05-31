@@ -64,8 +64,4 @@ export class Ongs {
     return `${this.address.street}, ${this.address.district}, ${this.address.city}, ${this.address.country}`;
   }
 
-
-
-
-
 }
