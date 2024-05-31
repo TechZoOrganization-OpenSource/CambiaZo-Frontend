@@ -88,5 +88,16 @@ mat-label{
   justify-content: space-between;
 }
 
-
-
+.box-boost mat-slide-toggle {
+  --mdc-switch-selected-focus-state-layer-color: rgba(174, 135, 5, 0.72);
+  --mdc-switch-selected-handle-color: rgba(243, 184, 0, 0.72);
+  --mdc-switch-selected-hover-state-layer-color: #FFD146;
+  --mdc-switch-selected-pressed-state-layer-color: rgba(243, 184, 0, 0.72);/*pone a la sombra del icono al poner click*/
+  --mdc-switch-selected-focus-handle-color: #FFD146;
+  --mdc-switch-selected-hover-handle-color: #FFD146;
+  --mdc-switch-selected-focus-track-color: #FFD146;
+  --mdc-switch-selected-pressed-handle-color: rgba(174, 135, 5, 0.72);/*pone color del icono al poner click*/
+  --mdc-switch-selected-pressed-track-color: #FFD146;/*pone color al slide al poner click*/
+  --mdc-switch-selected-hover-track-color: #FFD146 /*color del slide cuando pasa el mouse encima*/;
+  --mdc-switch-selected-track-color: #FFD146;/*color del slide cuando esta activado*/
+}
