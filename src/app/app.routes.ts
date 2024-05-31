@@ -30,6 +30,7 @@ import { MyReviewsComponent } from "./content/components/my-reviews/my-reviews.c
 import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
 import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
 import { EditPostComponent } from "./content/pages/edit-post/edit-post.component";
+import {PublisherProfileDetailsComponent} from "./content/pages/publisher-profile-details/publisher-profile-details.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -59,7 +60,9 @@ export const routes: Routes = [
   { path: 'home/:products', component: FilterProductsComponent },
   { path: 'product-information/:id', component: ProductDetailsComponent },
   { path: 'post/:postId', component: EditPostComponent },
-
+  { path: 'publisher-profile/:id', component: PublisherProfileDetailsComponent },
+  
+  /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
   { path: 'admin/ongs', component: OngsAdminComponent },

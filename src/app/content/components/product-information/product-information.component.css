@@ -129,6 +129,11 @@ mat-card {
   text-align: center;
   padding: 1rem;
 }
+
+.user-data mat-card mat-card-header h1{
+  font-weight: bolder;
+  font-family: 'Montserrat', sans-serif;
+}
 mat-card-header{
   display: flex;
   justify-content: center;

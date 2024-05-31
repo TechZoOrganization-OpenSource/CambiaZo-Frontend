@@ -8,10 +8,14 @@ import {Offers} from "../../model/offers/offers.model";
   providedIn: 'root'
 })
 export class OffersService {
-
-
-  baseUrl= environment.baseUrl;
+   baseUrl= environment.baseUrl;
   constructor(private http:HttpClient) { }
+  
+
+  getOffers(){
+    return this.http.get(`${this.baseUrl}/offers`)
+  }
+  
 
   getOffers(){
     return this.http.get(`${this.baseUrl}/offers`)
@@ -21,6 +25,6 @@ export class OffersService {
   }
 
   postOffer(offer: Offers): Observable<Offers> {
-    return this.http.post<Offers>(this.baseUrl, offer);
+    return this.http.post<Offers>(`${this.baseUrl}/offers`, offer);
   }
 }
