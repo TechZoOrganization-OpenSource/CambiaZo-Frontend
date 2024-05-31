@@ -6,6 +6,8 @@ import {MyPostsComponent} from "../../components/my-posts/my-posts.component";
 import {MyReviewsComponent} from "../../components/my-reviews/my-reviews.component";
 import {MyFavoritesComponent} from "../../components/my-favorites/my-favorites.component";
 import {UserOffersComponent} from "../../components/user-offers/user-offers.component";
+import { RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
+import {NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-own-profile',
@@ -16,14 +18,19 @@ import {UserOffersComponent} from "../../components/user-offers/user-offers.comp
     MyPostsComponent,
     MyReviewsComponent,
     MyFavoritesComponent,
-    UserOffersComponent
+    UserOffersComponent,
+    RouterLink,
+    RouterOutlet,
+    NgIf,
+    RouterLinkActive
   ],
   templateUrl: './own-profile.component.html',
   styleUrl: './own-profile.component.css'
 })
 export class OwnProfileComponent implements OnInit{
   user : any = {};
-  constructor(private userService:UsersService) {}
+
+  constructor(private userService:UsersService) { }
   ngOnInit(){
     this.getUser();
   }
@@ -33,4 +40,5 @@ export class OwnProfileComponent implements OnInit{
       console.log(this.user)
     });
   }
+
 }
