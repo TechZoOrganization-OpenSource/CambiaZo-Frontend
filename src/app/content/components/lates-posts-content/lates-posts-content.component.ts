@@ -5,6 +5,10 @@ import {FeaturePostsContentComponent} from "../feature-posts-content/feature-pos
 import {PostsService} from "../../service/posts/posts.service";
 import {MatIcon} from "@angular/material/icon";
 import {Products} from "../../model/products/products.model";
+import {MatButton} from "@angular/material/button";
+import {MatFormField} from "@angular/material/form-field";
+import {MatInput} from "@angular/material/input";
+import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-lates-posts-content',
   standalone: true,
@@ -12,13 +16,18 @@ import {Products} from "../../model/products/products.model";
     MatCardModule,
     CommonModule,
     FeaturePostsContentComponent,
-    MatIcon
+    MatIcon,
+    MatButton,
+    MatFormField,
+    MatInput,
+    RouterLink
   ],
   templateUrl: './lates-posts-content.component.html',
   styleUrl: './lates-posts-content.component.css'
 })
 export class LatesPostsContentComponent implements OnInit{
   items:Products[]=[]
+  categories:any[] = []
 
   constructor(private postService:PostsService) {
   }
@@ -45,12 +54,23 @@ export class LatesPostsContentComponent implements OnInit{
       })
 
       this.postService.getCategoriesProducts().subscribe((categories:any)=>{
+        this.categories = categories
         this.items.map((item:Products)=>{
           item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
         })
       })
 
     })
+  }
+
+  searchProduct(event:Event) {
+    const search = (event.target as HTMLInputElement).value.trim()
+    this.postService.getProducs().subscribe((res: any) => {
+      this.items = res.filter((product: Products) => {
+        const ongsNameNormalized = product.product_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+        return ongsNameNormalized.includes(search) || search == '';
+      })
+    },error => console.log(error))
   }
 
 }

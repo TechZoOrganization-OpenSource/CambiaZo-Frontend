@@ -11,6 +11,7 @@ import {MatIconButton} from "@angular/material/button";
 import {RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DialogDeletePostComponent} from "../../../public/components/dialog-delete-post/dialog-delete-post.component";
+import {DialogEditPostComponent} from "../../../public/components/dialog-edit-post/dialog-edit-post.component";
 
 @Component({
   selector: 'app-my-posts',
@@ -32,6 +33,7 @@ import {DialogDeletePostComponent} from "../../../public/components/dialog-delet
 export class MyPostsComponent implements OnInit{
   user : any = {};
   items: any = [];
+  post: any={};
   constructor(private userService:UsersService,private dialogDeletePost: MatDialog, private postService:PostsService) {}
   ngOnInit() {
     this.getUser();
@@ -80,7 +82,9 @@ export class MyPostsComponent implements OnInit{
       }
     });
   };
-  onCallEditPost(id:string){
 
+  setPost(post:any){
+    this.post = post;
+    console.log(this.post)
   }
 }

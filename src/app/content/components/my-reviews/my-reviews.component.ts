@@ -91,7 +91,7 @@ export class MyReviewsComponent implements OnInit{
       } else if (i === fullStars && decimalPart >= 0.01 && decimalPart < 0.99) {
         starRating.push({ icon: 'star_half'});
       } else {
-        starRating.push({ icon: 'star'});
+        starRating.push({ icon: 'stars'});
       }
     }
     return starRating;

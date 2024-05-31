@@ -1,3 +1,5 @@
+import {Products} from "../products/products.model";
+
 export class Users {
   id: number;
   name: string;
@@ -5,7 +7,9 @@ export class Users {
   phone:string;
   password: string;
   membership: number;
+  membership_date:string;
   img: string;
+  favorites: Products[];
 
   constructor(
     id: number,
@@ -14,7 +18,8 @@ export class Users {
     phone: string,
     password: string,
     membership: number,
-    img: string
+    img: string,
+    favorites: Products[]
   ){
     this.id = id;
     this.name = name;
@@ -22,6 +27,12 @@ export class Users {
     this.phone = phone;
     this.password = password;
     this.membership = membership;
+    this.membership_date="";
     this.img = img;
+    this.favorites = favorites;
+  }
+  set membershipDate(membership_date:string){
+    this.membership_date=membership_date;
   }
 }
+

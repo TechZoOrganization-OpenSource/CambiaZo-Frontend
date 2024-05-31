@@ -26,7 +26,6 @@ import {RouterLink} from "@angular/router";
   styleUrl: './search-ongs.component.css'
 })
 export class SearchOngsComponent implements OnInit{
-  ongsSearched: string = ""
   items:Ongs[]=[]
 
   constructor(private ongsService:OngsService) {
@@ -38,11 +37,11 @@ export class SearchOngsComponent implements OnInit{
   }
 
   searchOngs(event:Event){
-    this.ongsSearched = (event.target as HTMLInputElement).value.trim()
+   const ongsSearched = (event.target as HTMLInputElement).value.trim()
     this.ongsService.getOngs().subscribe((res:any)=>
     { this.items = res.filter((ongs:Ongs)=>{
       const ongsNameNormalized = ongs.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-      return ongsNameNormalized.includes(this.ongsSearched) || this.ongsSearched == '';
+      return ongsNameNormalized.includes(ongsSearched) || ongsSearched == '';
 
     })},error => console.log(error))
 

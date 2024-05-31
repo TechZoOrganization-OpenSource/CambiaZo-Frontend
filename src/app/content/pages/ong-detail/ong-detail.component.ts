@@ -33,7 +33,6 @@ export class OngDetailComponent implements OnInit{
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      /*this is the var params: mathias&Id=1 adn i want the id after &Id=*/
       const ong = params.get('ong')/*ong have this value: mathias&Id=1*/
       const id = ong ? ong.split('&Id=')[1] : ''/*id have this value: 1*/
       this.getOng(id);

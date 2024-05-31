@@ -20,7 +20,11 @@ export class AppComponent {
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.showNavFooter = !(event.url === '/login'|| event.url === '/register'|| event.url.startsWith('/admin'));
+        this.showNavFooter = !(event.url === '/login'|| event.url === '/register'|| event.url.startsWith('/admin')|| event.url.startsWith('/memberships/')|| event.url === '/verify-email' || event.url === '/change-password'|| event.url === '/buy-membership');
+
+        if (event.url === '/login') {
+          localStorage.removeItem('id-temporal');
+        }
       }
     });
 
