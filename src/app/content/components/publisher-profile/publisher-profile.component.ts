@@ -31,13 +31,14 @@ import {MatIcon} from "@angular/material/icon";
 })
 export class PublisherProfileComponent implements OnInit {
   user: Users | null = null;
+  userProducts: Products[] = [];
   reviews: Reviews[] = [];
   myReviews: Reviews[] = [];
+
   averageScore: number = 0;
   totalReviews: number = 0;
   ratings: { score: number, percentage: number }[] = [];
   acceptedOffersCount: number = 0;
-  userProducts: Products[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -70,6 +71,12 @@ export class PublisherProfileComponent implements OnInit {
         review.give_user_id
       ));
 
+      this.reviews.map((review: Reviews) => {
+        this.usersService.getUserById(Number(review.give_user_id)).subscribe((user: Users) => {
+          review.setGiveUserName = user.name;
+        });
+      })
+
       this.myReviews = this.reviews.filter((review: Reviews) => review.get_user_id === userId);
       this.totalReviews = this.myReviews.length;
 
@@ -77,6 +84,7 @@ export class PublisherProfileComponent implements OnInit {
       this.calculateAverageScore();
     });
   }
+
 
   loadAcceptedOffersCount(userId: string): void {
     this.offersService.getOffers().subscribe((offers: Offers[]) => {
@@ -91,6 +99,10 @@ export class PublisherProfileComponent implements OnInit {
       this.userProducts = products.filter(product => product.user_id === userId);
     });
   }
+
+
+
+
 
   calculateRatings(): void {
     this.ratings = [];

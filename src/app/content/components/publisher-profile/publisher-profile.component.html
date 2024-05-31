@@ -64,7 +64,7 @@
           <mat-card-content>
             <div class="user-review" *ngFor="let review of myReviews">
               <div class="review-header">
-                <h3>userName</h3>
+                <h3>{{review.give_user_name}}</h3>
                 <div class="stars-score">
                   <ng-container *ngFor="let star of getStarRating(review.score)">
                     <img [src]="star.icon === 'star' ? 'assets/images/icons/full-star.png' : star.icon === 'star_half' ? 'assets/images/icons/half-star.png' : 'assets/images/icons/none-star.png'" width="20" alt="Star">
