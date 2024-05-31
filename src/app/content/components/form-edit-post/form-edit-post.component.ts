@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {JsonPipe, NgForOf, NgIf} from "@angular/common";
-import {MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {MatDialog, MatDialogClose, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 import {UsersService} from "../../service/users/users.service";
 import {MatIcon} from "@angular/material/icon";
 import {PostsService} from "../../service/posts/posts.service";
@@ -9,6 +9,7 @@ import {Products} from "../../model/products/products.model";
 import {CountriesService} from "../../service/countries/countries.service";
 import {FormControl, FormGroup, ReactiveFormsModule} from "@angular/forms";
 import {CategoriesObjectsService} from "../../service/categories-objects/categories-objects.service";
+import {DialogEditPostComponent} from "../../../public/components/dialog-edit-post/dialog-edit-post.component";
 
 @Component({
   selector: 'app-form-edit-post',
@@ -58,7 +59,7 @@ export class FormEditPostComponent implements OnInit{
   boost= new FormControl();
 
   districts:any[] = [];
-  constructor(private router:Router,private categoriesService:CategoriesObjectsService,private countriesService:CountriesService,private userService:UsersService, private postService:PostsService,private route: ActivatedRoute){ /**private readonly imgbbService:ImgbbService */
+  constructor(private dialogEditPost: MatDialog,private categoriesService:CategoriesObjectsService,private countriesService:CountriesService,private userService:UsersService, private postService:PostsService,private route: ActivatedRoute){ /**private readonly imgbbService:ImgbbService */
     this.route.params.subscribe(params => this.postC=(params));
     this.postC= this.postC.postId;
     const idStartIndex = this.postC.indexOf('=');
@@ -200,7 +201,7 @@ export class FormEditPostComponent implements OnInit{
     this.postService.putProduct(id,newPost).subscribe((res:any)=>{
       console.log(res);
     });
-    alert("Cambios guardados con exito");
+    this.dialogEditPost.open(DialogEditPostComponent,{disableClose: true, data:id});
   }
 
 
