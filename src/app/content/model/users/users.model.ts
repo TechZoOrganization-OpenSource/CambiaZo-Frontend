@@ -7,6 +7,7 @@ export class Users {
   phone:string;
   password: string;
   membership: number;
+  membership_date:string;
   img: string;
   favorites: Products[];
 
@@ -26,7 +27,12 @@ export class Users {
     this.phone = phone;
     this.password = password;
     this.membership = membership;
+    this.membership_date="";
     this.img = img;
     this.favorites = favorites;
   }
+  set membershipDate(membership_date:string){
+    this.membership_date=membership_date;
+  }
 }
+

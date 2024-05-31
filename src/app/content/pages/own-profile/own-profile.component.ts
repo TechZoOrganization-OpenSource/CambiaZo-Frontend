@@ -37,7 +37,6 @@ export class OwnProfileComponent implements OnInit{
   getUser(){
     this.userService.getUserById(Number(localStorage.getItem('id'))).subscribe((data)=>{
       this.user = data;
-      console.log(this.user)
     });
   }
 

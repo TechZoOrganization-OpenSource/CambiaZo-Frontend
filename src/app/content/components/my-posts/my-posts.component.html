@@ -20,7 +20,7 @@
             </button>
           </div>
           <mat-menu #menu="matMenu">
-              <button mat-menu-item (click)="onCallEditPost(posts.id)" title="Editar">
+              <button (click)="setPost(posts)" [routerLink]="['/post/', posts.product_name+'&Id='+posts.id]"  mat-menu-item title="Editar">
                 <mat-icon>edit</mat-icon>
                 <span>Editar</span>
               </button>

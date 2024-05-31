@@ -27,4 +27,9 @@ export class HeaderProfileComponent implements OnInit{
       this.user = data;
     });
   }
+
+  logout(){
+    this.userService.isLogged = false;
+    localStorage.removeItem('id');
+  }
 }

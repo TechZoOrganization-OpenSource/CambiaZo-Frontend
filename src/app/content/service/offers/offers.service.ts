@@ -8,6 +8,7 @@ import {Observable} from "rxjs";
 })
 export class OffersService {
 
+
   baseUrl= environment.baseUrl;
   constructor(private http:HttpClient) { }
 
@@ -16,5 +17,10 @@ export class OffersService {
   }
   updateOfferStatus(id: string, status: string): Observable<any> {
     return this.http.put(`${this.baseUrl}/offers/${id}`, { status: status });
+  }
+
+  postOffer(offer: Offers): Observable<Offers> {
+    return this.http.post<Offers>(this.baseUrl, offer);
+
   }
 }
