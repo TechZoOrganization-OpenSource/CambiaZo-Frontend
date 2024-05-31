@@ -23,6 +23,10 @@ import { FilterProductsComponent } from "./content/pages/filter-products/filter-
 import { VerifyEmailComponent } from "./content/pages/verify-email/verify-email.component";
 import { ChangePasswordComponent } from "./content/pages/change-password/change-password.component";
 import { EditProfileComponent } from "./content/pages/edit-profile/edit-profile.component";
+import { MyPostsComponent } from "./content/components/my-posts/my-posts.component";
+import { UserOffersComponent } from "./content/components/user-offers/user-offers.component";
+import { MyFavoritesComponent } from "./content/components/my-favorites/my-favorites.component";
+import { MyReviewsComponent } from "./content/components/my-reviews/my-reviews.component";
 import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
 import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
 import { EditPostComponent } from "./content/pages/edit-post/edit-post.component";
@@ -42,13 +46,22 @@ export const routes: Routes = [
   { path: 'change-password', component: ChangePasswordComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: AssistComponent },
-  { path: 'profile', component: OwnProfileComponent },
+  { path: 'profile', component: OwnProfileComponent, children: [
+      { path: '', redirectTo: 'publicaciones', pathMatch: 'full' },
+      { path: 'publicaciones', component: MyPostsComponent },
+      { path: 'ofertas', component: UserOffersComponent },
+      { path: 'cambios-completos', component: MyPostsComponent }, // Replace with the appropriate component
+      { path: 'favoritos', component: MyFavoritesComponent },
+      { path: 'resenas', component: MyReviewsComponent },
+    ]
+  },
   { path: 'profile/edit', component: EditProfileComponent },
   { path: 'donations/:ong', component: OngDetailComponent },
   { path: 'home/:products', component: FilterProductsComponent },
   { path: 'product-information/:id', component: ProductDetailsComponent },
   { path: 'post/:postId', component: EditPostComponent },
   { path: 'publisher-profile/:id', component: PublisherProfileDetailsComponent },
+  
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
