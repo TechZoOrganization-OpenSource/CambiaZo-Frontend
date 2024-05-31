@@ -1,6 +1,7 @@
-.container, h1, h2, h3, span, div,p,section{
-  font-family: inherit;
+mat-label,input,h1,select,option,mat-checkbox{
+  font-family: 'Montserrat', sans-serif;
 }
+
 .section-1,.section-2{
   display: flex;
   flex-direction: column;
@@ -8,31 +9,84 @@
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombras en los bordes */
-
-
 }
+
+.section-1 input,.section-1 select{;
+  outline: none;
+  border-radius: 5px;
+  height: 2rem;
+  border:solid 1px #C2C2C2;
+}
+
+.section-1 select:focus{;
+  border:solid 2px #FFD146;
+}
+.section-1 input{
+  margin-bottom: 0.5rem;
+}
+.section-1 div{
+  color:red;
+  height: 1.2rem;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+mat-label{
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
+
+
 .title{
   text-align: center;
   font-weight: bolder;
-
-  margin:0;
+  margin-bottom: 1.5rem;
 }
 
-.subtitle{
+.box-policy{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.box-policy mat-label{
+  color: #000000;
   margin:0;
+  padding:0;
 }
 
-.section-2 .title-boost{
+.box-policy mat-checkbox{
+  display: inline-flex;
+  --mdc-checkbox-unselected-hover-icon-color: #FFD146;
+  --mdc-checkbox-selected-icon-color: #FFD146;
+  --mdc-checkbox-selected-color: #FFD146;
+  --mdc-checkbox-selected-focus-icon-color: #FFD146;
+  --mdc-checkbox-selected-hover-icon-color: #FFD146;
+
+  --mdc-checkbox-selected-hover-state-layer-color: #FFD146;
+  --mdc-checkbox-selected-focus-state-layer-color: #FFD146;
+
+  --mat-full-pseudo-checkbox-selected-icon-color: #FFD146;
+  --mat-minimal-pseudo-checkbox-selected-checkmark-color: #FFD146;
+  --mdc-checkbox-selected-pressed-state-layer-color: #FFD146;
+  --mdc-checkbox-selected-pressed-icon-color: #FFD146;
+}
+
+.box-policy mat-label a{
+  text-decoration: none;
+  color: #FFD146;
+}
+
+/*boost*/
+.section-2 p{
+  text-align: justify;
+}
+
+.box-boost{
   display: flex;
   justify-content: space-between;
 }
 
-.title-boost h3{
-  font-weight: bolder;
 
-}
-
-.section-2 p{
-  text-align: justify;
-}
 

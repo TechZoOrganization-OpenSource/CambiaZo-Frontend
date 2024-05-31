@@ -13,6 +13,7 @@ import {UsersService} from "../../service/users/users.service";
 import {Products} from "../../model/products/products.model";
 import {Users} from "../../model/users/users.model";
 import {validateForm} from "@emailjs/browser/es/utils/validateForm/validateForm";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-create-post-info-user-content',
@@ -31,6 +32,7 @@ import {validateForm} from "@emailjs/browser/es/utils/validateForm/validateForm"
     NgIf,
     ReactiveFormsModule,
     JsonPipe,
+    RouterLink,
   ],
   templateUrl: './create-post-info-user-content.component.html',
   styleUrl: './create-post-info-user-content.component.css'
