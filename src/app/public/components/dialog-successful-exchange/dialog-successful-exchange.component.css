@@ -20,6 +20,12 @@
   text-align: center;
   font-family: 'Montserrat', sans-serif;
 }
+.more-info-detail h3{
+  font-family: 'Montserrat', sans-serif;
+  text-align: left;
+  font-size: 2.5vh;
+  line-height: 2.5vh;
+}
 
 .dialog-title h1{
   font-family: inherit;
@@ -43,7 +49,7 @@
 
 }
 
-.dialog-actions button{
+.dialog-actions button, .dialog-actions a{
   width: 100%;
   margin: 0.2rem;
   font-weight: bolder;
@@ -51,20 +57,34 @@
   transition: 1s;
 }
 
-.dialog-actions button:hover{
-  transform: scale(1.02);
-  color: #000000;
-  background-color: #FFD146;
-  border:none;
-
-}
-
-.button-close-yellow{
-  color: #FFD146;
+.button-whatsapp{
+  color: #00d540;
   background-color: transparent;
-  border:solid 3px #FFD146;
+  border:solid 3px #00d540;
 }
-
+.whatsapp{
+  fill: #ffffff !important;
+}
+.button-whatsapp:hover{
+  color: #ffffff;
+  background-color: #00d540;
+  border:none ;
+  transform: scale(1.02);
+  .whatsapp{
+    fill: #ffffff !important;
+  }
+}
+.button-email{
+  color: #61b4e3;
+  background-color: transparent;
+  border:solid 3px #61b4e3;
+}
+.button-email:hover{
+  color: #ffffff;
+  background-color: #61b4e3;
+  border:none ;
+  transform: scale(1.02);
+}
 .contact-info{
   display: flex;
   flex-direction: row;
@@ -101,6 +121,10 @@
     line-height: 4vh;
   }
   .dialog-content{
+    font-size: 2vh;
+    line-height: 2vh;
+  }
+  .more-info-detail h3{
     font-size: 2vh;
     line-height: 2vh;
   }

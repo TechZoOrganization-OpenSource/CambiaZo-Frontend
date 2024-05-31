@@ -19,6 +19,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   DialogSuccessfulExchangeComponent
 } from "../../../public/components/dialog-successful-exchange/dialog-successful-exchange.component";
+import {of} from "rxjs";
 
 @Component({
   selector: 'app-user-get-offers',
@@ -90,7 +91,8 @@ export class UserGetOffersComponent implements OnInit {
           data: {
             name: offer.user_offer.name,
             img: offer.user_offer.img,
-            phone: offer.user_offer.phone
+            phone: offer.user_offer.phone,
+            email: offer.user_offer.email
           },
           disableClose: true
         });

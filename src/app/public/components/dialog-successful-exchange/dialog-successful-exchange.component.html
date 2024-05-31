@@ -15,8 +15,11 @@
       </div>
       <div class="contact-info-detail">
         <h2>Información de Contacto de {{data.name}}:</h2>
-        <button mat-button mat-dialog-close class="button-close-yellow">WhatsApp</button>
-        <button mat-button mat-dialog-close class="button-close-yellow">Telegram</button>
+
+          <button (click)="sendWhatsapp()"  mat-button class="button-whatsapp">
+            WhatsApp</button>
+
+          <button (click)="sendEmail()" mat-button class="button-email">Correo Electrónico</button>
       </div>
 
     </div>
