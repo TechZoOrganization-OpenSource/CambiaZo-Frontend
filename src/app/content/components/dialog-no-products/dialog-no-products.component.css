@@ -1,6 +1,21 @@
 .container{
   padding: 1% 15% 2% 15%;
 }
+.button-close{
+  position: absolute;
+  z-index: 1;
+  right:0.7rem;
+  top:0.7rem;
+  background: transparent;
+  border: none;
+  transition: 1s;
+}
+
+
+.button-close:hover{
+  transform: scale(1.6);
+}
+
 .dialog-title, .dialog-content,.dialog-actions{
   text-align: center;
   font-family: 'Montserrat', sans-serif;
@@ -32,7 +47,6 @@
   font-weight: bolder;
   font-family: inherit;
   transition: 1s;
-  background-color: #FFD146;
 }
 
 .dialog-actions button:hover{
@@ -40,6 +54,14 @@
 
 }
 
+.button-login{
+  background-color: #FFD146;
+  border:solid 2px #FFD146;
+}
+
+.button-register{
+  border:solid 2px #FFD146;
+}
 
 @media(max-width:850px){
   .dialog-title h1{

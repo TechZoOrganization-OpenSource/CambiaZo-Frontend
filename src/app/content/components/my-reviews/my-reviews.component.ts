@@ -65,9 +65,8 @@ export class MyReviewsComponent implements OnInit{
         this.ratings.push({ score: i, percentage: percentage });
       }
 
-      this.averageScore = this.myReviews.reduce((acc: any, review: any) => {
-        return acc + review.score;
-      }, 0) / this.totalReviews;
+      this.averageScore = this.totalReviews > 0 ?
+        this.myReviews.reduce((acc: number, review: any) => acc + review.score, 0) / this.totalReviews : 0;
     })
   };
   getStarIcons(score: number): { icon: string, filled: boolean }[] {

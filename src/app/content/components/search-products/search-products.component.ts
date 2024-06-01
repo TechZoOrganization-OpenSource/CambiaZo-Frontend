@@ -101,4 +101,8 @@ export class SearchProductsComponent implements OnInit{
     this.formProduct.reset()
   }
 
+  validateInput(event:any) {
+    if (event.data === '-' || event.data === '+')event.preventDefault();
+  }
+
 }

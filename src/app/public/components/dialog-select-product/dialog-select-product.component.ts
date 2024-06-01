@@ -85,7 +85,7 @@ export class DialogSelectProductComponent implements OnInit {
     this.dialogRef.close()
     this.dialogRef.afterClosed().subscribe(() => {
       this.dialogSuccess.open(DialogOfferSuccessfulComponent,{data: {
-        product_name: this.data.product_name,
+          product_name: this.data.product_name,
           user_name: this.data.user_name
         }})
     })

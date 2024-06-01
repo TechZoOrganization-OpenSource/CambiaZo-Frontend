@@ -11,6 +11,14 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {Products} from "../../model/products/products.model";
 import {PostsService} from "../../service/posts/posts.service";
+import {
+  DialogRegisterSuccessfullyComponent
+} from "../../components/dialog-register-successfully/dialog-register-successfully.component";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  DialogSuccessfullyPostComponent
+} from "../../../public/components/dialog-successfully-post/dialog-successfully-post.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -29,8 +37,13 @@ import {PostsService} from "../../service/posts/posts.service";
 export class PostComponent {
 
   imageDefault='https://media.istockphoto.com/id/1472933890/es/vector/no-hay-s%C3%ADmbolo-vectorial-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este.jpg?s=612x612&w=0&k=20&c=fTxCETonJ20MRRE6DFU9pbGws6e7sa1uySP49wU372I='
-  constructor(private productsService: PostsService){
-  }
+  
+  constructor(
+    private productsService: PostsService,
+    private dialog: MatDialog,
+    private router: Router,
+  ){
+
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
   @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
 
@@ -55,9 +68,12 @@ export class PostComponent {
         }
       this.productsService.postProduct(newProduct).subscribe()
       })
-
+      const dialogRef = this.dialog.open(DialogSuccessfullyPostComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.navigateByUrl('/home');
+      });
     }
-
   }
+
 
 }

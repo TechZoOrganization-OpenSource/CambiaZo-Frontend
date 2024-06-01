@@ -39,9 +39,9 @@
     <section>
       <mat-label>Valor aproximado</mat-label>
       <div class="range-price">
-        <input type="number"  placeholder="min" formControlName="priceMin" >
+        <input type="number"  placeholder="min" formControlName="priceMin" (beforeinput)="validateInput($event)">
         <div class="box-icon"><mat-icon> compare_arrows</mat-icon></div>
-        <input type="number"  placeholder="máx" formControlName="priceMax" >
+        <input type="number"  placeholder="máx" formControlName="priceMax" (beforeinput)="validateInput($event)">
       </div>
     </section>
 
@@ -52,7 +52,6 @@
 
     </form>
   </div>
-
 </div>
 
 
