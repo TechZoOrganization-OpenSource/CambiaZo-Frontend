@@ -29,6 +29,8 @@ import {ContactOngComponent} from "../../components/contact-ong/contact-ong.comp
 export class OngDetailComponent implements OnInit{
   @Output() ong_obj: any;
   ong: any;
+  categories: any;
+
   constructor(private ongService:OngsService,private route: ActivatedRoute){}
 
   ngOnInit() {
@@ -58,7 +60,12 @@ export class OngDetailComponent implements OnInit{
         res.id
       )
       this.ong_obj = this.ong;
-    })
+
+      this.ongService.getCategoriesOngs().subscribe((categories:any)=>{
+        this.categories = categories;
+        this.ong.category_name = this.categories.find((category:any)=>category.id === this.ong.category).name;
+      }
+    )})
   }
 
 }
