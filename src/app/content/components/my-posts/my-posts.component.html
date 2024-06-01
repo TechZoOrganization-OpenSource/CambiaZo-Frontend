@@ -1,10 +1,9 @@
-<div class="reviews-title">
-  <p>IntercambioZ publicados:</p>
+<div class="posts__first">
+  <p>Intercambios Publicados:</p>
 </div>
-<div>
-  <div class="line-text">
-    <div class="line"></div>
-  </div>
+<div class="line-text">
+  <div class="line"></div>
+</div>
   <div class="cards-container">
     <ng-container *ngFor="let posts of items">
       <div class="container-products" *ngIf="posts.user_id == user.id">
@@ -49,5 +48,4 @@
       </div>
     </ng-container>
   </div>
-</div>
 

@@ -4,15 +4,6 @@
   height: 100%;
   object-fit: cover;
 }
-.reviews-title{
-  font-size: 1.5rem;
-  line-height: 1.25;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bolder;
-  padding-top: 4rem;
-  padding-left: 3rem;
-  padding-bottom: 1rem;
-}
 .line-text{
   display: flex;
   align-items: center;
@@ -25,6 +16,14 @@
   background-color: #C2C2C2;
   margin-left: 3rem;
   margin-right: 3rem;
+}
+.posts__first{
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  padding-top: 4rem;
+  padding-left: 3rem;
+  padding-bottom: 1rem;
 }
 .cards-responsive{
   display: none;

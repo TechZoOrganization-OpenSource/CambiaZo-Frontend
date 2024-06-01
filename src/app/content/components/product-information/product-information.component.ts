@@ -36,7 +36,8 @@ export class ProductInformationComponent implements OnInit {
     private route: ActivatedRoute,
     private postsService: PostsService,
     private usersService: UsersService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogSuccess: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -88,21 +89,27 @@ export class ProductInformationComponent implements OnInit {
 
   offer(): void {
     const loggedInUserId = this.getLoggedInUserId();
+
     if (loggedInUserId) {
-      this.usersService.getUserById(loggedInUserId).subscribe((loggedInUser) => {
-        if (loggedInUser.products && loggedInUser.products.length > 0) {
-          this.dialog.open(DialogSelectProductComponent, {
-            data: {
-              product_id: this.product.id,
-              user_id: this.user.id,
-              product_name: this.product.product_name,
-              user_name: this.user.name,
-            }
-          });
-        } else {
-          this.dialog.open(DialogNoProductsComponent, { disableClose: true });
+      this.postsService.getProducts2().subscribe(
+        (products) => {
+          const userProducts = products.filter(product => Number(product.user_id) === loggedInUserId);
+
+          if (userProducts.length > 0) {
+            this.dialog.open(DialogSelectProductComponent, {
+              data: {
+                product_id: this.product.id,
+                user_id: this.user.id,
+                product_name: this.product.product_name,
+                user_name: this.user.name,
+              },
+              width: '100rem',
+            });
+          } else {
+            this.dialogSuccess.open(DialogNoProductsComponent, { disableClose: true });
+          }
         }
-      });
+      );
     } else {
       this.dialog.open(DialogLoginRegisterComponent, { disableClose: true });
     }

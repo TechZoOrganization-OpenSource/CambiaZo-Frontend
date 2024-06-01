@@ -55,7 +55,7 @@
   </section>
 
 
-  <section class="section-2" *ngIf="user.membership != 1">
+  <section class="section-2" *ngIf="user?.membership != 1">
     <div class="box-boost"><mat-label>Boost de Visibilidad</mat-label><mat-slide-toggle formControlName="boost"></mat-slide-toggle></div>
     <br>
     <p>Activa tu boost! Al hacerlo, tu producto sera
