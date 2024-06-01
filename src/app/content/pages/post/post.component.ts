@@ -11,6 +11,14 @@ import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {Products} from "../../model/products/products.model";
 import {PostsService} from "../../service/posts/posts.service";
+import {
+  DialogRegisterSuccessfullyComponent
+} from "../../components/dialog-register-successfully/dialog-register-successfully.component";
+import {MatDialog} from "@angular/material/dialog";
+import {
+  DialogSuccessfullyPostComponent
+} from "../../../public/components/dialog-successfully-post/dialog-successfully-post.component";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-post',
@@ -28,7 +36,11 @@ import {PostsService} from "../../service/posts/posts.service";
 })
 export class PostComponent {
 
-  constructor(private productsService: PostsService){
+  constructor(
+    private productsService: PostsService,
+    private dialog: MatDialog,
+    private router: Router,
+  ){
   }
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
   @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
@@ -53,9 +65,12 @@ export class PostComponent {
         }
       this.productsService.postProduct(newProduct).subscribe()
       })
-
+      const dialogRef = this.dialog.open(DialogSuccessfullyPostComponent);
+      dialogRef.afterClosed().subscribe(result => {
+        this.router.navigateByUrl('/home');
+      });
     }
-
   }
+
 
 }

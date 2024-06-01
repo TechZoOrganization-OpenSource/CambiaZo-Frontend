@@ -3,7 +3,14 @@ import { OffersService } from '../../service/offers/offers.service';
 import { PostsService} from "../../service/posts/posts.service";
 import { UsersService } from '../../service/users/users.service';
 import {Offers} from "../../model/offers/offers.model";
-import {MatCard, MatCardAvatar, MatCardContent, MatCardHeader, MatCardTitle} from "@angular/material/card";
+import {
+  MatCard,
+  MatCardAvatar,
+  MatCardContent,
+  MatCardFooter,
+  MatCardHeader,
+  MatCardTitle
+} from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
 import {NgForOf, NgStyle} from "@angular/common";
 
@@ -18,7 +25,8 @@ import {NgForOf, NgStyle} from "@angular/common";
     MatCardTitle,
     MatIcon,
     NgForOf,
-    NgStyle
+    NgStyle,
+    MatCardFooter
   ],
   templateUrl: './user-sent-offers.component.html',
   styleUrl: './user-sent-offers.component.css'

@@ -47,12 +47,12 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: AssistComponent },
   { path: 'profile', component: OwnProfileComponent, children: [
-      { path: '', redirectTo: 'publicaciones', pathMatch: 'full' },
-      { path: 'publicaciones', component: MyPostsComponent },
-      { path: 'ofertas', component: UserOffersComponent },
-      { path: 'cambios-completos', component: MyPostsComponent }, // Replace with the appropriate component
-      { path: 'favoritos', component: MyFavoritesComponent },
-      { path: 'resenas', component: MyReviewsComponent },
+      { path: '', redirectTo: 'my-posts', pathMatch: 'full' },
+      { path: 'my-posts', component: MyPostsComponent },
+      { path: 'offers', component: UserOffersComponent },
+      { path: 'complete-changes', component: MyPostsComponent }, // Replace with the appropriate component
+      { path: 'favourites', component: MyFavoritesComponent },
+      { path: 'reviews', component: MyReviewsComponent },
     ]
   },
   { path: 'profile/edit', component: EditProfileComponent },
@@ -61,7 +61,7 @@ export const routes: Routes = [
   { path: 'product-information/:id', component: ProductDetailsComponent },
   { path: 'post/:postId', component: EditPostComponent },
   { path: 'publisher-profile/:id', component: PublisherProfileDetailsComponent },
-  
+
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
