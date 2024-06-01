@@ -84,6 +84,11 @@ mat-card-header{
   padding-right: 10px;
   padding-left: 10px;
 }
+mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
+
 mat-card-footer{
   padding: 0.2rem 0 0.2rem 0;
   background: #FFD146;

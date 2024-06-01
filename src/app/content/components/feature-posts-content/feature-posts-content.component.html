@@ -1,7 +1,6 @@
 <div class="container-slider">
   <div class="container-cards" *ngFor="let i of [1,2]">
     <ng-container *ngFor="let item of items">
-
       <mat-card *ngIf="item.boost" [routerLink]="['/product-information', item.id]">
         <div class="image" [style.background-image]="'url(' + item.images[0] + ')'"></div>
         <div class="info-card">

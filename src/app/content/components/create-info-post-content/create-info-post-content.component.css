@@ -1,6 +1,7 @@
-.container, h1, h2, h3, span, div,p,section{
-  font-family: inherit;
+.container, h1,mat-labe,input,textarea,section,option{
+  font-family: 'Montserrat', sans-serif;
 }
+
 .section-1,.section-2{
   display: flex;
   flex-direction: column;
@@ -8,14 +9,43 @@
   padding: 2rem;
   margin-bottom: 2rem;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Sombras en los bordes */
-
-
 }
+
+.section-1 input, .section-1 textarea,.section-1 select{;
+  outline: none;
+  border-radius: 5px;
+  height: 2rem;
+  border:solid 1px #C2C2C2;
+}
+
+.section-1 input:focus, .section-1 textarea:focus,.section-1 select:focus{;
+  border:solid 2px #FFD146;
+}
+
+.section-1 textarea{
+  height: 6rem;
+  padding:0.5rem;
+  resize: none;
+  overflow: auto;
+}
+
+.section-1 div{
+  color:red;
+  height: 1.2rem;
+  width: 100%;
+  font-size: 0.7rem;
+}
+
+mat-label{
+  font-weight: bold;
+  font-size: 1rem;
+  margin-bottom: 0.4rem;
+}
+
 .title{
   text-align: center;
   font-weight: bolder;
-
-  margin:0;
+  margin-bottom: 1.5rem;
 }
 
 .subtitle{
@@ -27,14 +57,99 @@
   height:8rem;
 }
 
-/***** cambia el disenio del input amount *****/
-.example-right-align {
-  text-align: right;
+.section-1 input{
+  width: 100%;
+  display: flex;
+  border-radius: 0 5px 5px 0;
 }
-input.example-right-align::-webkit-outer-spin-button,
-input.example-right-align::-webkit-inner-spin-button {
-  display: none;
+.box-price{
+  width: 100%;
+  flex-direction: row;
 }
-input.example-right-align {
-  -moz-appearance: textfield;
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+
+.box-input-price{
+  display:flex;
+  flex-direction:
+    row; justify-content: left
+}
+
+.sign-money{
+  border-radius: 5px 0 0 5px;
+}
+
+
+
+/*img 2*/
+
+.section-2 p{
+  text-align: center;
+}
+
+ngx-dropzone {
+  display: flex;
+  flex-wrap: wrap;
+  height: auto;
+  justify-content: center;
+}
+
+ngx-dropzone-image-preview {
+  width: 45%;
+  height: 10rem;
+  object-fit: contain;
+  overflow: hidden;
+  border: solid 1px red;
+}
+
+.sing-more {
+  width: 50%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin:0;
+}
+
+ngx-dropzone-label{
+  height: 8.8rem;
+  display: flex;
+  align-items: center;
+}
+
+
+
+@media(max-width: 1100px){
+  ngx-dropzone {
+    flex-direction: column;
+  }
+  ngx-dropzone-image-preview {
+    width: 90%;
+  }
+}
+
+@media(max-width: 900px){
+  ngx-dropzone-image-preview {
+    width: 45%;
+  }
+  ngx-dropzone {
+    flex-direction: row;
+  }
+}
+@media(max-width: 565px){
+  ngx-dropzone {
+    flex-direction: column;
+  }
+  ngx-dropzone-image-preview {
+    width: 90%;
+  }
+
+  .section-1,.section-2{
+    padding:1.5rem;
+  }
 }

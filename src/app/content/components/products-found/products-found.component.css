@@ -1,4 +1,3 @@
-
 .container-card{
   display: flex;
   flex-wrap: wrap;
@@ -16,28 +15,37 @@ mat-card {
 
 }
 
-
 mat-card-title,mat-card-content,mat-card-header{
   padding:0;
   margin:0;
 }
 
 mat-card-title{
-  display: -webkit-box; /* Propiedad necesaria para line-clamp */
-  -webkit-line-clamp: 1; /* Limita el texto a dos líneas */
-  -webkit-box-orient: vertical; /* Propiedad necesaria para line-clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 .change-object{
-  display: -webkit-box; /* Propiedad necesaria para line-clamp */
-  -webkit-line-clamp: 2; /* Limita el texto a dos líneas */
-  -webkit-box-orient: vertical; /* Propiedad necesaria para line-clamp */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   height: 2.5rem;
 }
+
+.example-card{
+  cursor: pointer;
+}
+
+.example-card mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
+
 .container-post-image{
   width: inherit;
   height: 248px;
@@ -65,13 +73,16 @@ mat-card-content{
   padding:0 10px 0 10px;
 
 }
+
 hr{
   border: solid 1px #FFD146;
 }
+
 mat-card-header{
   padding-right: 10px;
   padding-left: 10px;
 }
+
 mat-card-footer{
   padding: 0.2rem 0 0.2rem 0;
   background: #FFD146;

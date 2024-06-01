@@ -155,8 +155,7 @@ export class FormEditPostComponent implements OnInit{
     }
   }
 
-  /**
-   * Funcion para subir imagenes a imgbb
+
   async onselect(e: any) {
     if (e.target.files) {
       Array.from(e.target.files).forEach(async (file: any) => {
@@ -178,7 +177,34 @@ export class FormEditPostComponent implements OnInit{
       });
     }
   }
-   */
+
+  async dfsdf(e: any) {
+    if (e.target.files) {
+      const fileList = e.target.files;
+      for (let i = 0; i < fileList.length; i++) {
+
+        const file = fileList[i];
+        const url = `https://api.imgbb.com/1/upload?expiration=300&key=e20a8b081ea288c51254cd9dca20515c&name=${file.name}`;
+        const data = new FormData();
+        data.append('image', file);
+
+        try {
+
+          const response = await fetch(url, {
+            method: 'post',
+            body: data
+          });
+          const responseData = await response.json();
+          this.images.push(responseData.data.url);
+          console.log(this.images);
+
+
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    }
+  }
 
   saveChanges(){
 
