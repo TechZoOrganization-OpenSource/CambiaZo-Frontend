@@ -2,21 +2,21 @@ import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {ActivatedRoute, RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import {Products} from "../../model/products/products.model";
-import {Users} from "../../model/users/users.model";
-import {UsersService} from "../../service/users/users.service";
 import {PostsService} from "../../service/posts/posts.service";
 import {FormEditPostComponent} from "../../components/form-edit-post/form-edit-post.component";
 import {MatIcon} from "@angular/material/icon";
 import {MatCardModule} from "@angular/material/card";
 import {MatButton} from "@angular/material/button";
-import {OngsService} from "../../service/ongs/ongs.service";
-import {Ongs} from "../../model/ongs/ongs.model";
+import {MatDialog} from "@angular/material/dialog";
 import {
   CreatePostInfoUserContentComponent
 } from "../../components/create-post-info-user-content/create-post-info-user-content.component";
 import {
   CreateInfoPostContentComponent
 } from "../../components/create-info-post-content/create-info-post-content.component";
+import {
+  DialogSuccessfulProductEditionComponent
+} from "../../../public/components/dialog-successful-product-edition/dialog-successful-product-edition.component";
 
 @Component({
   selector: 'app-edit-post',
@@ -42,7 +42,7 @@ export class EditPostComponent implements OnInit{
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
   @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
   post:any
-  constructor(private productsService:PostsService,private route: ActivatedRoute){
+  constructor(private dialog:MatDialog, private productsService:PostsService,private route: ActivatedRoute){
   }
 
   ngOnInit() {
@@ -88,11 +88,23 @@ export class EditPostComponent implements OnInit{
               'district': contactProduct.district
             }
           }
-        this.productsService.putProduct(this.post.id,newProduct).subscribe()
+        this.productsService.putProduct(this.post.id,newProduct).subscribe({
+          next: () => {
+            this.successEdition()
+          },
+          error: (err) => {
+            console.log(err)
+          }
+        })
       })
+
 
     }
 
+  }
+
+  successEdition(){
+    this.dialog.open(DialogSuccessfulProductEditionComponent, {disableClose: true})
   }
 
 }
