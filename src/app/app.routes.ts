@@ -30,6 +30,7 @@ import { MyReviewsComponent } from "./content/components/my-reviews/my-reviews.c
 import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
 import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
 import { EditPostComponent } from "./content/pages/edit-post/edit-post.component";
+import {CompleteExchangesComponent} from "./content/components/complete-exchanges/complete-exchanges.component";
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -49,7 +50,7 @@ export const routes: Routes = [
       { path: '', redirectTo: 'publicaciones', pathMatch: 'full' },
       { path: 'publicaciones', component: MyPostsComponent },
       { path: 'ofertas', component: UserOffersComponent },
-      { path: 'cambios-completos', component: MyPostsComponent }, // Replace with the appropriate component
+      { path: 'cambios-completos', component: CompleteExchangesComponent }, // Replace with the appropriate component
       { path: 'favoritos', component: MyFavoritesComponent },
       { path: 'resenas', component: MyReviewsComponent },
     ]
