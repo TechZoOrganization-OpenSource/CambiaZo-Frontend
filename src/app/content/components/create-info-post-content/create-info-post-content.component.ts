@@ -70,6 +70,7 @@ export class CreateInfoPostContentComponent implements OnInit{
       }
     )
     this.imagesUrl = this.images
+
     this.getCategoriesPostOptions()
     this.formProduct.get('product_name')?.valueChanges.subscribe(value => {
       if (value === '') {
@@ -89,6 +90,8 @@ export class CreateInfoPostContentComponent implements OnInit{
 
 
   }
+
+
 
   getCategoriesPostOptions(){
     this.postService.getCategoriesProducts().subscribe((res:any)=> {
@@ -110,6 +113,7 @@ export class CreateInfoPostContentComponent implements OnInit{
   errorLimitFiles = false
 
   onSelect(event: any) {
+    console.log(event.addedFiles)
     const totalFiles = this.files.length + event.addedFiles.length;
 
     if (totalFiles <= this.maxFiles) {
@@ -121,12 +125,6 @@ export class CreateInfoPostContentComponent implements OnInit{
       this.errorLimitFiles = true
     }
 
-    console.log(this.category_id)
-    console.log(this.product_name)
-    console.log(this.description)
-    console.log(this.change_for)
-    console.log(this.price)
-    console.log(this.images)
   }
 
   onRemove(event: any) {
