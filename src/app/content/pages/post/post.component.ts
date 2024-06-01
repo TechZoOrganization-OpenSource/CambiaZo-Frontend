@@ -37,15 +37,15 @@ import {Router} from "@angular/router";
 export class PostComponent {
 
   imageDefault='https://media.istockphoto.com/id/1472933890/es/vector/no-hay-s%C3%ADmbolo-vectorial-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este.jpg?s=612x612&w=0&k=20&c=fTxCETonJ20MRRE6DFU9pbGws6e7sa1uySP49wU372I='
-  
+
   constructor(
     private productsService: PostsService,
     private dialog: MatDialog,
     private router: Router,
-  ){
-
-  @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
-  @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
+  ) {
+  }
+  @ViewChild(CreatePostInfoUserContentComponent)createPostInfoUserContentComponent!:CreatePostInfoUserContentComponent;
+  @ViewChild(CreateInfoPostContentComponent)createInfoPostContentComponent!:CreateInfoPostContentComponent;
 
   onPost(){
     const infoProduct = this.createInfoPostContentComponent.onSubmit()
