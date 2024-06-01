@@ -34,8 +34,8 @@ import {
     NgIf
   ],
   templateUrl: './edit-post.component.html',
-  styleUrl: "../post/post.component.css"
-  //component style of this component -> styleUrl: './edit-post.component.css'
+  styleUrls: ['../post/post.component.css','./edit-post.component.css']
+  //component style of this component -> styleUrl: './edit-post.component.css
 })
 export class EditPostComponent implements OnInit{
 
