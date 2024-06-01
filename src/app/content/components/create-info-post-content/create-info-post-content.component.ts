@@ -1,4 +1,4 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatButtonModule} from "@angular/material/button";
@@ -45,7 +45,9 @@ export class CreateInfoPostContentComponent implements OnInit{
   categories: CategoriesObjects[]=[]
   imagesUrl: string[] = [];
   files: File[] = [];
-  imageDefault = 'https://media.istockphoto.com/id/1472933890/es/vector/no-hay-s%C3%ADmbolo-vectorial-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este.jpg?s=612x612&w=0&k=20&c=fTxCETonJ20MRRE6DFU9pbGws6e7sa1uySP49wU372I='
+  maxFiles: number = 4;
+  totalFiles: number = 0;
+
   formProduct = new FormGroup({
     'category_id': new FormControl(null, Validators.required),
     'product_name': new FormControl(null, Validators.required),
@@ -55,8 +57,6 @@ export class CreateInfoPostContentComponent implements OnInit{
     }
   )
   constructor(private postService:PostsService) {
-
-
   }
 
   ngOnInit() {
@@ -69,7 +69,8 @@ export class CreateInfoPostContentComponent implements OnInit{
         'price': new FormControl(this.price, Validators.required),
       }
     )
-    this.imagesUrl = this.images
+
+    this.totalFiles = this.images.length
 
     this.getCategoriesPostOptions()
     this.formProduct.get('product_name')?.valueChanges.subscribe(value => {
@@ -94,7 +95,7 @@ export class CreateInfoPostContentComponent implements OnInit{
 
 
   getCategoriesPostOptions(){
-    this.postService.getCategoriesProducts().subscribe((res:any)=> {
+    this.postService.getCategoriesProducts().subscribe(res=> {
         this.categories = res
       },error => console.log(error)
     )};
@@ -109,19 +110,18 @@ export class CreateInfoPostContentComponent implements OnInit{
     }else return null
   }
 
-  maxFiles: number = 8;
   errorLimitFiles = false
-
   onSelect(event: any) {
-    console.log(event.addedFiles)
-    const totalFiles = this.files.length + event.addedFiles.length;
+    const totals = this.totalFiles + event.addedFiles.length;
 
-    if (totalFiles <= this.maxFiles) {
+    if (totals <= this.maxFiles) {
       this.files.push(...event.addedFiles);
+      this.totalFiles += event.addedFiles.length
       this.errorLimitFiles = false;
     } else {
-      const allowedFiles = this.maxFiles - this.files.length;
+      const allowedFiles = this.maxFiles - this.totalFiles;
       this.files.push(...event.addedFiles.slice(0, allowedFiles));
+      this.totalFiles += allowedFiles
       this.errorLimitFiles = true
     }
 
@@ -129,6 +129,7 @@ export class CreateInfoPostContentComponent implements OnInit{
 
   onRemove(event: any) {
     this.files.splice(this.files.indexOf(event), 1);
+    this.totalFiles -= 1
     if (this.files.length < this.maxFiles && this.errorLimitFiles) {
       this.errorLimitFiles = false;
     }
@@ -151,7 +152,7 @@ export class CreateInfoPostContentComponent implements OnInit{
           console.error(error);
         }
       }
-      if(!this.imagesUrl.length)return [this.imageDefault]
+      if(!this.imagesUrl.length)return []
        return this.imagesUrl
   }
 

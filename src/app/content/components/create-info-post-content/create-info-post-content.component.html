@@ -60,7 +60,7 @@ width: 2rem; font-size:16px; background: #FFD146;display:flex;height: inherit;ju
 
 <section class="section-2">
   <h1 class="title">Imagenes</h1>
-  <p>Imagenes {{files.length}}/8 - Puedes agregar un maximo de 8 fotos</p>
+  <p>Imagenes {{totalFiles}}/4 - Puedes agregar un maximo de 4 fotos</p>
 
   <div class="gallery-images" *ngIf="images.length">
     <div class="container-my-images" *ngFor="let image of images">
@@ -70,8 +70,8 @@ width: 2rem; font-size:16px; background: #FFD146;display:flex;height: inherit;ju
   <br>
 
   <div class="custom-dropzone" >
-    <ngx-dropzone accept="image/*" (change)="onSelect($event)">
-        <ngx-dropzone-label  *ngIf="!files.length" >Subir imagen</ngx-dropzone-label>
+    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [disableClick]="totalFiles >=4">
+        <ngx-dropzone-label  *ngIf="!totalFiles && totalFiles < 4">Subir imagen</ngx-dropzone-label>
         <ngx-dropzone-image-preview
           ngProjectAs="ngx-dropzone-preview"
           [removable]="true"
@@ -81,8 +81,11 @@ width: 2rem; font-size:16px; background: #FFD146;display:flex;height: inherit;ju
           style="object-fit: fill">
         </ngx-dropzone-image-preview>
 
-      <div *ngIf="files.length && files.length < maxFiles " class="sing-more">
+      <div *ngIf="totalFiles && totalFiles < maxFiles " class="sing-more">
       <mat-icon fontIcon="add"></mat-icon>
+      </div>
+      <div *ngIf="totalFiles >= maxFiles " class="sing-more">
+        Maximo de imagenes alcanzado
       </div>
     </ngx-dropzone>
   </div>

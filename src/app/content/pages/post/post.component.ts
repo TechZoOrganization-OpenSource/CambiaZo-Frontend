@@ -28,6 +28,7 @@ import {PostsService} from "../../service/posts/posts.service";
 })
 export class PostComponent {
 
+  imageDefault='https://media.istockphoto.com/id/1472933890/es/vector/no-hay-s%C3%ADmbolo-vectorial-de-imagen-falta-el-icono-disponible-no-hay-galer%C3%ADa-para-este.jpg?s=612x612&w=0&k=20&c=fTxCETonJ20MRRE6DFU9pbGws6e7sa1uySP49wU372I='
   constructor(private productsService: PostsService){
   }
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
@@ -39,11 +40,12 @@ export class PostComponent {
 
     if(infoProduct && contactProduct){
       this.createInfoPostContentComponent.uploadImage().then((images:string[]) => {
+
       const newProduct =
         {
            user_id: localStorage.getItem('id'),
           ...infoProduct,
-          'images':images,
+          'images':!images.length ? [this.imageDefault] : images,
           'boost': contactProduct.boost,
           'location':{
             'country': contactProduct.country,

@@ -80,7 +80,7 @@ export class EditPostComponent implements OnInit{
           {
             user_id: localStorage.getItem('id'),
             ...infoProduct,
-            'images':images,
+            'images': [...this.post.images, ...images],
             'boost': contactProduct.boost,
             'location':{
               'country': contactProduct.country,
