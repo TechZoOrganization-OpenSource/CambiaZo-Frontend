@@ -70,8 +70,8 @@ export class UserSentOffersComponent implements OnInit{
           offer.setUserGet = data;
         });
       });
-  });
-}
+    });
+  }
   protected readonly Offers = Offers;
 
   getStatusStyles(status: string) {
