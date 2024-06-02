@@ -87,6 +87,9 @@ button{
     width: 100%;
     text-align: center;
   }
+  .mat-mdc-card-content:last-child{
+    margin-left: 0;
+  }
 
   .container-avatar {
     height: 8rem;

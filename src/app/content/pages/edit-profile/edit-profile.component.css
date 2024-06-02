@@ -347,6 +347,9 @@ button-change-password{
     align-items: center;
   }
 
+  .mat-card-content{
+    margin-left: 0;
+  }
   .col1, .col2 {
     width: 100%;
     order: unset;
@@ -376,6 +379,9 @@ button-change-password{
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .mat-mdc-card-content:last-child{
+    margin-left: 0;
   }
 
   .button-edit-profile-image{
