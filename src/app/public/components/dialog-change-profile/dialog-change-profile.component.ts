@@ -43,8 +43,10 @@ export class DialogChangeProfileComponent {
 
   onChange(){
     this.changeImageProfile().then((url)=>{
-      if(url.length) this.usersService.changeProfileImage(this.data,url).subscribe()
-      this.dialogRef.close()
+      if(url.length)
+        this.usersService.changeProfileImage(this.data,url).subscribe(()=>{
+        this.dialogRef.close()
+      })
     })
   }
 

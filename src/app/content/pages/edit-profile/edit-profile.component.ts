@@ -199,10 +199,13 @@ export class EditProfileComponent implements OnInit {
 
   changeImage(){
     const userId = String(localStorage.getItem('id'));
-    this.dialog.open(DialogChangeProfileComponent, {
-      data: {
-        user_id: userId,
-      },
-    });
+    const dialogRef = this.dialog.open(DialogChangeProfileComponent, {
+      data: userId,
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
+    })
+    ;
   }
 }
