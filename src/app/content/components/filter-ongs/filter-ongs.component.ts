@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {JsonPipe, NgForOf} from '@angular/common';
@@ -30,8 +30,10 @@ export class FilterOngsComponent implements OnInit {
   categories:CategoriesOngs[]=[];
   toppings: any= FormGroup;
 
+  @Output() ongSearched = new EventEmitter<any>();
+
   constructor(private _formBuilder: FormBuilder,private ongsService: OngsService) {
-    this.toppings = this._formBuilder.group({ 'localizacion': '' });
+    this.toppings = this._formBuilder.group({ 'address': '' });
   }
 
   ngOnInit() {
@@ -39,8 +41,7 @@ export class FilterOngsComponent implements OnInit {
   }
 
   getCategoryChecksBoxs(){
-    this.ongsService.getCategoriesOngs().subscribe(
-      (res:any)=> {
+    this.ongsService.getCategoriesOngs().subscribe((res:any)=> {
         this.categories = res.map((item:any)=>
         {
           this.toppings.addControl(item.id, new FormControl(false));
@@ -48,6 +49,11 @@ export class FilterOngsComponent implements OnInit {
         })
       },error => console.log(error)
     )
+  }
+
+  filterOng(){
+    const keys = Object.keys(this.toppings.value).filter(key => this.toppings.value[key] === true)
+    this.ongSearched.emit({'address': this.toppings.value.address,'categories':keys})
   }
 
 

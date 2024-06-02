@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
 import {Observable} from "rxjs";
+import {Products} from "../../model/products/products.model";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class PostsService {
   getProducs():Observable<any>{
     return this.http.get(`${this.baseUrl}/products`)
   }
+
   postProduct(data:any):Observable<any>{
     return this.http.post<any>(`${this.baseUrl}/products`,data)
   }
@@ -28,7 +30,9 @@ export class PostsService {
   getProductById(id:string):Observable<any>{
     return this.http.get<any>(`${this.baseUrl}/products/${id}`)
   }
-
+  getProducts2(): Observable<Products[]> {
+    return this.http.get<Products[]>(`${this.baseUrl}/products`);
+  }
 
 
   /******************* Products Categories **********************/

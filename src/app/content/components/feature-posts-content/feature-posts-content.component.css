@@ -9,7 +9,12 @@ mat-card{
   font-family: 'Montserrat', sans-serif;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.5);
   overflow: hidden;
+  cursor: pointer;
+}
 
+mat-card mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
 }
 .image{
   height:320px;
