@@ -5,8 +5,15 @@
   </div>
 
   <div class="dialog-content" mat-dialog-content>
-    <ngx-dropzone accept="image/*" >
-
+    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [multiple]="false" >
+      <ngx-dropzone-label  *ngIf="!files.length">Subir Foto</ngx-dropzone-label>
+      <ngx-dropzone-image-preview
+        ngProjectAs="ngx-dropzone-preview"
+        [removable]="true"
+        *ngFor="let f of files"
+        [file]="f"
+        (removed)="onRemove(f)">
+      </ngx-dropzone-image-preview>
     </ngx-dropzone>
   </div>
 

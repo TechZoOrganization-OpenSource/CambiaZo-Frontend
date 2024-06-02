@@ -32,9 +32,22 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 })
 export class DialogChangeProfileComponent {
 
+  files: File[] = [];
+
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,) {
   }
   changeImageProfile(){
 
   }
+
+  onSelect(event:any) {
+    if (this.files.length) this.files.splice(this.files.indexOf(event), 1);
+    this.files.push(event.addedFiles[0]);
+  }
+
+  onRemove(event:any) {
+    this.files.splice(this.files.indexOf(event), 1);
+  }
+
+
 }
