@@ -18,6 +18,6 @@
   </div>
 
   <div class="dialog-actions" mat-dialog-actions>
-    <button routerLink="/profile" class="button-confirm" mat-button (click)="changeImageProfile()">Confirmar</button>
+    <button routerLink="/profile" class="button-confirm" mat-button [disabled]="disableButton" (click)="onChange()">Confirmar</button>
   </div>
 </div>
