@@ -5,7 +5,7 @@
   </div>
 
   <div class="dialog-content" mat-dialog-content>
-    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [multiple]="false" >
+    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [multiple]="false">
       <ngx-dropzone-label  *ngIf="!files.length">Subir Foto</ngx-dropzone-label>
       <ngx-dropzone-image-preview
         ngProjectAs="ngx-dropzone-preview"
