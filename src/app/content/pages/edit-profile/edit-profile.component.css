@@ -56,7 +56,6 @@
   height: 12rem;
   width: 12rem;
 }
-
 .container-avatar img {
   width: 100%;
   height: 100%;
@@ -69,7 +68,9 @@ mat-card{
   display: flex;
   flex-direction: row;
 }
-
+mat-card-header{
+  position: relative;
+}
 mat-card-content{
   display: flex;
   flex-direction: column;
@@ -184,7 +185,7 @@ img {
 .required{
   color: rgb(255, 0, 0);
 }
-button,
+ button,
 button-change-password{
   background-color: #FFD146;
   width: 100%;
@@ -196,10 +197,7 @@ button-change-password{
   margin-top: 10px;
   margin-bottom: 10px;
 }
-.button:hover {
-  background-color: #FFD146;
-  color: #000000;
-}
+
 .button-change-password{
   background-color: #000000;
 }
@@ -212,7 +210,6 @@ button-change-password{
 .button-change-password:hover span{
   color: #ffffff;
 }
-
 .close-session,
 .delete-account
 {
@@ -325,6 +322,24 @@ button-change-password{
   color: #000000;
 }
 
+.button-edit-profile-image{
+  all: initial;
+  right: 10%;
+  top: 15%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width:1.5rem;
+  height: 2rem;
+  position: absolute;
+  padding:0;
+  margin:0;
+  background-color: #FFD146;
+  border-radius: 7px;
+}
+.button-edit-profile-image mat-icon{
+  margin:0;
+}
 
 @media (max-width: 450px) {
   .content-edit {
@@ -362,7 +377,12 @@ button-change-password{
     flex-direction: column;
     align-items: center;
   }
-  .button {
+
+  .button-edit-profile-image{
+    width: 1rem;
+    height: 1.5rem;
+  }
+  .button{
     width: 100%;
   }
 }
