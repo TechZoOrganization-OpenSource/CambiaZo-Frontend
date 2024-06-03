@@ -70,7 +70,6 @@ h1,h2,h3,h4,h5,h6,p{
   justify-content: center;
   margin-bottom: 1rem;
 }
-
 .card-offer{
   width: auto;
   height: calc(100% - 20px);
@@ -85,8 +84,6 @@ h1,h2,h3,h4,h5,h6,p{
   display: flex;
   align-items: center;
 }
-
-
 .avatar-card-offer img{
   width:100%;
   height: 100%;
@@ -94,8 +91,6 @@ h1,h2,h3,h4,h5,h6,p{
   object-position: center;
   object-fit: cover;
 }
-
-
 .header-card-offer h1 {
   margin-left: 1rem;
   font-size: 25px;
@@ -133,7 +128,6 @@ h1,h2,h3,h4,h5,h6,p{
   order: 2;
   flex: 2;
 }
-
 .offer-content{
   width: 100%;
   display:flex;
@@ -141,7 +135,6 @@ h1,h2,h3,h4,h5,h6,p{
   flex-wrap: wrap;
   box-sizing: border-box;
 }
-
 .col11, .footer-title{
   flex-direction: column;
   display: flex;
@@ -223,11 +216,8 @@ h1,h2,h3,h4,h5,h6,p{
   align-content: center;
   padding-left: 1rem;
 }
-.btn-accepted{
+.btn-accepted, .btn-denied{
   cursor: pointer;
-  color:#41DB0B ;
-  background-color: #EAFFDD;
-  border: solid 1px #41DB0B ;
   border-radius: 10px;
   text-align: center;
   font-size: 18px;
@@ -237,17 +227,14 @@ h1,h2,h3,h4,h5,h6,p{
   margin: 0 0.5rem 0 0.5rem;
 }
 .btn-denied{
-  cursor: pointer;
   color:#FF502A ;
   background-color: #FFD7B9;
   border: solid 1px #FF502A ;
-  border-radius: 10px;
-  text-align: center;
-  font-size: 18px;
-  font-weight: bold;
-  width: 8.5rem;
-  height: 2.2rem;
-  margin: 0 0.5rem 0 0.5rem;
+}
+.btn-accepted{
+  color:#41DB0B ;
+  background-color: #EAFFDD;
+  border: solid 1px #41DB0B ;
 }
 .btn-denied:hover{
   color:#FFD7B9 ;
