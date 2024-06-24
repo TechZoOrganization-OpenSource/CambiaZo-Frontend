@@ -15,13 +15,15 @@ import {MatDialog} from "@angular/material/dialog";
 import {
   DialogSuccessfullyChangeComponent
 } from "../../components/dialog-successfully-change/dialog-successfully-change.component";
-import {Memberships} from "../../model/memberships/memberships.model";
-import {
-  DialogPasswordChangedSuccessfullyComponent
-} from "../../components/dialog-password-changed-successfully/dialog-password-changed-successfully.component";
 import {
   DialogCancelMembershipComponent
 } from "../../components/dialog-cancel-membership/dialog-cancel-membership.component";
+import {
+  DialogSelectProductComponent
+} from "../../../public/components/dialog-select-product/dialog-select-product.component";
+import {
+  DialogChangeProfileComponent
+} from "../../../public/components/dialog-change-profile/dialog-change-profile.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -91,12 +93,10 @@ export class EditProfileComponent implements OnInit {
   getMembership() {
     this.membershipService.getMembershipsById(this.user.membership).subscribe((data) => {
       this.membership = data;
-      console.log(data)
     });
   }
 
   cancelMembership() {
-
     const dialogRef = this.dialog.open(DialogCancelMembershipComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -195,5 +195,17 @@ export class EditProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeImage(){
+    const userId = String(localStorage.getItem('id'));
+    const dialogRef = this.dialog.open(DialogChangeProfileComponent, {
+      data: userId,
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
+    })
+    ;
   }
 }

@@ -25,7 +25,7 @@ mat-card {
   margin-right: 15px;
   margin-left: 15px;
   box-shadow: 0 0 10px 0 rgba(0,0,0,0.7);
-
+  cursor: pointer;
 }
 
 
@@ -84,6 +84,11 @@ mat-card-header{
   padding-right: 10px;
   padding-left: 10px;
 }
+mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
+
 mat-card-footer{
   padding: 0.2rem 0 0.2rem 0;
   background: #FFD146;
