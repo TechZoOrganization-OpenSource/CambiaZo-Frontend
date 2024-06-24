@@ -46,11 +46,10 @@ export class Ongs {
     this.social_networks = social_networks;
     this.id = id;
     this.setInformation();
-    this.category_name = ''
+    this.category_name = '';
   }
 
-
-  /* funccion para cambiar valores de information. en sus propiedades about, mission_vision hacer que el texto tenga un salto de line despues de cada punto(remember the data is json)*/
+  /* funccion para cambiar valores de information. en sus propiedades about, mission_vision hacer que el texto tenga un salto de line despues de cada punto(remember the data is json) */
   setInformation() {
     this.information.map((info: any) => {
       info.about = info.about.split('.').join('.\n\n');
@@ -58,17 +57,15 @@ export class Ongs {
     });
   }
 
-  get nameUpper(){
+  get nameUpper() {
     return this.name.toUpperCase();
   }
 
-  get addressText(){
+  get addressText() {
     return `${this.address.street}, ${this.address.district}, ${this.address.city}, ${this.address.country}`;
   }
-  set setCategory_name(category_name: string){
+
+  set setCategory_name(category_name: string) {
     this.category_name = category_name;
   }
-
-
-
 }
