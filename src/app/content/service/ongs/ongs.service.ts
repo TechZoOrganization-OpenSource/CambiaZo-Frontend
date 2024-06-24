@@ -198,7 +198,7 @@ export class OngsService {
   }
   getCategoryNameById(id: number): Observable<string> {
     console.log('Fetching category name for id:', id); // Verifica el id
-    return this.http.get<any>(`https://cambiazo-backend.azurewebsites.net/api/v1/category-ongs/${id}`).pipe(
+    return this.http.get<any>(`${this.baseUrl}/api/v1/category-ongs/${id}`).pipe(
       tap(response => console.log('API response:', response)), // Verifica la respuesta de la API
       map(category => category.name),
       catchError(this.handleError)

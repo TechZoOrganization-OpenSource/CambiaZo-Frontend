@@ -57,6 +57,7 @@ export class MyPostsComponent implements OnInit{
           product.price,
           product.images,
           product.boost,
+          product.available,
           product.location)
         )
 
