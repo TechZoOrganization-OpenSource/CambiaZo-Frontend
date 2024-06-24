@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
 import {MatOption} from "@angular/material/autocomplete";
@@ -37,78 +37,96 @@ import {RouterLink} from "@angular/router";
   templateUrl: './create-post-info-user-content.component.html',
   styleUrl: './create-post-info-user-content.component.css'
 })
-export class CreatePostInfoUserContentComponent implements OnInit{
 
-  countries: any[]= []
-  departments: any[]=[]
-  cities: string[]=[]
+export class CreatePostInfoUserContentComponent implements OnInit {
+
+  @Input() boost = false
+  @Input() country = null;
+  @Input() department= null;
+  @Input() city = null
+
+  countries: any[] = [];
+  departments: any[] = [];
+  cities: string[] = [];
   user: any;
 
-
   formProduct = new FormGroup({
-      'boost': new FormControl(false),
-      'country': new FormControl(null,Validators.required),
-      'departament': new FormControl(null,Validators.required),
-      'district': new FormControl(null,Validators.required),
+    'boost': new FormControl(false),
+    'country': new FormControl(null, Validators.required),
+    'departament': new FormControl(null, Validators.required),
+    'district': new FormControl(null, Validators.required),
   });
   acceptPolicy = new FormControl(false, Validators.requiredTrue);
 
-
-  constructor(private countriesService: CountriesService,private usersService: UsersService) {}
+  constructor(private countriesService: CountriesService, private usersService: UsersService) { }
 
   ngOnInit() {
-    this.getUser()
+    this.formProduct.get('boost')?.setValue(this.boost)
     this.getAllCountries()
+    this.getUser()
   }
+
   onSubmit() {
     this.formProduct.markAllAsTouched();
     this.acceptPolicy.markAsTouched();
 
     if (this.formProduct.valid && this.acceptPolicy.valid) {
-      return this.formProduct.value
-    }else return null
+      return this.formProduct.value;
+    } else return null;
   }
+  
   getAllCountries(){
     this.countriesService.getCountries().subscribe((res:any)=>{
       this.countries = res
-    })
 
-  }
-
-  getUser(){
-    this.usersService.getUserById(Number(localStorage.getItem('id'))).subscribe((data)=>{
-      this.user = new Users(
-        data.id,
-        data.name,
-        data.email,
-        data.phone,
-        data.password,
-        data.membership,
-        data.img,
-        []
-      );
+      if(this.country){
+        this.formProduct.get('country')?.setValue(this.country)
+        this.onCountrySelectionChange()
+        this.formProduct.get('departament')?.setValue(this.department)
+        this.onCitiesSelectionChange()
+        this.formProduct.get('district')?.setValue(this.city)
+      }
     })
   }
 
-  onCountrySelectionChange(){
-    this.departments = []
-    this.cities = []
-    this.formProduct.get('departament')?.reset()
-    this.formProduct.get('district')?.reset()
-    if(this.formProduct.value.country) {
+  getUser() {
+    const userId = Number(localStorage.getItem('id'));
+    this.usersService.getUserById(userId).subscribe(
+      (data) => {
+        this.user = new Users(
+          data.id,
+          data.name,
+          data.email,
+          data.phone,
+          data.password,
+          data.membership,
+          data.img,
+          []
+        );
+      },
+      (error) => {
+        console.error('Error fetching user data:', error);
+      }
+    );
+  }
+
+  onCountrySelectionChange() {
+    this.departments = [];
+    this.cities = [];
+    this.formProduct.get('departament')?.reset();
+    this.formProduct.get('district')?.reset();
+    if (this.formProduct.value.country) {
       const selectedCountryObj = this.countries.find(c => c.country === this.formProduct.value.country);
-      this.departments = selectedCountryObj.departments;
+      this.departments = selectedCountryObj ? selectedCountryObj.departments : [];
     }
-
   }
-  onCitiesSelectionChange(){
-    this.cities = []
-    this.formProduct.get('district')?.reset()
-    if(this.formProduct.value.departament) {
+
+  onCitiesSelectionChange() {
+    this.cities = [];
+    this.formProduct.get('district')?.reset();
+    if (this.formProduct.value.departament) {
       const selectedDepartmentObj = this.departments.find(c => c.name === this.formProduct.value.departament);
-      this.cities = selectedDepartmentObj.cities;
+      this.cities = selectedDepartmentObj ? selectedDepartmentObj.cities : [];
     }
   }
-
-
 }

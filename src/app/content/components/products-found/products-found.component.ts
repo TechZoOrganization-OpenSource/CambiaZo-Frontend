@@ -13,6 +13,7 @@ import {MatMenu, MatMenuItem} from "@angular/material/menu";
 import {NgForOf, NgIf} from "@angular/common";
 import {Products} from "../../model/products/products.model";
 import {PostsService} from "../../service/posts/posts.service";
+import {RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-products-found',
@@ -30,7 +31,8 @@ import {PostsService} from "../../service/posts/posts.service";
     MatMenuItem,
     NgForOf,
     NgIf,
-    MatCardImage
+    MatCardImage,
+    RouterLink
   ],
   templateUrl: './products-found.component.html',
   styleUrl: './products-found.component.css'

@@ -1,9 +1,30 @@
+
 .container-image-products img{
   width: 250px;
   height: 100%;
   object-fit: cover;
 }
-
+.line-text{
+  display: flex;
+  align-items: center;
+  align-content: center;
+}
+.line {
+  margin-bottom: 0.5rem;
+  flex: 1;
+  height: 1px;
+  background-color: #C2C2C2;
+  margin-left: 3rem;
+  margin-right: 3rem;
+}
+.posts__first{
+  font-size: 1.5rem;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  padding-top: 4rem;
+  padding-left: 3rem;
+  padding-bottom: 1rem;
+}
 .cards-responsive{
   display: none;
 }
@@ -13,15 +34,30 @@
   flex-direction: row;
   height: auto;
   width: auto;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
   flex: 0 0 calc(50% - 20px);
 }
 
 .example-card{
   width: 100%;
-  text-align: justify;
 }
-
+.p__information{
+  word-break: break-word;
+  display: flex;
+  align-items: center;
+  font-family: 'Montserrat' , sans-serif;
+}
+.change-for{
+  display: flex;
+  flex-direction: row;
+}
+.change-for p{
+  margin-left: 5px;
+  font-size: 15px;
+}
+.change-for img{
+  margin-top: 2px;
+}
 mat-card-header{
   background-color: black;
   color: white;
@@ -50,6 +86,7 @@ mat-card-content{
   padding-top: 0.5rem;
 }
 mat-card-footer{
+  font-size: 1rem;
   text-align: center;
   padding: 0.5rem;
   font-weight: bolder;
@@ -64,13 +101,6 @@ mat-card-footer{
   gap: 2rem;
 }
 
-.post-title{
-  font-size: 1.5rem;
-  font-family: 'Montserrat', sans-serif;
-  font-weight: bolder;
-  padding-top: 4rem;
-  padding-left: 3rem;
-}
 
 .post-burger-content{
   margin: 0;
@@ -81,14 +111,15 @@ mat-card-footer{
 .container-image-products-responsive img{
   display: none;
 }
-
+@media screen and (max-width: 1150px) {
+  .title-posts {
+    padding-top: 2rem;
+    padding-left: 1rem;
+  }
+}
 @media screen and (max-width: 1100px){
   .container-products{
     width: 100%;
-  }
-  .post-title{
-    padding-top: 2rem;
-    padding-left: 1rem;
   }
   .cards-container{
     padding: 1rem 1rem 3rem 1rem;

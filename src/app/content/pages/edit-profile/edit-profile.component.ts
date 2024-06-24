@@ -18,6 +18,12 @@ import {
 import {
   DialogCancelMembershipComponent
 } from "../../components/dialog-cancel-membership/dialog-cancel-membership.component";
+import {
+  DialogSelectProductComponent
+} from "../../../public/components/dialog-select-product/dialog-select-product.component";
+import {
+  DialogChangeProfileComponent
+} from "../../../public/components/dialog-change-profile/dialog-change-profile.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -189,5 +195,17 @@ export class EditProfileComponent implements OnInit {
         });
       }
     });
+  }
+
+  changeImage(){
+    const userId = String(localStorage.getItem('id'));
+    const dialogRef = this.dialog.open(DialogChangeProfileComponent, {
+      data: userId,
+      disableClose: true
+    })
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
+    })
+    ;
   }
 }

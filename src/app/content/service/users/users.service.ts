@@ -82,6 +82,9 @@ export class UsersService {
   changeMembership(id: string, newMembership: number): Observable<any> {
     return this.http.put(`${this.baseUrl}/users/${id}`, { membership: newMembership });
   }
+  changeProfileImage(id: string, profileImage: string): Observable<any> {
+    return this.http.put(`${this.baseUrl}/users/${id}`, { img: profileImage });
+  }
 
   changeMembershipDate(id: string): Observable<any> {
     const today = new Date();

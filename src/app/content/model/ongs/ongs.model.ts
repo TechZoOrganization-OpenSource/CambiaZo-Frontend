@@ -13,6 +13,7 @@ export class Ongs {
   website: string;
   social_networks: any[];
   id: string;
+  category_name: string;
 
   constructor(
     name: string,
@@ -45,6 +46,7 @@ export class Ongs {
     this.social_networks = social_networks;
     this.id = id;
     this.setInformation();
+    this.category_name = ''
   }
 
 
@@ -63,5 +65,10 @@ export class Ongs {
   get addressText(){
     return `${this.address.street}, ${this.address.district}, ${this.address.city}, ${this.address.country}`;
   }
+  set setCategory_name(category_name: string){
+    this.category_name = category_name;
+  }
+
+
 
 }

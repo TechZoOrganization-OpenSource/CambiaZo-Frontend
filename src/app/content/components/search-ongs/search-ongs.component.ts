@@ -27,23 +27,45 @@ import {RouterLink} from "@angular/router";
 })
 export class SearchOngsComponent implements OnInit{
   items:Ongs[]=[]
+  ongSearched:Ongs[]=[]
 
   constructor(private ongsService:OngsService) {
   }
   ngOnInit() {
 
     this.ongsService.getOngs().subscribe((res:any)=>
-    { this.items = res},error => console.log(error))
+    {
+      this.items = res
+      this.ongSearched = this.items
+      console.log('ONGs with associated data:', this.items);
+
+    },error => console.log(error))
   }
 
-  searchOngs(event:Event){
-   const ongsSearched = (event.target as HTMLInputElement).value.trim()
-    this.ongsService.getOngs().subscribe((res:any)=>
-    { this.items = res.filter((ongs:Ongs)=>{
+  searchOngs(event:any){
+   const ongsSearched = event.target.value
+     this.ongSearched = this.items.filter((ongs:Ongs)=>{
       const ongsNameNormalized = ongs.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
       return ongsNameNormalized.includes(ongsSearched) || ongsSearched == '';
+  })
+  }
 
-    })},error => console.log(error))
+  filterOng(data:any){
+    this.ongSearched = this.items.filter((ong:Ongs)=>{
+    const ongCountryNormalized = ong.address.country.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const ongDepartmentNormalized = ong.address.city.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const ongDistrictNormalized = ong.address.district.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    const ongStreetNormalized = ong.address.street.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+
+      return (
+        ongCountryNormalized.includes(data.address) ||
+        ongDepartmentNormalized.includes(data.address)||
+        ongDistrictNormalized.includes(data.address) ||
+        ongStreetNormalized.includes(data.address) ||
+        data.address == ''
+      )&&(
+        data.categories.includes(ong.category) || !data.categories.length)
+    })
 
   }
 
