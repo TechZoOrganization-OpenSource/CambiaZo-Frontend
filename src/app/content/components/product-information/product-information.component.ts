@@ -45,8 +45,9 @@ export class ProductInformationComponent implements OnInit {
     if (productId) {
       this.postsService.getProductById(productId).subscribe((data) => {
         this.product = data;
+        console.log('Product data:', this.product); // Log product data
         this.loadCategories();
-        this.loadUser(data.user_id);
+        this.loadUser(Number(data.user_id));
       });
     }
   }
@@ -61,6 +62,7 @@ export class ProductInformationComponent implements OnInit {
     this.usersService.getUserById(userId).subscribe((user) => {
       this.user = user;
     });
+    console.log()
   }
 
   getLoggedInUserId(): number | null {
@@ -68,6 +70,7 @@ export class ProductInformationComponent implements OnInit {
     return userId ? Number(userId) : null;
   }
 
+  /*
   addToFavorites(): void {
     const loggedInUserId = this.getLoggedInUserId();
     if (loggedInUserId) {
@@ -86,6 +89,8 @@ export class ProductInformationComponent implements OnInit {
       console.log('User is not logged in');
     }
   }
+  * */
+
 
   offer(): void {
     const loggedInUserId = this.getLoggedInUserId();

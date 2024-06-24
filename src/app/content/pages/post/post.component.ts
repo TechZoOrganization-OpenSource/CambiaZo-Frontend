@@ -56,7 +56,7 @@ export class PostComponent {
 
       const newProduct =
         {
-           user_id: localStorage.getItem('id'),
+          user_id: localStorage.getItem('id') || 'default',
           ...infoProduct,
           'images':!images.length ? [this.imageDefault] : images,
           'boost': contactProduct.boost,

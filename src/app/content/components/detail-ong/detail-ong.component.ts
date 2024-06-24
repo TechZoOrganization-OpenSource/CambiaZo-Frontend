@@ -1,11 +1,12 @@
 import {Component, Input} from '@angular/core';
-import {NgForOf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-detail-ong',
   standalone: true,
   imports: [
-    NgForOf
+    NgForOf,
+    NgIf
   ],
   templateUrl: './detail-ong.component.html',
   styleUrl: './detail-ong.component.css'
