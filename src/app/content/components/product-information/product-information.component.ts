@@ -8,6 +8,10 @@ import { DialogSelectProductComponent } from '../../../public/components/dialog-
 import { MatCardModule, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { CommonModule } from '@angular/common';
 import { MatButton } from '@angular/material/button';
+import {
+  DialogLoginRegisterComponent
+} from "../../../public/components/dialog-login-register/dialog-login-register.component";
+import {DialogNoProductsComponent} from "../dialog-no-products/dialog-no-products.component";
 
 @Component({
   selector: 'app-product-information',
@@ -32,7 +36,8 @@ export class ProductInformationComponent implements OnInit {
     private route: ActivatedRoute,
     private postsService: PostsService,
     private usersService: UsersService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private dialogSuccess: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -63,6 +68,7 @@ export class ProductInformationComponent implements OnInit {
     return userId ? Number(userId) : null;
   }
 
+  /*
   addToFavorites(): void {
     const loggedInUserId = this.getLoggedInUserId();
     if (loggedInUserId) {
@@ -81,12 +87,35 @@ export class ProductInformationComponent implements OnInit {
       console.log('User is not logged in');
     }
   }
+  * */
+
 
   offer(): void {
-    this.dialog.open(DialogSelectProductComponent,{data:{
-      product_id: this.product.id,
-        user_id: this.user.id
-      }});
+    const loggedInUserId = this.getLoggedInUserId();
+
+    if (loggedInUserId) {
+      this.postsService.getProducts2().subscribe(
+        (products) => {
+          const userProducts = products.filter(product => Number(product.user_id) === loggedInUserId);
+
+          if (userProducts.length > 0) {
+            this.dialog.open(DialogSelectProductComponent, {
+              data: {
+                product_id: this.product.id,
+                user_id: this.user.id,
+                product_name: this.product.product_name,
+                user_name: this.user.name,
+              },
+              width: '100rem',
+            });
+          } else {
+            this.dialogSuccess.open(DialogNoProductsComponent, { disableClose: true });
+          }
+        }
+      );
+    } else {
+      this.dialog.open(DialogLoginRegisterComponent, { disableClose: true });
+    }
   }
 
   protected readonly localStorage = localStorage;

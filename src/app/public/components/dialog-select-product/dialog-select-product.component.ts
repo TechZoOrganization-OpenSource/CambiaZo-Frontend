@@ -34,6 +34,7 @@ import { DialogOfferSuccessfulComponent} from "../dialog-offer-successful/dialog
 export class DialogSelectProductComponent implements OnInit {
   user: any = {};
   items: Products[] = [];
+  selectedProduct: Products | null = null;
 
   constructor(
     public dialogRef: MatDialogRef<DialogSelectProductComponent>,
@@ -82,22 +83,30 @@ export class DialogSelectProductComponent implements OnInit {
   }
 
   closeDialog(): void {
-    this.dialogRef.close()
+    this.dialogRef.close();
     this.dialogRef.afterClosed().subscribe(() => {
-      this.dialogSuccess.open(DialogOfferSuccessfulComponent)
-    })
+      if (this.selectedProduct) {
+        this.dialogSuccess.open(DialogOfferSuccessfulComponent, {
+          data: {
+            product_name: this.selectedProduct.product_name,
+            user_name: this.data.user_name
+          }
+        });
+      }
+    });
   }
 
   offer(product: Products): void {
+    this.selectedProduct = product;
 
     const newOffer = new Offers(
+      '', // ID de la oferta, lo puede generar el backend
       String(localStorage.getItem('id')), // ID del usuario que hace la oferta
       String(product.id), // ID del producto que ofrece
       this.data.user_id, // ID del usuario que recibe la oferta
       this.data.product_id, // ID del producto que recibe la oferta
-      'Pendiente', // Estado de la oferta
-      '' // ID de la oferta, lo puede generar el backend
-    )
+      'Pendiente' // Estado de la oferta
+    );
 
     this.offersService.postOffer(newOffer).subscribe((data: Offers) => {
     }, error => {
@@ -105,6 +114,5 @@ export class DialogSelectProductComponent implements OnInit {
     });
 
     this.closeDialog();
-
   }
 }
