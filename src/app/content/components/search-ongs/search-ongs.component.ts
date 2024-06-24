@@ -37,6 +37,7 @@ export class SearchOngsComponent implements OnInit{
     {
       this.items = res
       this.ongSearched = this.items
+      console.log('ONGs with associated data:', this.items);
 
     },error => console.log(error))
   }

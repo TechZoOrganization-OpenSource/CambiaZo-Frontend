@@ -52,7 +52,9 @@ export class FilterOngsComponent implements OnInit {
   }
 
   filterOng(){
-    const keys = Object.keys(this.toppings.value).filter(key => this.toppings.value[key] === true)
+    const keys = Object.keys(this.toppings.value)
+      .filter(key => this.toppings.value[key] === true)
+      .map(key => parseInt(key, 10)); // Convertir los keys a enteros
     this.ongSearched.emit({'address': this.toppings.value.address,'categories':keys})
   }
 
