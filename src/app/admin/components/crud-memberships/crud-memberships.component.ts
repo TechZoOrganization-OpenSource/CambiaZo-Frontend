@@ -1,47 +1,48 @@
-import {Component, OnInit} from '@angular/core';
-import {MatTableModule,MatTableDataSource} from "@angular/material/table";
-import {MatDialog} from "@angular/material/dialog";
-import {MembershipsService} from "../../../content/service/memberships/memberships.service";
-import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import { Component, OnInit } from '@angular/core';
+import { MatTableModule, MatTableDataSource } from "@angular/material/table";
+import { MatDialog } from "@angular/material/dialog";
+import { MembershipsService } from "../../../content/service/memberships/memberships.service";
+import { MatIconModule } from "@angular/material/icon";
+import { MatButtonModule } from "@angular/material/button";
 
 @Component({
   selector: 'app-crud-memberships',
   standalone: true,
   imports: [
     MatTableModule,
-    MatIcon,
-    MatIconButton,
+    MatIconModule,
+    MatButtonModule,
   ],
   templateUrl: './crud-memberships.component.html',
-  styleUrl: './crud-memberships.component.css'
+  styleUrls: ['./crud-memberships.component.css']
 })
-export class CrudMembershipsComponent implements OnInit{
-  dataSource = new MatTableDataSource()
-  displayedColumns = ['id','name','price','description','benefits','actions']
+export class CrudMembershipsComponent implements OnInit {
+  dataSource = new MatTableDataSource();
+  displayedColumns = ['id', 'name', 'price', 'description', 'benefits', 'actions'];
 
-  constructor(private membershipService: MembershipsService,private dialogMembership: MatDialog) {
-  }
+  constructor(private membershipService: MembershipsService, private dialogMembership: MatDialog) {}
 
   ngOnInit() {
-    this.getAllMembership()
+    this.getAllMembership();
   }
 
-  getAllMembership(){
-    this.membershipService.getMemberships().subscribe((res:any)=>{
-      this.dataSource = res
-    })
+  getAllMembership() {
+    this.membershipService.getMemberships().subscribe((res: any) => {
+      this.dataSource = new MatTableDataSource(res);
+    });
   }
 
-
-  deleteMembership(id:string){
-    this.membershipService.deleteMemberships(id).subscribe()
+  deleteMembership(id: string) {
+    this.membershipService.deleteMembership(id).subscribe(() => {
+      this.getAllMembership(); // Refresh the list after deletion
+    });
   }
 
-  editMembership(id:string){
-    //this.dialogMembership.open(DialogOngsCategoriesComponent,{data: id})
+  editMembership(id: string) {
+    // this.dialogMembership.open(DialogOngsCategoriesComponent, { data: id });
   }
-  addMembership(){
-    //this.dialogMembership.open(DialogOngsCategoriesComponent)
+
+  addMembership() {
+    // this.dialogMembership.open(DialogOngsCategoriesComponent);
   }
 }
