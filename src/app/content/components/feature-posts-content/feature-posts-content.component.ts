@@ -35,18 +35,17 @@ export class FeaturePostsContentComponent implements OnInit{
           product.price,
           product.images,
           product.boost,
+          product.available,
           product.location)
         )
+      })
 
-    })
-
-        this.postsService.getCategoriesProducts().subscribe((categories:any)=>{
-          this.items.map((item:Products)=>{
-            item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
-          })
+      this.items.forEach((item:Products)=>{
+        this.postsService.getCategoryProductById(item.category_id).subscribe((category:any)=>{
+          item.setCategory = category.name;
         })
-
-  })
+      })
+    })
   }
 
 }

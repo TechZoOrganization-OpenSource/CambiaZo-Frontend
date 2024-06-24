@@ -70,6 +70,7 @@ export class DialogSelectProductComponent implements OnInit {
             product.price,
             product.images,
             product.boost,
+            product.available,
             product.location
           ));
         }
