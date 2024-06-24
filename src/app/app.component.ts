@@ -16,6 +16,12 @@ export class AppComponent {
   title = 'Cambiazo';
 
   showNavFooter: boolean = true;
+  scrollToTop() {
+    window.scrollTo({
+      top: 0,
+    });
+  }
+
 
   constructor(private router: Router) {
     this.router.events.subscribe((event) => {
@@ -24,6 +30,9 @@ export class AppComponent {
 
         if (event.url === '/login') {
           localStorage.removeItem('id-temporal');
+        }
+        if(event.url.startsWith('/')){
+          this.scrollToTop()
         }
       }
     });

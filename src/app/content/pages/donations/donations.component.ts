@@ -15,7 +15,6 @@ import {SearchOngsComponent} from "../../components/search-ongs/search-ongs.comp
 export class DonationsComponent {
 
   @ViewChild(SearchOngsComponent) searchOngsComponent!: SearchOngsComponent;
-  ongSearch: any;
 
   handleFilterOng(data:any){
     this.searchOngsComponent.filterOng(data)

@@ -26,10 +26,6 @@ export class Offers {
     this.id_user_get = id_user_get;
     this.id_product_get = id_product_get;
     this.status = status;
-    this.user_get = {};
-    this.user_offer = {};
-    this.product_get = {};
-    this.product_offers = {};
   }
 
   set setUserGet(value: any) {

@@ -30,6 +30,7 @@ import { MyReviewsComponent } from "./content/components/my-reviews/my-reviews.c
 import { ProductDetailsComponent } from "./content/pages/product-details/product-details.component";
 import { BuyMembershipComponent } from "./content/pages/buy-membership/buy-membership.component";
 import { EditPostComponent } from "./content/pages/edit-post/edit-post.component";
+import {CompleteExchangesComponent} from "./content/components/complete-exchanges/complete-exchanges.component";
 import {PublisherProfileDetailsComponent} from "./content/pages/publisher-profile-details/publisher-profile-details.component";
 
 export const routes: Routes = [
@@ -47,12 +48,12 @@ export const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'help', component: AssistComponent },
   { path: 'profile', component: OwnProfileComponent, children: [
-      { path: '', redirectTo: 'publicaciones', pathMatch: 'full' },
-      { path: 'publicaciones', component: MyPostsComponent },
-      { path: 'ofertas', component: UserOffersComponent },
-      { path: 'cambios-completos', component: MyPostsComponent }, // Replace with the appropriate component
-      { path: 'favoritos', component: MyFavoritesComponent },
-      { path: 'resenas', component: MyReviewsComponent },
+      { path: '', redirectTo: 'my-posts', pathMatch: 'full' },
+      { path: 'my-posts', component: MyPostsComponent },
+      { path: 'offers', component: UserOffersComponent },
+      { path: 'complete-changes', component: CompleteExchangesComponent },
+      { path: 'favourites', component: MyFavoritesComponent },
+      { path: 'reviews', component: MyReviewsComponent },
     ]
   },
   { path: 'profile/edit', component: EditProfileComponent },
@@ -61,7 +62,7 @@ export const routes: Routes = [
   { path: 'product-information/:id', component: ProductDetailsComponent },
   { path: 'post/:postId', component: EditPostComponent },
   { path: 'publisher-profile/:id', component: PublisherProfileDetailsComponent },
-  
+
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },

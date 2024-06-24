@@ -1,5 +1,5 @@
 import {Component, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {ActivatedRoute, RouterLink} from "@angular/router";
+import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {NgForOf, NgIf} from "@angular/common";
 import {Products} from "../../model/products/products.model";
 import {PostsService} from "../../service/posts/posts.service";
@@ -17,7 +17,6 @@ import {
 import {
   DialogSuccessfulProductEditionComponent
 } from "../../../public/components/dialog-successful-product-edition/dialog-successful-product-edition.component";
-
 @Component({
   selector: 'app-edit-post',
   standalone: true,
@@ -42,7 +41,7 @@ export class EditPostComponent implements OnInit{
   @ViewChild(CreatePostInfoUserContentComponent) createPostInfoUserContentComponent!: CreatePostInfoUserContentComponent;
   @ViewChild(CreateInfoPostContentComponent) createInfoPostContentComponent!: CreateInfoPostContentComponent;
   post:any
-  constructor(private dialog:MatDialog, private productsService:PostsService,private route: ActivatedRoute){
+  constructor(private dialog:MatDialog, private productsService:PostsService,private route: ActivatedRoute, private router : Router){
   }
 
   ngOnInit() {
@@ -104,7 +103,13 @@ export class EditPostComponent implements OnInit{
   }
 
   successEdition(){
-    this.dialog.open(DialogSuccessfulProductEditionComponent, {disableClose: true})
+    const dialog =  this.dialog.open(DialogSuccessfulProductEditionComponent, {disableClose: true})
+
+    dialog.afterClosed().subscribe(result => {
+      this.router.navigateByUrl('/profile/my-posts')
+    });
+
+
   }
 
 }
