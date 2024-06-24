@@ -74,9 +74,9 @@ export class CreatePostInfoUserContentComponent implements OnInit {
       return this.formProduct.value;
     } else return null;
   }
-  
+
   getAllCountries(){
-    this.countriesService.getCountries().subscribe((res:any)=>{
+    this.countriesService.getLocation().subscribe((res:any)=>{
       this.countries = res
 
       if(this.country){
