@@ -3,7 +3,6 @@ import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
 import { Observable, map, catchError, throwError } from "rxjs";
 import { Users } from "../../model/users/users.model";
-import { Products } from "../../model/products/products.model";
 
 @Injectable({
   providedIn: 'root'
@@ -82,8 +81,11 @@ export class UsersService {
     );
   }
 
-  putUser(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, this.transformToNewStructure(data)).pipe(
+  putUser(id: any, data: any): Observable<any> {
+    const transformedData = this.transformToNewStructure(data);
+    console.log('Transformed Data:', transformedData); // Log the data being sent
+
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, transformedData).pipe(
       catchError(this.handleError)
     );
   }
@@ -102,13 +104,13 @@ export class UsersService {
   }
 
   changeMembership(id: string, newMembership: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membership: newMembership }).pipe(
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membershipId: newMembership }).pipe(
       catchError(this.handleError)
     );
   }
 
   changeProfileImage(id: string, profileImage: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { img: profileImage }).pipe(
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { profilePicture: profileImage }).pipe(
       catchError(this.handleError)
     );
   }
@@ -140,15 +142,12 @@ export class UsersService {
 
   private transformToNewStructure(data: any): any {
     return {
-      id: data.id,
       name: data.name,
       email: data.email,
       phone: data.phone,
       password: data.password,
-      membershipId: data.membership,
-      profilePicture: data.img,
-      membershipDate: data.membership_date,
-      favorites: data.favorites
+      profilePicture: data.profilePicture, // Ensure the key names match the backend structure
+      membershipId: data.membershipId
     };
   }
 

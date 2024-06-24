@@ -1,14 +1,14 @@
-import {Component, OnInit} from '@angular/core';
-import {MatCardModule} from "@angular/material/card";
-import {NgClass, NgForOf, NgIf} from "@angular/common";
-import {MembershipsService} from "../../service/memberships/memberships.service";
-import {Memberships} from "../../model/memberships/memberships.model";
-import {UsersService} from "../../service/users/users.service";
-import {DialogLoginRegisterComponent} from "../../../public/components/dialog-login-register/dialog-login-register.component";
-import {MatDialog} from "@angular/material/dialog";
+import { Component, OnInit } from '@angular/core';
+import { MatCardModule } from "@angular/material/card";
+import { NgClass, NgForOf, NgIf } from "@angular/common";
+import { MembershipsService } from "../../service/memberships/memberships.service";
+import { Memberships } from "../../model/memberships/memberships.model";
+import { UsersService } from "../../service/users/users.service";
+import { DialogLoginRegisterComponent } from "../../../public/components/dialog-login-register/dialog-login-register.component";
+import { MatDialog } from "@angular/material/dialog";
 import { Router } from '@angular/router';
-import {throwIfEmpty} from "rxjs";
-import {Users} from "../../model/users/users.model";
+import { throwIfEmpty } from "rxjs";
+import { Users } from "../../model/users/users.model";
 
 @Component({
   selector: 'app-memberships',
@@ -20,7 +20,7 @@ import {Users} from "../../model/users/users.model";
     NgIf
   ],
   templateUrl: './memberships.component.html',
-  styleUrl: './memberships.component.css'
+  styleUrls: ['./memberships.component.css']
 })
 export class MembershipsComponent implements OnInit {
 
@@ -58,6 +58,11 @@ export class MembershipsComponent implements OnInit {
     this.membershipsService.getMemberships().subscribe(
       (res: any) => {
         this.memberships = res;
+        this.memberships.forEach((membership) => {
+          this.membershipsService.getBenefitsByMembershipId(membership.id).subscribe((benefits: any) => {
+            membership.benefits = benefits.map((benefit: { description: string }) => benefit.description);
+          });
+        });
         this.filterMemberships();
       },
       error => console.log(error)
@@ -77,10 +82,12 @@ export class MembershipsComponent implements OnInit {
       this.dialogLoginRegister.open(DialogLoginRegisterComponent, { disableClose: true });
     } else {
       if (this.user && String(this.user.membership) === membershipId) {
-      } else { this.router.navigateByUrl(`/memberships/buy-membership&${membershipId}`);}
+        // Add your logic here if the user is already on the selected membership
+      } else {
+        this.router.navigateByUrl(`/memberships/buy-membership&${membershipId}`);
+      }
     }
   }
-
 
   protected readonly throwIfEmpty = throwIfEmpty;
 }
