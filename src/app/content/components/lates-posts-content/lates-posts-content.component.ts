@@ -8,7 +8,6 @@ import {Products} from "../../model/products/products.model";
 import {MatButton} from "@angular/material/button";
 import {MatFormField} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
-import {Ongs} from "../../model/ongs/ongs.model";
 import {RouterLink} from "@angular/router";
 @Component({
   selector: 'app-lates-posts-content',
@@ -49,6 +48,7 @@ export class LatesPostsContentComponent implements OnInit{
           product.price,
           product.images,
           product.boost,
+          product.available,
           product.location)
         )
 
