@@ -53,7 +53,8 @@ export class FormEditPostComponent implements OnInit{
     'product_name': new FormControl(''),
     'description': new FormControl(''),
     'change_for': new FormControl(''),
-    'price': new FormControl('')
+    'price': new FormControl(''),
+    'available': new FormControl('')
   });
 
   boost= new FormControl();
@@ -97,6 +98,7 @@ export class FormEditPostComponent implements OnInit{
         res.price,
         res.images,
         res.boost,
+        res.available,
         res.location
       )
       this.catId= this.postC.category_id;
@@ -141,7 +143,8 @@ export class FormEditPostComponent implements OnInit{
         'product_name': new FormControl(this.postC.product_name),
         'description': new FormControl(this.postC.description),
         'change_for': new FormControl(this.postC.change_for),
-        'price': new FormControl(this.postC.price)
+        'price': new FormControl(this.postC.price),
+        'available': new FormControl('')
       });
   }
 
@@ -218,13 +221,25 @@ export class FormEditPostComponent implements OnInit{
     const price:any= this.postFormGroup.value.price;
     const images:any= this.postC.images;
     const boost:any= this.boost.value;
+    const available:any = this.postFormGroup.value.available;
     const location:any= {
       country: this.contactFormGroup.value.pais,
       departament: this.contactFormGroup.value.provincia,
       district: this.contactFormGroup.value.distrito
     }
-    const newPost = new Products(this.postC.id,user_id,this.catId,product_name,description,change_for,price,images,boost,location);
-    this.postService.putProduct(id,newPost).subscribe((res:any)=>{
+    const newPost = {
+      name: product_name,
+      description: description,
+      desiredObject: change_for,
+      price: price,
+      image: images[0], // assuming the first image is the one to be used
+      boost: boost,
+      available: available,
+      productCategoryId: category_id,
+      userId: user_id,
+      districtId: location.district // assuming location.district is the correct districtId
+    };
+    this.postService.putProduct(id, newPost).subscribe((res:any)=>{
       console.log(res);
     });
     this.dialogEditPost.open(DialogEditPostComponent,{disableClose: true, data:id});

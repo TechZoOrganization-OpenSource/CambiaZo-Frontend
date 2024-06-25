@@ -1,28 +1,24 @@
-import {Component, OnInit} from '@angular/core';
-import {MatCard, MatCardContent, MatCardHeader} from "@angular/material/card";
-import {UsersService} from "../../service/users/users.service";
-import {MatButton} from "@angular/material/button";
-import {MatIcon} from "@angular/material/icon";
-import {Router, RouterLink} from "@angular/router";
-import {ActivatedRoute} from "@angular/router";
-import {MembershipsService} from "../../service/memberships/memberships.service";
-import {MatDialog} from "@angular/material/dialog";
-import {
-  DialogPaymentSuccessfullyComponent
-} from "../../components/dialog-payment-successfully/dialog-payment-successfully.component";
+import { Component, OnInit } from '@angular/core';
+import { MatCardModule } from "@angular/material/card";
+import { UsersService } from "../../service/users/users.service";
+import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
+import { Router, RouterLink, ActivatedRoute } from "@angular/router";
+import { MembershipsService } from "../../service/memberships/memberships.service";
+import { MatDialog } from "@angular/material/dialog";
+import { DialogPaymentSuccessfullyComponent } from "../../components/dialog-payment-successfully/dialog-payment-successfully.component";
+
 @Component({
   selector: 'app-buy-membership',
   standalone: true,
   imports: [
-    MatCardHeader,
-    MatCard,
-    MatCardContent,
-    MatButton,
-    MatIcon,
+    MatCardModule,
+    MatButtonModule,
+    MatIconModule,
     RouterLink,
   ],
   templateUrl: './buy-membership.component.html',
-  styleUrl: './buy-membership.component.css'
+  styleUrls: ['./buy-membership.component.css']
 })
 export class BuyMembershipComponent implements OnInit {
   user: any = {};
@@ -56,31 +52,35 @@ export class BuyMembershipComponent implements OnInit {
   }
 
   getMembership(id: string) {
-    this.membershipsService.getMembershipsById(id).subscribe((data) => {
+    this.membershipsService.getMembershipById(id).subscribe((data) => {
       this.membership = data;
     });
   }
 
-
   buyMembership() {
-    const newMembership = this.membership.id;
+    const newMembershipId = this.membership.id;
     const userId = localStorage.getItem('id');
-    if (userId && newMembership) {
-      this.userService.changeMembership(userId, newMembership).subscribe(
-        () => {
-          this.userService.changeMembershipDate(userId).subscribe(
-            () => {
-              const dialogRef = this.dialog.open(DialogPaymentSuccessfullyComponent, {data: this.membership.name});
-              dialogRef.afterClosed().subscribe(() => {
-                this.router.navigateByUrl('/home').then(() => {
-                  window.location.reload();
-                });
-              });
-            }
-          );
-        }
-      );
+
+    if (userId && newMembershipId) {
+      const updatedUserData = {
+        name: this.user.name,
+        email: this.user.email,
+        phone: this.user.phone,
+        password: this.user.password,
+        profilePicture: this.user.img,
+        membershipId: Number(newMembershipId)
+      };
+
+      console.log(updatedUserData)
+
+      this.userService.changeMembership(userId, updatedUserData).subscribe(() => {
+          const dialogRef = this.dialog.open(DialogPaymentSuccessfullyComponent, { data: this.membership.name });
+          dialogRef.afterClosed().subscribe(() => {
+            this.router.navigateByUrl('/home').then(() => {
+              window.location.reload();
+            });
+          });
+      });
     }
   }
-
 }

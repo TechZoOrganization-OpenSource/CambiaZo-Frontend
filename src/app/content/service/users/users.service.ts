@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
-import { Observable, map, catchError, throwError } from "rxjs";
+import {Observable, map, catchError, throwError, mergeMap} from "rxjs";
 import { Users } from "../../model/users/users.model";
-import { Products } from "../../model/products/products.model";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +71,8 @@ export class UsersService {
   }
 
   postUser(data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/api/v1/users`, this.transformToNewStructure(data)).pipe(
+    console.log('Data:', data); // Log the data being sent
+    return this.http.post<any>(`${this.baseUrl}/api/v1/users`, data).pipe(
       catchError(this.handleError)
     );
   }
@@ -82,8 +83,11 @@ export class UsersService {
     );
   }
 
-  putUser(id: string, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, this.transformToNewStructure(data)).pipe(
+  putUser(id: any, data: any): Observable<any> {
+    const transformedData = this.transformToNewStructure(data);
+    console.log('Transformed Data:', transformedData); // Log the data being sent
+
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, transformedData).pipe(
       catchError(this.handleError)
     );
   }
@@ -101,26 +105,14 @@ export class UsersService {
     );
   }
 
-  changeMembership(id: string, newMembership: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membership: newMembership }).pipe(
+  changeMembership(userId: string, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${userId}`, data).pipe(
       catchError(this.handleError)
     );
   }
 
   changeProfileImage(id: string, profileImage: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { img: profileImage }).pipe(
-      catchError(this.handleError)
-    );
-  }
-
-  changeMembershipDate(id: string): Observable<any> {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 2;
-    const year = today.getFullYear();
-    const date = `${day}/${month}/${year}`;
-
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membership_date: date }).pipe(
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { profilePicture: profileImage }).pipe(
       catchError(this.handleError)
     );
   }
@@ -140,15 +132,12 @@ export class UsersService {
 
   private transformToNewStructure(data: any): any {
     return {
-      id: data.id,
       name: data.name,
       email: data.email,
       phone: data.phone,
       password: data.password,
-      membershipId: data.membership,
-      profilePicture: data.img,
-      membershipDate: data.membership_date,
-      favorites: data.favorites
+      profilePicture: data.profilePicture, // Ensure the key names match the backend structure
+      membershipId: data.membershipId
     };
   }
 

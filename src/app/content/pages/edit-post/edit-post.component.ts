@@ -63,6 +63,7 @@ export class EditPostComponent implements OnInit{
         res.price,
         res.images,
         res.boost,
+        res.available,
         res.location
       )
     })
@@ -75,31 +76,28 @@ export class EditPostComponent implements OnInit{
 
     if(infoProduct && contactProduct){
       this.createInfoPostContentComponent.uploadImage().then((images:string[]) => {
-        const newProduct =
-          {
-            user_id: localStorage.getItem('id'),
-            ...infoProduct,
-            'images': [...this.post.images, ...images],
-            'boost': contactProduct.boost,
-            'location':{
-              'country': contactProduct.country,
-              'departament':contactProduct.departament,
-              'district': contactProduct.district
-            }
-          }
-        this.productsService.putProduct(this.post.id,newProduct).subscribe({
+        const newProduct = {
+          name: infoProduct.product_name || 'defaultName', // replace 'defaultName' with a suitable default value
+          description: infoProduct.description || 'defaultDescription', // replace 'defaultDescription' with a suitable default value
+          desiredObject: infoProduct.change_for || 'defaultObject', // replace 'defaultObject' with a suitable default value
+          price: infoProduct.price || 0, // replace 0 with a suitable default value
+          image: images[0], // assuming the first image is the one to be used
+          boost: contactProduct.boost || false, // assuming false as a default value
+          available: true, // assuming the product is always available when posted
+          productCategoryId: infoProduct.category_id || 0, // replace 0 with a suitable default value
+          userId: parseInt(localStorage.getItem('id') || '0'), // replace '0' with a suitable default value
+          districtId: this.post.location.district // assuming this.post.location.district is the correct districtId
+        };
+        this.productsService.putProduct(this.post.id, newProduct).subscribe({
           next: () => {
             this.successEdition()
           },
           error: (err) => {
             console.log(err)
           }
-        })
+        });
       })
-
-
     }
-
   }
 
   successEdition(){

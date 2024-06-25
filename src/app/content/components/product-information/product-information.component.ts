@@ -31,6 +31,7 @@ export class ProductInformationComponent implements OnInit {
   product: any;
   categories: any[] = [];
   user: any;
+  loading = true;
 
   constructor(
     private route: ActivatedRoute,
@@ -46,7 +47,8 @@ export class ProductInformationComponent implements OnInit {
       this.postsService.getProductById(productId).subscribe((data) => {
         this.product = data;
         this.loadCategories();
-        this.loadUser(data.user_id);
+        this.loadUser(Number(data.user_id));
+        this.loading = false;
       });
     }
   }
