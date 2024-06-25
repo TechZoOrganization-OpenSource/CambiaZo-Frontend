@@ -8,6 +8,7 @@ export class Products {
   price: number;
   images: string[];
   boost: boolean;
+  available: boolean;
   location: any;
   category: string;
 
@@ -21,6 +22,7 @@ export class Products {
     price: number,
     images: string[],
     boost: boolean,
+    available: boolean,
     location: any
   ) {
     this.id = id;
@@ -32,6 +34,7 @@ export class Products {
     this.price = price;
     this.images = images;
     this.boost = boost;
+    this.available= available;
     this.location = location;
     this.category = '';
   }

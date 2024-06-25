@@ -8,7 +8,6 @@
   padding: 5% 20% 0 20%;
   align-content: center;
   justify-content: center;
-
 }
 .button {
   background-color: #FFD146;
@@ -18,6 +17,7 @@
   border-radius: 35px;
   cursor: pointer;
   margin-bottom: 25px;
+  margin-top: 40px;
 }
 .gmail {
   border: 1px solid #C2C2C2;
@@ -135,6 +135,7 @@ main {
 }
 .forgot-password a{
   color: #FFD146;
+  text-align: right;
   text-decoration: none;
   font-size: 13px;
 }
@@ -146,6 +147,35 @@ main {
   cursor: pointer;
   padding: 10px;
   margin: 5px 0 20px 0;
+}
+.input-password{
+  border: 1px solid #C2C2C2;
+  width: 95%;
+  height: 25px;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 10px 14px 10px 6px;
+  margin: 5px 0 5px 0;
+  display: flex;
+  gap: 5px;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+}
+.text-input-password{
+  width: 100%;
+  height: 30px;
+  border: none;
+}
+.visibility{
+  background-color: white;
+  border: none;
+}
+.error-message{
+  color: #ff0000;
+  margin-top: 10px;
+  position: absolute;
 }
 
 @media(max-width: 915px){

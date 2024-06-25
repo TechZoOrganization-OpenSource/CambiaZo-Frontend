@@ -49,13 +49,45 @@ button{
 
 mat-card{
   border:solid 2px #FFD146;
-  border-radius: 25px;
-  min-height:31rem;
-  width: 20rem;
+  border-radius: 15px;
+  min-height:28rem;
+  max-width: 20rem;
+  width: 100%;
   margin-bottom: 1rem;
 }
 
-.background-white{
+mat-card mat-card-title{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+}
+
+mat-card mat-card-subtitle{
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bolder;
+  color: black;
+}
+
+mat-card mat-card-actions button{
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+  transition: 0.43s;
+  border: 3px solid #000000;
+  background-color: #000000;
+  color: #ffffff;
+}
+.background-white button:hover{
+  background-color: #FFD146;
+  color: #000000;
+  border: 3px solid #FFD146;
+  transition: 0.43s;
+}
+.background-primary button:hover{
+  background-color: #ffffff;
+  color: #000000;
+  border: 3px solid #ffffff;
+  transition: 0.43s;
+}
+.background-white {
   background-color: #FFFFFF;
 }
 
@@ -129,5 +161,11 @@ mat-card-content p{
   mat-card:not(first-of-type){
     margin-left: 0;
   }
-
+  .container{
+    padding:1rem;
+  }
+  .mat-card{
+    max-width: 16rem;
+    width: 100%;
+  }
 }

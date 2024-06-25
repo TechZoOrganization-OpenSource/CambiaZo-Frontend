@@ -6,7 +6,7 @@
   </button>
   <div class="boxB col1">
     <form class="form-container">
-      <img src="../../../assets/images/logos/logo-2.png" alt="cambiazo-logo" class="img-logo">
+      <img src="./assets/images/logos/logo-2.png" alt="cambiazo-logo" class="img-logo">
       <h1 class="title">Iniciar Sesión</h1>
       <button mat-button routerLink="/home" (click)="login()" class="gmail">
         <div class="gmail-logo-name">
@@ -22,17 +22,35 @@
       </div>
 
       <mat-label><b>Usuario</b></mat-label>
-      <input  name="username" placeholder="username or email" class="mat-input-element" [(ngModel)]="username">
+      <input name="username" placeholder="Email" class="mat-input-element" [(ngModel)]="username" (input)="onUsernameInput()">
 
       <div class="forgot-password">
         <mat-label><b>Contraseña</b></mat-label>
-        <a class="remember-password" routerLink="/home"><b>¿No recuerdas la contraseña?</b></a>
+
+        <a class="remember-password" routerLink="/verify-email"><b>¿No recuerdas la contraseña?</b></a>
+
       </div>
-      <input  name="password" type="password" placeholder="password" class="mat-input-element" [(ngModel)]="password">
+      <div class="input-password">
+        <input [type]="hide ? 'password' : 'text'"
+               name="password"
+               placeholder="Password"
+               [(ngModel)]="password" (input)="onPasswordInput()"
+               class="text-input-password"/>
+        <button class="visibility" matSuffix (click)="hide1($event)" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+          <img [src]="'assets/images/icons' + (hide ? '/visibility_off.png' : '/visibility.png')" style="width: 15px;height: 15px" alt="">
+        </button>
+      </div>
+
+      <div *ngIf="showError" class="error-message">
+        {{ errorMessage }}
+      </div>
+
 
       <button mat-button (click)="login()" class="button"><b>Iniciar Sesión</b></button>
 
+
       <p class="register">¿No tienes una cuenta? <a routerLink="/register"> Crea tu cuenta</a></p>
+
 
     </form>
   </div>
