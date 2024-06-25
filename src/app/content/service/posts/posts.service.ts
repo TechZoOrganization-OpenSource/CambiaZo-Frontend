@@ -129,7 +129,6 @@ export class PostsService {
   }
 
   getProductById(id: string): Observable<Products> {
-    console.log('Product ID:', id); // Log the product ID
     return this.http.get<any>(`${this.baseUrl}/api/v1/products/${id}`).pipe(
       tap(response => console.log('Response:', response)), // Log the response
       switchMap(product => {
@@ -244,7 +243,6 @@ export class PostsService {
       location: location,
       category: product.category
     };
-    console.log(transformedProduct)
     return transformedProduct;
   }
 
