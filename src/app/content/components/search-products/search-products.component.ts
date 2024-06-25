@@ -73,7 +73,7 @@ export class SearchProductsComponent implements OnInit{
   }
 
   getAllCountries(){
-    this.countriesService.getCountries().subscribe((countries:any)=>{
+    this.countriesService.getLocation().subscribe((countries:any)=>{
       this.countries = countries
     })
   }
@@ -99,6 +99,10 @@ export class SearchProductsComponent implements OnInit{
 
   onClear(){
     this.formProduct.reset()
+  }
+
+  validateInput(event:any) {
+    if (event.data === '-' || event.data === '+')event.preventDefault();
   }
 
 }

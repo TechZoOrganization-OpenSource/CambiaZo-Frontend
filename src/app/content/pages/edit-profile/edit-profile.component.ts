@@ -18,6 +18,12 @@ import {
 import {
   DialogCancelMembershipComponent
 } from "../../components/dialog-cancel-membership/dialog-cancel-membership.component";
+import {
+  DialogSelectProductComponent
+} from "../../../public/components/dialog-select-product/dialog-select-product.component";
+import {
+  DialogChangeProfileComponent
+} from "../../../public/components/dialog-change-profile/dialog-change-profile.component";
 
 @Component({
   selector: 'app-edit-profile',
@@ -53,7 +59,7 @@ export class EditProfileComponent implements OnInit {
   changePasswordSuccess: string | null = null;
   membership:  any = {};
 
-  constructor(private fb: FormBuilder, private userService: UsersService,private membershipService:MembershipsService, private router: Router, private dialog: MatDialog) {
+  constructor(private fb: FormBuilder, private userService: UsersService, private membershipService: MembershipsService, private router: Router, private dialog: MatDialog) {
     this.editProfileForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, CustomValidators.validEmail]],
@@ -77,15 +83,14 @@ export class EditProfileComponent implements OnInit {
       this.editProfileForm.patchValue({
         name: this.user.name,
         email: this.user.email,
-        phone: this.user.phone,
-        password: this.user.password,
+        phone: this.user.phone
       });
       this.getMembership();
     });
   }
 
   getMembership() {
-    this.membershipService.getMembershipsById(this.user.membership).subscribe((data) => {
+    this.membershipService.getMembershipById(this.user.membership).subscribe((data) => {
       this.membership = data;
     });
   }
@@ -109,14 +114,18 @@ export class EditProfileComponent implements OnInit {
     })
   }
 
-
-
-
   onSubmit() {
     this.submitted = true;
     if (this.editProfileForm.valid) {
       const userId = String(localStorage.getItem('id'));
-      this.userService.putUser(userId, this.editProfileForm.value).subscribe(() => {
+      const updateData = {
+        ...this.editProfileForm.value,
+        id: userId, // Make sure to include user ID in the data
+        password: this.user.password, // Include password to avoid overwriting it as empty
+        profilePicture: this.user.img, // Ensure profile picture is included if needed
+        membershipId: this.user.membership // Ensure membershipId is included
+      };
+      this.userService.putUser(userId, updateData).subscribe(() => {
         const dialogRef = this.dialog.open(DialogSuccessfullyChangeComponent);
         dialogRef.afterClosed().subscribe(() => {
           window.location.reload();
@@ -125,8 +134,8 @@ export class EditProfileComponent implements OnInit {
     }
   }
 
-  changePasswordButton(){
-    this.changePassword=true;
+  changePasswordButton() {
+    this.changePassword = true;
   }
 
   validateCurrentPassword() {
@@ -156,8 +165,8 @@ export class EditProfileComponent implements OnInit {
         });
       });
     } else {
-      if (this.changePasswordForm.controls['currentPassword'].invalid) {this.changePasswordForm.controls['currentPassword'].markAsTouched();}
-      if (this.changePasswordForm.controls['newPassword'].invalid) {this.changePasswordForm.controls['newPassword'].markAsTouched();}
+      if (this.changePasswordForm.controls['currentPassword'].invalid) { this.changePasswordForm.controls['currentPassword'].markAsTouched(); }
+      if (this.changePasswordForm.controls['newPassword'].invalid) { this.changePasswordForm.controls['newPassword'].markAsTouched(); }
     }
   }
 
@@ -167,14 +176,13 @@ export class EditProfileComponent implements OnInit {
       window.location.reload();
     });
   }
+
   forgotPassword() {
     localStorage.removeItem('id');
     this.router.navigateByUrl('/verify-email').then(() => {
       window.location.reload();
     });
   }
-
-
 
   deleteAccount() {
     const dialogRef = this.dialog.open(DialogDeleteAccountComponent);
@@ -188,6 +196,17 @@ export class EditProfileComponent implements OnInit {
           });
         });
       }
+    });
+  }
+
+  changeImage() {
+    const userId = String(localStorage.getItem('id'));
+    const dialogRef = this.dialog.open(DialogChangeProfileComponent, {
+      data: userId,
+      disableClose: true
+    });
+    dialogRef.afterClosed().subscribe(() => {
+      window.location.reload();
     });
   }
 }

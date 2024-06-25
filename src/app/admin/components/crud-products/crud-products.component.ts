@@ -32,7 +32,7 @@ export class CrudProductsComponent implements OnInit{
     })
   }
 
-  deleteProduct(id:string){
+  deleteProduct(id:number){
     this.postService.deleteProduct(id).subscribe()
   }
 

@@ -1,4 +1,6 @@
-<div class="container-product-information" *ngIf="product">
+<div *ngIf="loading" class="loading-message">
+</div>
+<div  class="container-product-information" *ngIf="product || !loading">
   <section><h1>{{ product.product_name }}</h1></section>
   <div class="content-information">
     <div class="product-information">
@@ -65,7 +67,12 @@
               </div>
             </div>
             <hr>
+            <!--
             <button mat-button class="favorite-button" (click)="addToFavorites()">
+              <img src="./assets/images/icons/star.svg" alt="Favorite icon" width="40" height="40">
+            </button>
+            -->
+            <button mat-button class="favorite-button">
               <img src="./assets/images/icons/star.svg" alt="Favorite icon" width="40" height="40">
             </button>
             <br><br>

@@ -9,7 +9,15 @@
   <section class="socials">
     <button *ngFor="let social of ong?.social_networks" class="social-button">
       <a [href]="social?.url" target="_blank">
-        <img [src]="social?.icon" [alt]='social?.name' class="social-icon">
+        <img *ngIf="social?.name.toLowerCase() === 'facebook'"
+             src="https://upload.wikimedia.org/wikipedia/commons/b/b9/2023_Facebook_icon.svg"
+             [alt]='social?.name' class="social-icon">
+        <img *ngIf="social?.name.toLowerCase() === 'twitter'"
+             src="https://cdn-icons-png.flaticon.com/512/3938/3938028.png"
+             [alt]='social?.name' class="social-icon">
+        <img *ngIf="social?.name.toLowerCase() === 'instagram'"
+             src="https://w7.pngwing.com/pngs/822/208/png-transparent-instagram-application-icon-social-media-logo-symbol-insta-text-monochrome-social-media-marketing-thumbnail.png"
+             [alt]='social?.name' class="social-icon">
         {{ social?.name }}
       </a>
     </button>

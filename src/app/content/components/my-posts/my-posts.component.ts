@@ -30,61 +30,74 @@ import {DialogEditPostComponent} from "../../../public/components/dialog-edit-po
   templateUrl: './my-posts.component.html',
   styleUrl: './my-posts.component.css'
 })
-export class MyPostsComponent implements OnInit{
+export class MyPostsComponent implements OnInit {
   user : any = {};
-  items: any = [];
-  post: any={};
-  constructor(private userService:UsersService,private dialogDeletePost: MatDialog, private postService:PostsService) {}
+  items: Products[] = []; // corregido: se especifica que items es un array de Products
+  post: any = {};
+
+  constructor(
+    private userService: UsersService,
+    private dialogDeletePost: MatDialog,
+    private postService: PostsService
+  ) {}
+
   ngOnInit() {
     this.getUser();
-    this.getAllProducts()
+    this.getAllProducts();
   }
-  getUser(){
-    this.userService.getUserById(Number(localStorage.getItem('id'))).subscribe((data)=>{
+
+  getUser() {
+    this.userService.getUserById(Number(localStorage.getItem('id'))).subscribe((data) => {
       this.user = data;
-    })
-  };
+    });
+  }
+
   getAllProducts() {
-    this.postService.getProducs().subscribe((res:any)=>{
-      res.forEach((product: any) => {
-        this.items.push(new Products(
-          product.id,
-          product.user_id,
-          product.category_id,
-          product.product_name,
-          product.description,
-          product.change_for,
-          product.price,
-          product.images,
-          product.boost,
-          product.location)
-        )
+    const userId = Number(localStorage.getItem('id'));
+    this.postService.getProductsByUserId(userId).subscribe((res: any) => {
+      this.items = res.map((product: any) => new Products(
+        product.id,
+        product.user_id,
+        product.category_id,
+        product.product_name,
+        product.description,
+        product.change_for,
+        product.price,
+        product.images,
+        product.boost,
+        product.available,
+        product.location
+      ));
 
-      })
+      this.postService.getCategoriesProducts().subscribe((categories: any) => {
+        this.items = this.items.map((item: Products) => {
+          const category = categories.find((category: any) => category.id === item.category_id);
+          if (category) {
+            item.setCategory = category.name;
+          }
+          return item;
+        });
+      });
+    });
+  }
 
-      this.postService.getCategoriesProducts().subscribe((categories:any)=>{
-        this.items.map((item:Products)=>{
-          item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
-        })
-      })
-
-    })
-  };
-  onCallDeletePost(id:string){
-    const dialogRef = this.dialogDeletePost.open(DialogDeletePostComponent,{disableClose: true, data:id});
-    dialogRef.afterClosed().subscribe(result=>{
-      if(result){
+  onCallDeletePost(id: number) {
+    const dialogRef = this.dialogDeletePost.open(DialogDeletePostComponent, { disableClose: true, data: id });
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
         this.postService.deleteProduct(id).subscribe(
-          res=>{
-            this.items = this.items.filter((item:Products)=>item.id !== id)
+          res => {
+            this.items = this.items.filter((item: Products) => item.id !== String(id));
           }
         );
       }
     });
-  };
-
-  setPost(post:any){
-    this.post = post;
-    console.log(this.post)
   }
+
+  setPost(post: any) {
+    this.post = post;
+    console.log(this.post);
+  }
+
+  protected readonly Number = Number;
 }

@@ -1,3 +1,11 @@
+.loading-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 2em;
+  color: #FFD146;
+}
 .container-product-information {
   padding: 3rem;
 }
@@ -51,8 +59,10 @@ mat-card {
 }
 
 .product-image mat-card mat-card-content img {
-  width: 55%;
+  width: 75%;
   height: 70vh;
+  object-fit: cover;
+  object-position: center;
 }
 
 .product-data{
@@ -117,6 +127,7 @@ mat-card {
   padding: 0.25rem;
   color: #FFD146;
   font-weight: bolder;
+  text-align: center;
 }
 
 .user-data{
@@ -219,7 +230,9 @@ mat-card-subtitle{
   width: 80px;
   height: 80px;
 }
-
+.category p{
+  text-align: center;
+}
 @media (max-width: 768px) {
   section h1{
     font-size: 1.5rem;
@@ -239,5 +252,14 @@ mat-card-subtitle{
   .product-image mat-card mat-card-content img {
     width: 70%;
     height: 200px;
+  }
+}
+
+@media (max-width: 450px) {
+  .product-category{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
   }
 }

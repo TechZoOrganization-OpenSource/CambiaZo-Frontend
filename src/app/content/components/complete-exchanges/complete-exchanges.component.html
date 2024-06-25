@@ -1,5 +1,9 @@
-<h1 class="main__title">IntercambioZ completados con éxito:</h1>
-
+<div class="exchanges__title">
+  <p>Intercambios Completados con Éxito:</p>
+</div>
+<div class="line-text">
+  <div class="line"></div>
+</div>
 <div class="complete__container">
   <ng-container *ngFor="let sent of offers; let i = index" >
     <mat-card *ngIf="sent.status=='Aceptado'"  class="example-card">

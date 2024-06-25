@@ -27,7 +27,9 @@ import {RouterLink} from "@angular/router";
 })
 export class LatesPostsContentComponent implements OnInit{
   items:Products[]=[]
+  allProducts: Products[] = []; // Add this line to store all products
   categories:any[] = []
+  loading = true;
 
   constructor(private postService:PostsService) {
   }
@@ -36,9 +38,10 @@ export class LatesPostsContentComponent implements OnInit{
   }
 
   getAllProducts() {
+    this.loading = true;
     this.postService.getProducs().subscribe((res:any)=>{
       res.forEach((product: any) => {
-        this.items.push(new Products(
+        const newProduct = new Products(
           product.id,
           product.user_id,
           product.category_id,
@@ -48,9 +51,11 @@ export class LatesPostsContentComponent implements OnInit{
           product.price,
           product.images,
           product.boost,
-          product.location)
-        )
-
+          product.available,
+          product.location
+        );
+        this.items.push(newProduct);
+        this.allProducts.push(newProduct);
       })
 
       this.postService.getCategoriesProducts().subscribe((categories:any)=>{
@@ -59,18 +64,15 @@ export class LatesPostsContentComponent implements OnInit{
           item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
         })
       })
-
+      this.loading = false;
     })
   }
 
   searchProduct(event:Event) {
-    const search = (event.target as HTMLInputElement).value.trim()
-    this.postService.getProducs().subscribe((res: any) => {
-      this.items = res.filter((product: Products) => {
-        const ongsNameNormalized = product.product_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-        return ongsNameNormalized.includes(search) || search == '';
-      })
-    },error => console.log(error))
+    const search = (event.target as HTMLInputElement).value.trim().toLowerCase();
+    this.items = this.allProducts.filter((product: Products) => { // Filter the allProducts array instead of making a new request
+      const productNameNormalized = product.product_name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+      return productNameNormalized.includes(search) || search == '';
+    });
   }
-
 }

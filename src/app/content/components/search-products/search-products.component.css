@@ -42,6 +42,19 @@ h1{
 mat-label,section,input,option,h1,button{
   font-family: 'Montserrat', sans-serif;
 }
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input{
+  outline: none;
+}
+input:focus, select:focus{;
+  border:solid 2px #FFD146;
+}
+
 section{
   display: flex;
   flex-direction: column;

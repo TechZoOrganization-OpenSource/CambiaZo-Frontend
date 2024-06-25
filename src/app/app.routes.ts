@@ -62,7 +62,7 @@ export const routes: Routes = [
   { path: 'product-information/:id', component: ProductDetailsComponent },
   { path: 'post/:postId', component: EditPostComponent },
   { path: 'publisher-profile/:id', component: PublisherProfileDetailsComponent },
-  
+
   /**************   Admin    *********************/
   { path: 'admin', component: HomeAdminComponent },
   { path: 'admin/ongs-categories', component: OngsCategoriesAdminComponent },
