@@ -1,3 +1,11 @@
+.loading-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  font-size: 1.5em;
+  color: #000000;
+}
 mat-card{
   height:320px;
   width: 250px;
