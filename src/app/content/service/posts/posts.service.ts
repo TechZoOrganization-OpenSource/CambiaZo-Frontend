@@ -295,11 +295,6 @@ export class PostsService {
       return;
     }
 
-    const location = {
-      country: product.country ? product.country.name : null,
-      department: product.department ? product.department.name : null,
-      district: product.district ? product.district.name : null
-    };
     const transformedProduct = {
       id: product.id ? product.id.toString() : null,
       user_id: product.userId ? product.userId.toString() : null,
@@ -311,7 +306,7 @@ export class PostsService {
       images: [product.image],
       boost: product.boost,
       available: product.available,
-      location: location,
+      location: product.location,
       category: product.category
     };
     return transformedProduct;

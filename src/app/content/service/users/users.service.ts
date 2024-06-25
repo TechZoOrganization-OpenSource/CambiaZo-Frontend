@@ -117,6 +117,25 @@ export class UsersService {
     );
   }
 
+  getFavoritesProducts(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/v1/favorite-products/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  deleteFavoriteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/v1/favorite-products/delete/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
+
+  addFavoriteProduct(data: any): Observable<any> {
+    console.log(data);
+    return this.http.post(`${this.baseUrl}/api/v1/favorite-products`, data).pipe(
+      catchError(this.handleError)
+    );
+  }
+
   private transformToUserModel(data: any): Users {
     return new Users(
       data.id,
