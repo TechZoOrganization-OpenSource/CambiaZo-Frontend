@@ -1,4 +1,6 @@
-<div class="container-product-information" *ngIf="product">
+<div *ngIf="loading" class="loading-message">
+</div>
+<div  class="container-product-information" *ngIf="product || !loading">
   <section><h1>{{ product.product_name }}</h1></section>
   <div class="content-information">
     <div class="product-information">

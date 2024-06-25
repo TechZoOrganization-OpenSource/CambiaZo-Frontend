@@ -17,9 +17,11 @@
   </div>
 </div>
 
-<div class="container-card">
-  <ng-container *ngFor="let product of items" >
-    <mat-card class="example-card" *ngIf="!product.boost" [routerLink]="['/product-information', product.id]">
+<div *ngIf="loading" class="loading-message">
+</div>
+<div *ngIf="!loading" class="container-card">
+  <ng-container *ngFor="let product of items.slice(-28).reverse()" >
+    <mat-card class="example-card" *ngIf="product.available" [routerLink]="['/product-information', product.id]">
       <div class="container-post-image">
         <img mat-card-image src="{{product.images[0]}}" alt="Photo Product">
       </div>

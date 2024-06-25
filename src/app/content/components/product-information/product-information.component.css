@@ -1,3 +1,11 @@
+.loading-message {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 2em;
+  color: #FFD146;
+}
 .container-product-information {
   padding: 3rem;
 }
@@ -51,8 +59,10 @@ mat-card {
 }
 
 .product-image mat-card mat-card-content img {
-  width: 55%;
+  width: 75%;
   height: 70vh;
+  object-fit: cover;
+  object-position: center;
 }
 
 .product-data{

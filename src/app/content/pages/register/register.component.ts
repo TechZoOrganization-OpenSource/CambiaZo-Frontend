@@ -92,13 +92,12 @@ export class RegisterComponent {
         email: this.registerForm.value.email,
         phone: this.registerForm.value.tel,
         password: this.registerForm.value.contrasenia,
-        membership: 1,
-        img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6lqpQj3oAmc1gtyM78oJCbTaDrD7Fj9NRlceOPDZiHA&s"
+        membershipId: 1,
+        profilePicture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6lqpQj3oAmc1gtyM78oJCbTaDrD7Fj9NRlceOPDZiHA&s"
       };
 
       this.usersService.postUser(newUser).subscribe(
         response => {
-          console.log('User registered successfully:', response);
           this.register();
         },
         error => {
