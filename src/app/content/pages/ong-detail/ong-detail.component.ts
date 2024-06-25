@@ -29,11 +29,12 @@ import {ContactOngComponent} from "../../components/contact-ong/contact-ong.comp
 export class OngDetailComponent implements OnInit{
   @Output() ong_obj: any;
   ong: any;
+  categories: any;
+
   constructor(private ongService:OngsService,private route: ActivatedRoute){}
 
   ngOnInit() {
     this.route.paramMap.subscribe(params => {
-      /*this is the var params: mathias&Id=1 adn i want the id after &Id=*/
       const ong = params.get('ong')/*ong have this value: mathias&Id=1*/
       const id = ong ? ong.split('&Id=')[1] : ''/*id have this value: 1*/
       this.getOng(id);
@@ -59,7 +60,12 @@ export class OngDetailComponent implements OnInit{
         res.id
       )
       this.ong_obj = this.ong;
-    })
+
+      this.ongService.getCategoriesOngs().subscribe((categories:any)=>{
+        this.categories = categories;
+        this.ong.category_name = this.categories.find((category:any)=>category.id === this.ong.category).name;
+      }
+    )})
   }
 
 }

@@ -37,6 +37,8 @@
 .container-avatar img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center;
 }
 
 mat-card{
@@ -67,17 +69,26 @@ h1{
 }
 
 button{
+  background-color: #FFD146;
   width: 100%;
-  border-radius: 20px;
-  font-size: 1.2rem;
-  padding-top: 0.5rem;
-  padding-bottom: 0.5rem;
+  padding: 15px;
+  font-size: 15px;
+  border: none;
+  border-radius: 35px;
+  cursor: pointer;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
-
+.edit-btn:hover{
+  background-color: #FFD146;
+}
 @media (max-width: 768px) {
   .container-profile{
     width: 100%;
     text-align: center;
+  }
+  .mat-mdc-card-content:last-child{
+    margin-left: 0;
   }
 
   .container-avatar {

@@ -39,11 +39,19 @@ footer {
   }
 
   .footer-section {
-    margin-bottom: 10px;
+    text-align: center;
   }
 
-  .footer-links li {
-    display: block;
+  .footer-links {
+    display: flex;
+    text-align: center;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+  .footer-links a{
+    margin-right: 0;
+  }
+  .footer-links li{
     margin-bottom: 10px;
   }
 }
@@ -51,7 +59,7 @@ footer {
 @media screen and (max-width: 320px) {
   .footer-section {
     display: inline-block;
-    margin-right: 10px;
+    text-align: center;
     vertical-align: middle;
   }
 }
