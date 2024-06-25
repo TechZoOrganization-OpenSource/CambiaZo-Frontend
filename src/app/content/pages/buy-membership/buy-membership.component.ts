@@ -58,18 +58,28 @@ export class BuyMembershipComponent implements OnInit {
   }
 
   buyMembership() {
-    const newMembership = this.membership.id;
+    const newMembershipId = this.membership.id;
     const userId = localStorage.getItem('id');
-    if (userId && newMembership) {
-      this.userService.changeMembership(this.user, newMembership).subscribe(() => {
-        this.userService.changeMembershipDate(userId).subscribe(() => {
+
+    if (userId && newMembershipId) {
+      const updatedUserData = {
+        name: this.user.name,
+        email: this.user.email,
+        phone: this.user.phone,
+        password: this.user.password,
+        profilePicture: this.user.img,
+        membershipId: Number(newMembershipId)
+      };
+
+      console.log(updatedUserData)
+
+      this.userService.changeMembership(userId, updatedUserData).subscribe(() => {
           const dialogRef = this.dialog.open(DialogPaymentSuccessfullyComponent, { data: this.membership.name });
           dialogRef.afterClosed().subscribe(() => {
             this.router.navigateByUrl('/home').then(() => {
               window.location.reload();
             });
           });
-        });
       });
     }
   }

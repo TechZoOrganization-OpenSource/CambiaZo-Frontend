@@ -7,7 +7,7 @@ import { UsersService } from "../../service/users/users.service";
 import { DialogLoginRegisterComponent } from "../../../public/components/dialog-login-register/dialog-login-register.component";
 import { MatDialog } from "@angular/material/dialog";
 import { Router } from '@angular/router';
-import { throwIfEmpty } from "rxjs";
+import {forkJoin, throwIfEmpty} from "rxjs";
 import { Users } from "../../model/users/users.model";
 
 @Component({
@@ -27,6 +27,8 @@ export class MembershipsComponent implements OnInit {
   memberships: Memberships[] = [];
   user: Users | null = null;
   isLoggedIn: boolean = false;
+  dataLoaded: boolean = false;
+  loading: boolean = true;
 
   constructor(
     private membershipsService: MembershipsService,
@@ -40,7 +42,7 @@ export class MembershipsComponent implements OnInit {
     if (this.isLoggedIn) {
       this.getUser();
     } else {
-      this.getMemberAllMemberships();
+      this.loadMemberships();
     }
   }
 
@@ -49,30 +51,30 @@ export class MembershipsComponent implements OnInit {
     if (userId) {
       this.userService.getUserById(userId).subscribe((data) => {
         this.user = data;
-        this.getMemberAllMemberships();
+        this.loadMemberships();
       });
     }
   }
 
-  getMemberAllMemberships() {
-    this.membershipsService.getMemberships().subscribe(
-      (res: any) => {
-        this.memberships = res;
-        this.memberships.forEach((membership) => {
-          this.membershipsService.getBenefitsByMembershipId(membership.id).subscribe((benefits: any) => {
-            membership.benefits = benefits.map((benefit: { description: string }) => benefit.description);
-          });
-        });
+  loadMemberships() {
+    this.membershipsService.getMembershipsWithBenefits().subscribe(
+      (membershipsWithBenefits: any[]) => {
+        this.memberships = membershipsWithBenefits;
         this.filterMemberships();
+        this.dataLoaded = true; // Marcar la carga completa después de obtener las membresías
+        this.loading = false; // Ocultar pantalla de carga
       },
-      error => console.log(error)
+      error => {
+        console.error('Error loading memberships:', error);
+        this.loading = false; // Asegurar que la pantalla de carga se oculte en caso de error
+      }
     );
   }
 
   filterMemberships() {
     if (this.isLoggedIn && this.user) {
       this.memberships = this.memberships.filter(
-        m => m.id !== String(this.user!.membership) && m.id !== "1"
+        m => Number(m.id) !== this.user!.membership && Number(m.id) !== 1
       );
     }
   }
