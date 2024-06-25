@@ -96,7 +96,6 @@ export class ProductsFoundComponent implements OnInit{
       this.postService.getCategoriesProducts().subscribe((categories: any) => {
         this.categories = categories
 
-        console.log(categories)
         this.allProducts.map((item: Products) => {
           const category = categories.find((category: any) => category.id === item.category_id);
           if (category) {
