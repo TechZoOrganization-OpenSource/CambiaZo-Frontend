@@ -65,7 +65,6 @@ export class MembershipsComponent implements OnInit {
         this.loading = false; // Ocultar pantalla de carga
       },
       error => {
-        console.error('Error loading memberships:', error);
         this.loading = false; // Asegurar que la pantalla de carga se oculte en caso de error
       }
     );

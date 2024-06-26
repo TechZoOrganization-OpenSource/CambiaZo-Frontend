@@ -71,8 +71,6 @@ export class BuyMembershipComponent implements OnInit {
         membershipId: Number(newMembershipId)
       };
 
-      console.log(updatedUserData)
-
       this.userService.changeMembership(userId, updatedUserData).subscribe(() => {
           const dialogRef = this.dialog.open(DialogPaymentSuccessfullyComponent, { data: this.membership.name });
           dialogRef.afterClosed().subscribe(() => {
