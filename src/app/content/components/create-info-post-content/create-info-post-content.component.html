@@ -60,7 +60,7 @@ width: 2rem; font-size:16px; background: #FFD146;display:flex;height: inherit;ju
 
 <section class="section-2">
   <h1 class="title">Imagenes</h1>
-  <p>Imagenes {{totalFiles}}/4 - Puedes agregar un maximo de 4 fotos</p>
+  <p>Imagenes {{totalFiles}}/1 - Puedes agregar un maximo de 1 foto</p>
 
   <div class="gallery-images" *ngIf="images.length">
     <div class="container-my-images" *ngFor="let image of images">
@@ -70,8 +70,8 @@ width: 2rem; font-size:16px; background: #FFD146;display:flex;height: inherit;ju
   <br>
 
   <div class="custom-dropzone" >
-    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [disableClick]="totalFiles >=4">
-        <ngx-dropzone-label  *ngIf="!totalFiles && totalFiles < 4">Subir imagen</ngx-dropzone-label>
+    <ngx-dropzone accept="image/*" (change)="onSelect($event)" [disableClick]="totalFiles >=1">
+        <ngx-dropzone-label  *ngIf="!totalFiles && totalFiles < 1">Subir imagen</ngx-dropzone-label>
         <ngx-dropzone-image-preview
           ngProjectAs="ngx-dropzone-preview"
           [removable]="true"
