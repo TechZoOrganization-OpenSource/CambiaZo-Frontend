@@ -12,8 +12,7 @@ import {RouterLink} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {Offers} from "../../model/offers/offers.model";
 import {OffersService} from "../../service/offers/offers.service";
-import {Users} from "../../model/users/users.model";
-import {Reviews} from "../../model/reviews/reviews.model";
+
 import {ReviewsService} from "../../service/reviews/reviews.service";
 import {FormArray, FormGroup, FormBuilder, FormControl, ReactiveFormsModule, Form} from "@angular/forms";
 import {FormsModule} from "@angular/forms";
@@ -70,73 +69,78 @@ export class CompleteExchangesComponent implements OnInit{
 
 
   getAllOffers(){
-    this.offersService.getOffers().subscribe((data: any) => {
+    const userId = localStorage.getItem('id');
+    if(userId === null) return;
+    this.offersService.getAllOffersByUserChangeId(userId).subscribe((data: any) => {
       data.forEach((offer: any) => {
-        if (offer.id_user_offers === localStorage.getItem('id')) {
           this.offers.push(new Offers(
-              offer.id,
-              offer.id_user_offers,
-              offer.id_product_offers,
-              offer.id_user_get,
-              offer.id_product_get,
+              offer.id.toString(),
+              offer.productOwnId.toString(),
+              offer.productChangeId.toString(),
               offer.status
             )
           )
-        }
       });
+
       this.offers.map((offer: any) => {
-        this.postService.getProductById(offer.id_product_get).subscribe((data: any) => {
-          offer.setProductGet = data;
+        this.postService.getProductById(offer.id_product_offers).subscribe((resPost: any) => {
+          offer.setProductOffers = resPost;
+
+          this.userService.getUserById(Number(offer.product_offers.user_id)).subscribe((resUser: any) => {
+            offer.setUserOffers = resUser;
+            return offer
+          });
+
         })
       });
+
       this.offers.map((offer: any) => {
-        this.postService.getProductById(offer.id_product_offers).subscribe((data: any) => {
-          offer.setProductOffers = data;
-        })
-      });
-      this.offers.map((offer: any) => {
-        this.userService.getUserById(offer.id_user_get).subscribe((data: any) => {
-          offer.setUserGet = data;
+        this.postService.getProductById(offer.id_product_get).subscribe((resPost: any) => {
+
+          offer.setProductGet = resPost;
         });
+
       });
     });
   }
-  protected readonly Offers = Offers;
-
 
   getAllOffers2(){
-    this.offersService.getOffers().subscribe((data: any) => {
+    const userId = localStorage.getItem('id');
+    if(userId === null) return;
+    this.offersService.getAllOffersByUserOwnId(userId).subscribe((data: any) => {
       data.forEach((offer: any) => {
-        if (offer.id_user_get === localStorage.getItem('id')) {
-          this.offers2.push(new Offers(
-              offer.id,
-              offer.id_user_offers,
-              offer.id_product_offers,
-              offer.id_user_get,
-              offer.id_product_get,
-              offer.status
-            )
+        this.offers.push(new Offers(
+            offer.id.toString(),
+            offer.productOwnId.toString(),
+            offer.productChangeId.toString(),
+            offer.status
           )
-        }
+        )
       });
-      this.offers2.map((offer: any) => {
-        this.postService.getProductById(offer.id_product_offers).subscribe((data: any) => {
-          offer.setProductGet = data;
+
+      this.offers.map((offer: any) => {
+        this.postService.getProductById(offer.id_product_offers).subscribe((resPost: any) => {
+          offer.setProductOffers = resPost;
+          return offer
         })
       });
-      this.offers2.map((offer: any) => {
-        this.postService.getProductById(offer.id_product_get).subscribe((data: any) => {
-          offer.setProductOffers = data;
-        })
-      });
-      this.offers2.map((offer: any) => {
-        this.userService.getUserById(offer.id_user_offers).subscribe((data: any) => {
-          offer.setUserGet = data;
+
+      this.offers.map((offer: any) => {
+        this.postService.getProductById(offer.id_product_get).subscribe((resPost: any) => {
+
+          offer.setProductGet = resPost;
+
+          this.userService.getUserById(Number(offer.product_get.user_id)).subscribe((resUser: any) => {
+            offer.setUserGet = resUser;
+            return offer
+          });
+
         });
+
       });
+
     });
   }
-  protected readonly Offers2 = Offers;
 
 
   HandleMouseEnter(indexRate:number,indexOffer:number){
