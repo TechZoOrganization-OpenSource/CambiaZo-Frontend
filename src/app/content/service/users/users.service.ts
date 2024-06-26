@@ -104,20 +104,20 @@ export class UsersService {
     );
   }
 
-  changePassword(id: string, newPassword: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { password: newPassword }).pipe(
+  changePassword(id: number, newPassword: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, newPassword).pipe(
       catchError(this.handleError)
     );
   }
 
-  changeMembership(userId: string, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${userId}`, data).pipe(
+  changeMembership(userId: number, membership: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/membership/${userId}`, {membershipId: membership}).pipe(
       catchError(this.handleError)
     );
   }
 
-  changeProfileImage(id: string, profileImage: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { profilePicture: profileImage }).pipe(
+  changeProfileImage(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, data).pipe(
       catchError(this.handleError)
     );
   }

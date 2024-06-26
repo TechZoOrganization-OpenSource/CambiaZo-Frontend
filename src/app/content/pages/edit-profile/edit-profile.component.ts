@@ -103,7 +103,7 @@ export class EditProfileComponent implements OnInit {
         const newMembership = 1;
         const userId = localStorage.getItem('id');
         if (userId && newMembership) {
-          this.userService.changeMembership(userId, newMembership).subscribe(
+          this.userService.changeMembership(Number(userId), newMembership).subscribe(
             response => {
               window.location.reload();
             }
@@ -158,7 +158,17 @@ export class EditProfileComponent implements OnInit {
       const userId = String(localStorage.getItem('id'));
       const newPassword = this.changePasswordForm.value.newPassword;
 
-      this.userService.changePassword(userId, newPassword).subscribe(() => {
+      const ChangePassword = {
+        name: this.user.name,
+        password: newPassword,
+        email: this.user.email,
+        phone: this.user.phone,
+        profilePicture: this.user.img,
+        membershipId: this.user.membership
+      };
+
+      console.log(ChangePassword)
+      this.userService.changePassword(Number(userId), ChangePassword).subscribe(() => {
         const dialogRef = this.dialog.open(DialogSuccessfullyChangeComponent);
         dialogRef.afterClosed().subscribe(() => {
           window.location.reload();

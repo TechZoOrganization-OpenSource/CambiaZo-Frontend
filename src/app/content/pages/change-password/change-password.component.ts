@@ -72,7 +72,7 @@ export class ChangePasswordComponent {
       const userId = localStorage.getItem('id-temporal');
 
       if (userId && newPassword) {
-        this.usersService.changePassword(userId, newPassword).subscribe(
+        this.usersService.changePassword(Number(userId), newPassword).subscribe(
           response => {
             localStorage.removeItem('id-temporal');
             this.dialog.open(DialogPasswordChangedSuccessfullyComponent);

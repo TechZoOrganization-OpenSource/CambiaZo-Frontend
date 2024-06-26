@@ -102,9 +102,7 @@ export class DialogSelectProductComponent implements OnInit {
 
     const newOffer = new Offers(
       '', // ID de la oferta, lo puede generar el backend
-      String(localStorage.getItem('id')), // ID del usuario que hace la oferta
       String(product.id), // ID del producto que ofrece
-      this.data.user_id, // ID del usuario que recibe la oferta
       this.data.product_id, // ID del producto que recibe la oferta
       'Pendiente' // Estado de la oferta
     );

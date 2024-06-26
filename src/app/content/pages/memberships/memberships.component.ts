@@ -73,7 +73,7 @@ export class MembershipsComponent implements OnInit {
   filterMemberships() {
     if (this.isLoggedIn && this.user) {
       this.memberships = this.memberships.filter(
-        m => Number(m.id) !== this.user!.membership && Number(m.id) !== 1
+        m => m.id !== this.user!.membership && Number(m.id) !== 1
       );
     }
   }
@@ -82,7 +82,7 @@ export class MembershipsComponent implements OnInit {
     if (!this.isLoggedIn) {
       this.dialogLoginRegister.open(DialogLoginRegisterComponent, { disableClose: true });
     } else {
-      if (this.user && String(this.user.membership) === membershipId) {
+      if (this.user && this.user.membership === membershipId) {
         // Add your logic here if the user is already on the selected membership
       } else {
         this.router.navigateByUrl(`/memberships/buy-membership&${membershipId}`);

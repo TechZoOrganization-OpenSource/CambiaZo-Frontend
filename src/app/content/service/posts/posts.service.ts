@@ -84,18 +84,7 @@ export class PostsService {
     return this.http.delete(`${this.baseUrl}/api/v1/products/delete/${id}`);
   }
 
-  putProduct(id: string, data: {
-    name: string;
-    description: string;
-    desiredObject: string;
-    price: number;
-    image: string;
-    boost: boolean;
-    available: boolean;
-    productCategoryId: number;
-    userId: number;
-    districtId: number;
-  }): Observable<any> {
+  putProduct(id: number, data: any): Observable<any> {
     const backendData = {
       name: data.name,
       description: data.description,
@@ -108,6 +97,7 @@ export class PostsService {
       userId: data.userId,
       districtId: data.districtId
     };
+    console.log(backendData)
     return this.http.put<any>(`${this.baseUrl}/api/v1/products/edit/${id}`, backendData);
   }
 
@@ -290,7 +280,6 @@ export class PostsService {
     if (!product) {
       return;
     }
-
     const transformedProduct = {
       id: product.id ? product.id.toString() : null,
       user_id: product.userId ? product.userId.toString() : null,
@@ -305,6 +294,7 @@ export class PostsService {
       location: product.location,
       category: product.category
     };
+    console.log(transformedProduct)
     return transformedProduct;
   }
 
@@ -325,7 +315,7 @@ export class PostsService {
     return this.http.get<any>(`${this.baseUrl}/api/v1/districts/${id}`);
   }
 
-  private getDistrictId(districtName: string): Observable<number> {
+  getDistrictId(districtName: string): Observable<number> {
     return this.http.get<any[]>(`${this.baseUrl}/api/v1/districts`).pipe(
       map(districts => districts.find(district => district.name === districtName)?.id || -1),
       catchError(() => of(-1))
@@ -345,4 +335,7 @@ export class PostsService {
       catchError(() => of(-1))
     );
   }
+
 }
+
+
