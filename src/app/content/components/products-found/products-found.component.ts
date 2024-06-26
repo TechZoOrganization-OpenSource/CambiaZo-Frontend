@@ -59,13 +59,11 @@ export class ProductsFoundComponent implements OnInit{
 
     // Filtra los productos por nombre de categoría
     this.productsFiltered = this.allProducts.filter((item: Products) => item.getCategory === this.categoryIdSearched);
-
-    console.log(this.categoryIdSearched);
   }
 
   filterProducts(product:any) {
     this.productsFiltered = this.allProducts.filter((item: Products) =>
-      item.getCategory === this.categoryIdSearched &&
+      item.category === this.categoryIdSearched &&
       (product.wordKey  ? item.product_name.includes(product.wordKey) : true) &&
       (product.countries ? item.location.country == product.countries : true) &&
       (product.departments ? item.location.departament == product.departments : true) &&
@@ -79,7 +77,7 @@ export class ProductsFoundComponent implements OnInit{
     this.postService.getProducs().subscribe((res: any) => {
       res.forEach((product: any) => {
         this.allProducts.push(new Products(
-          product.id,
+          String(product.id),
           product.user_id,
           product.category_id,
           product.product_name,
@@ -96,11 +94,10 @@ export class ProductsFoundComponent implements OnInit{
       this.postService.getCategoriesProducts().subscribe((categories: any) => {
         this.categories = categories
 
-        console.log(categories)
         this.allProducts.map((item: Products) => {
-          const category = categories.find((category: any) => category.id === item.category_id);
+          const category = categories.find((category: any) => String(category.id) === item.category_id);
           if (category) {
-            item.setCategory = category.category;
+            item.setCategory = category.name;
           }
         })
         this.productsFiltered = this.allProducts.filter((item: Products) => item.getCategory === this.categoryIdSearched)

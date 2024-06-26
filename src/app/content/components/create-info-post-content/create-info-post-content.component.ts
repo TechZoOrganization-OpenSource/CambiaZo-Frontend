@@ -89,7 +89,6 @@ export class CreateInfoPostContentComponent implements OnInit{
       }
     });
 
-
   }
 
 
@@ -97,6 +96,12 @@ export class CreateInfoPostContentComponent implements OnInit{
   getCategoriesPostOptions(){
     this.postService.getCategoriesProducts().subscribe(res=> {
         this.categories = res
+        this.categories.map((category:any) => {
+          category.id = category.id.toString()
+          return category
+        })
+
+
       },error => console.log(error)
     )};
 

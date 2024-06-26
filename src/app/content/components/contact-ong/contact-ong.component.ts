@@ -28,10 +28,12 @@ export class ContactOngComponent implements OnInit{
   }
 
   getCategoryName() {
-    this.ongsService.getCategoryNameById(this.ong.categoryOngId)
-      .subscribe(categoryName => {
-        this.ong.category_name = categoryName;
-      });
+
+      this.ongsService.getCategoryNameById(this.ong.categoryOngId)
+        .subscribe(categoryName => {
+          this.ong.category_name = categoryName;
+        });
+
   }
 
 }

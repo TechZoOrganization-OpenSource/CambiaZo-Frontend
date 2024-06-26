@@ -6,6 +6,8 @@ import {MatButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {Products} from "../../model/products/products.model";
 import {RouterLink} from "@angular/router";
+import {forkJoin, Observable, switchMap} from "rxjs";
+import {map} from "rxjs/operators";
 @Component({
   selector: 'app-feature-posts-content',
   standalone: true,
@@ -13,39 +15,57 @@ import {RouterLink} from "@angular/router";
   templateUrl: './feature-posts-content.component.html',
   styleUrl: './feature-posts-content.component.css'
 })
-export class FeaturePostsContentComponent implements OnInit{
-  items:Products[]=[]
+export class FeaturePostsContentComponent implements OnInit {
+  items: Products[] = [];
+  loading = true;
+  constructor(private postsService: PostsService) {}
 
-  constructor(private postsService:PostsService) {
-  }
   ngOnInit() {
-    this.getAllFeaturePosts()
+    this.getAllFeaturePosts();
   }
 
-  getAllFeaturePosts(){
-    this.postsService.getProducs().subscribe((res:any)=>{
-      res.forEach((product: any) => {
-        this.items.push(new Products(
-          product.id,
-          product.user_id,
-          product.category_id,
-          product.product_name,
-          product.description,
-          product.change_for,
-          product.price,
-          product.images,
-          product.boost,
-          product.available,
-          product.location)
-        )
-      })
+  getAllFeaturePosts() {
+    this.postsService.getProducs().pipe(
+      switchMap(products => {
+        const categoryRequests: { [key: string]: Observable<any> } = {};
 
-      this.items.forEach((item:Products)=>{
-        this.postsService.getCategoryProductById(item.category_id).subscribe((category:any)=>{
-          item.setCategory = category.name;
-        })
+        products.forEach(product => {
+          if (!categoryRequests[product.category_id]) {
+            categoryRequests[product.category_id] = this.postsService.getCategoryProductById(product.category_id);
+          }
+        });
+
+        return forkJoin(categoryRequests).pipe(
+          map(categories => {
+            products.forEach(product => {
+              product.category = categories[product.category_id]?.name;
+            });
+            return products;
+          })
+        );
       })
-    })
+    ).subscribe(res => {
+      this.items = res.map(product => new Products(
+        product.id,
+        product.user_id,
+        product.category_id,
+        product.product_name,
+        product.description,
+        product.change_for,
+        product.price,
+        product.images,
+        product.boost,
+        product.available,
+        product.location
+      ));
+      this.assignCategoriesToItems(res);
+      this.loading = false;
+    });
   }
 
+  assignCategoriesToItems(products: any[]) {
+    products.forEach((product, index) => {
+      this.items[index].setCategory = product.category;
+    });
+  }
 }

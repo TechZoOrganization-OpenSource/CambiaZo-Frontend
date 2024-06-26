@@ -23,23 +23,17 @@ export class PostsService {
     return this.http.get<any[]>(`${this.baseUrl}/api/v1/products`).pipe(
       switchMap(products => {
         const productObservables = products.map(product => {
-          const district$ = this.districtCache.get(product.districtId) || this.http.get<any>(`${this.baseUrl}/api/v1/districts/${product.districtId}`).pipe(
-            shareReplay(1)
-          );
+          const district$ = this.districtCache.get(product.districtId) || this.http.get<any>(`${this.baseUrl}/api/v1/districts/${product.districtId}`).pipe(shareReplay(1));
           this.districtCache.set(product.districtId, district$);
 
           return district$.pipe(
             switchMap(district => {
-              const department$ = this.departmentCache.get(district.departmentId) || this.http.get<any>(`${this.baseUrl}/api/v1/departments/${district.departmentId}`).pipe(
-                shareReplay(1)
-              );
+              const department$ = this.departmentCache.get(district.departmentId) || this.http.get<any>(`${this.baseUrl}/api/v1/departments/${district.departmentId}`).pipe(shareReplay(1));
               this.departmentCache.set(district.departmentId, department$);
 
               return department$.pipe(
                 switchMap(department => {
-                  const country$ = this.countryCache.get(department.countryId) || this.http.get<any>(`${this.baseUrl}/api/v1/countries/${department.countryId}`).pipe(
-                    shareReplay(1)
-                  );
+                  const country$ = this.countryCache.get(department.countryId) || this.http.get<any>(`${this.baseUrl}/api/v1/countries/${department.countryId}`).pipe(shareReplay(1));
                   this.countryCache.set(department.countryId, country$);
 
                   return forkJoin({
@@ -54,24 +48,13 @@ export class PostsService {
             map(details => this.transformProduct(details))
           );
         });
-
         return forkJoin(productObservables);
       })
     );
   }
 
 
-  postProduct(data: {
-    images: string[];
-    category_id?: ɵValue<FormControl<null>>;
-    user_id: string;
-    price?: ɵValue<FormControl<null>>;
-    change_for?: ɵValue<FormControl<null>>;
-    description?: ɵValue<FormControl<null>>;
-    boost: boolean | null | undefined;
-    location: { country: null | undefined; district: null | undefined; departament: null | undefined };
-    product_name?: ɵValue<FormControl<null>>
-  }): Observable<any> {
+  postProduct(data: any): Observable<any> {
     const district = data.location.district;
     if (district === null || district === undefined) {
       throw new Error('District is null or undefined');
@@ -97,22 +80,11 @@ export class PostsService {
     );
   }
 
-  deleteProduct(id: string): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/api/v1/products/${id}`);
+  deleteProduct(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/v1/products/delete/${id}`);
   }
 
-  putProduct(id: string, data: {
-    name: string;
-    description: string;
-    desiredObject: string;
-    price: number;
-    image: string;
-    boost: boolean;
-    available: boolean;
-    productCategoryId: number;
-    userId: number;
-    districtId: number;
-  }): Observable<any> {
+  putProduct(id: number, data: any): Observable<any> {
     const backendData = {
       name: data.name,
       description: data.description,
@@ -125,13 +97,12 @@ export class PostsService {
       userId: data.userId,
       districtId: data.districtId
     };
+    console.log(backendData)
     return this.http.put<any>(`${this.baseUrl}/api/v1/products/edit/${id}`, backendData);
   }
 
   getProductById(id: string): Observable<Products> {
-    console.log('Product ID:', id); // Log the product ID
     return this.http.get<any>(`${this.baseUrl}/api/v1/products/${id}`).pipe(
-      tap(response => console.log('Response:', response)), // Log the response
       switchMap(product => {
         const district$ = this.districtCache.get(product.districtId) || this.http.get<any>(`${this.baseUrl}/api/v1/districts/${product.districtId}`).pipe(
           shareReplay(1)
@@ -182,6 +153,40 @@ export class PostsService {
     return this.getProducs();
   }
 
+  getProductsByUserId(userId: number): Observable<Products[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/v1/products/users/${userId}`).pipe(
+      switchMap(products => {
+        const productObservables = products.map(product => {
+          const district$ = this.districtCache.get(product.districtId) || this.http.get<any>(`${this.baseUrl}/api/v1/districts/${product.districtId}`).pipe(shareReplay(1));
+          this.districtCache.set(product.districtId, district$);
+
+          return district$.pipe(
+            switchMap(district => {
+              const department$ = this.departmentCache.get(district.departmentId) || this.http.get<any>(`${this.baseUrl}/api/v1/departments/${district.departmentId}`).pipe(shareReplay(1));
+              this.departmentCache.set(district.departmentId, department$);
+
+              return department$.pipe(
+                switchMap(department => {
+                  const country$ = this.countryCache.get(department.countryId) || this.http.get<any>(`${this.baseUrl}/api/v1/countries/${department.countryId}`).pipe(shareReplay(1));
+                  this.countryCache.set(department.countryId, country$);
+
+                  return forkJoin({
+                    product: of(product),
+                    country: country$,
+                    department: of(department),
+                    district: of(district)
+                  });
+                })
+              );
+            }),
+            map(details => this.transformProduct(details))
+          );
+        });
+        return forkJoin(productObservables);
+      })
+    );
+  }
+
   /******************* Products Categories **********************/
   getCategoriesProducts(): Observable<any> {
     return this.http.get<any[]>(`${this.baseUrl}/api/v1/product-category`).pipe(
@@ -213,14 +218,23 @@ export class PostsService {
     return this.http.put(`${this.baseUrl}/api/v1/product-category/${id}`, data);
   }
 
+  private categoryCache = new Map<string, Observable<any>>();
+
   getCategoryProductById(id: string): Observable<any> {
-    return this.http.get<any>(`${this.baseUrl}/api/v1/product-category/${id}`);
+    if (this.categoryCache.has(id)) {
+      return this.categoryCache.get(id)!;
+    } else {
+      const request = this.http.get<any>(`${this.baseUrl}/api/v1/product-category/${id}`).pipe(
+        shareReplay(1)
+      );
+      this.categoryCache.set(id, request);
+      return request;
+    }
   }
 
   /******************* Helper Methods **********************/
   private transformProduct(details: any): any {
     if (!details || !details.product) {
-      console.error('Product details are undefined');
       return;
     }
 
@@ -244,7 +258,6 @@ export class PostsService {
       location: location,
       category: product.category
     };
-    console.log(transformedProduct)
     return transformedProduct;
   }
 
@@ -265,15 +278,8 @@ export class PostsService {
 
   private transformProduct2(product: any): any {
     if (!product) {
-      console.error('Product details are undefined');
       return;
     }
-
-    const location = {
-      country: product.country ? product.country.name : null,
-      department: product.department ? product.department.name : null,
-      district: product.district ? product.district.name : null
-    };
     const transformedProduct = {
       id: product.id ? product.id.toString() : null,
       user_id: product.userId ? product.userId.toString() : null,
@@ -285,7 +291,7 @@ export class PostsService {
       images: [product.image],
       boost: product.boost,
       available: product.available,
-      location: location,
+      location: product.location,
       category: product.category
     };
     console.log(transformedProduct)
@@ -297,7 +303,6 @@ export class PostsService {
     if (id) {
       return this.http.get<any>(`${this.baseUrl}/api/v1/countries/${id}`);
     } else {
-      console.error('Country ID is undefined');
       return of(null);
     }
   }
@@ -310,7 +315,7 @@ export class PostsService {
     return this.http.get<any>(`${this.baseUrl}/api/v1/districts/${id}`);
   }
 
-  private getDistrictId(districtName: string): Observable<number> {
+  getDistrictId(districtName: string): Observable<number> {
     return this.http.get<any[]>(`${this.baseUrl}/api/v1/districts`).pipe(
       map(districts => districts.find(district => district.name === districtName)?.id || -1),
       catchError(() => of(-1))
@@ -330,4 +335,7 @@ export class PostsService {
       catchError(() => of(-1))
     );
   }
+
 }
+
+

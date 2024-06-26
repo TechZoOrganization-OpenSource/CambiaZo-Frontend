@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {environment} from "../../../../environments/environment";
-import {catchError, forkJoin, Observable, switchMap, tap, throwError} from "rxjs";
+import {catchError, forkJoin, Observable, shareReplay, switchMap, tap, throwError} from "rxjs";
 import {map} from "rxjs/operators";
 
 @Injectable({
@@ -18,11 +18,12 @@ export class OngsService {
   getOngs(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/api/v1/ongs`).pipe(
       switchMap((ongs: any[]) => {
+        // Limitar el número de solicitudes concurrentes a 5
         const requests = ongs.map((ong: any) => {
           return forkJoin({
-            projects: this.http.get(`${this.baseUrl}/api/v1/projects/ongs/${ong.id}`),
-            social_networks: this.http.get(`${this.baseUrl}/api/v1/social-networks/ongs/${ong.id}`),
-            account_numbers: this.http.get(`${this.baseUrl}/api/v1/account-number/ongs/${ong.id}`)
+            projects: this.http.get(`${this.baseUrl}/api/v1/projects/ongs/${ong.id}`).pipe(shareReplay(1)),
+            social_networks: this.http.get(`${this.baseUrl}/api/v1/social-networks/ongs/${ong.id}`).pipe(shareReplay(1)),
+            account_numbers: this.http.get(`${this.baseUrl}/api/v1/account-number/ongs/${ong.id}`).pipe(shareReplay(1))
           }).pipe(
             map((res: any) => {
               ong.projects = res.projects;
@@ -32,9 +33,10 @@ export class OngsService {
             })
           );
         });
-        return forkJoin(requests);
-      }),
-      catchError(this.handleError)
+        return forkJoin(requests).pipe(
+          catchError(this.handleError)
+        );
+      })
     );
   }
 
@@ -197,9 +199,7 @@ export class OngsService {
     );
   }
   getCategoryNameById(id: number): Observable<string> {
-    console.log('Fetching category name for id:', id); // Verifica el id
     return this.http.get<any>(`${this.baseUrl}/api/v1/category-ongs/${id}`).pipe(
-      tap(response => console.log('API response:', response)), // Verifica la respuesta de la API
       map(category => category.name),
       catchError(this.handleError)
     );

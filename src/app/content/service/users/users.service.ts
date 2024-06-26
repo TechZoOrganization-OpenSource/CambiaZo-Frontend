@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from "@angular/common/http";
+import {HttpClient, HttpErrorResponse, HttpHeaders} from "@angular/common/http";
 import { environment } from "../../../../environments/environment";
-import { Observable, map, catchError, throwError } from "rxjs";
+import {Observable, map, catchError, throwError, mergeMap} from "rxjs";
 import { Users } from "../../model/users/users.model";
+import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
 
 @Injectable({
   providedIn: 'root'
@@ -70,10 +71,17 @@ export class UsersService {
   }
 
   postUser(data: any): Observable<any> {
-    return this.http.post<any>(`${this.baseUrl}/api/v1/users`, this.transformToNewStructure(data)).pipe(
+    return this.http.post<any>(`${this.baseUrl}/api/v1/users`, data).pipe(
       catchError(this.handleError)
     );
   }
+
+  addFavoriteProduct(data: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/v1/favorite-products`, data).pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
   deleteUser(id: string): Observable<any> {
     return this.http.delete(`${this.baseUrl}/api/v1/users/delete/${id}`).pipe(
@@ -83,7 +91,6 @@ export class UsersService {
 
   putUser(id: any, data: any): Observable<any> {
     const transformedData = this.transformToNewStructure(data);
-    console.log('Transformed Data:', transformedData); // Log the data being sent
 
     return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, transformedData).pipe(
       catchError(this.handleError)
@@ -97,36 +104,35 @@ export class UsersService {
     );
   }
 
-  changePassword(id: string, newPassword: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { password: newPassword }).pipe(
+  changePassword(id: number, newPassword: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, newPassword).pipe(
       catchError(this.handleError)
     );
   }
 
-  changeMembership(id: string, newMembership: number): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membershipId: newMembership }).pipe(
+  changeMembership(userId: number, membership: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/membership/${userId}`, {membershipId: membership}).pipe(
       catchError(this.handleError)
     );
   }
 
-  changeProfileImage(id: string, profileImage: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { profilePicture: profileImage }).pipe(
+  changeProfileImage(id: number, data: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, data).pipe(
       catchError(this.handleError)
     );
   }
 
-  changeMembershipDate(id: string): Observable<any> {
-    const today = new Date();
-    const day = today.getDate();
-    const month = today.getMonth() + 2;
-    const year = today.getFullYear();
-    const date = `${day}/${month}/${year}`;
-
-    return this.http.put(`${this.baseUrl}/api/v1/users/edit/${id}`, { membership_date: date }).pipe(
+  getFavoritesProducts(id: string): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/api/v1/favorite-products/${id}`).pipe(
       catchError(this.handleError)
     );
   }
 
+  deleteFavoriteProduct(id: string): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/api/v1/favorite-products/delete/${id}`).pipe(
+      catchError(this.handleError)
+    );
+  }
   private transformToUserModel(data: any): Users {
     return new Users(
       data.id,

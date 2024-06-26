@@ -8,7 +8,7 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
+import {JsonPipe, NgForOf, NgOptimizedImage, NgStyle} from "@angular/common";
 import {OffersService} from "../../service/offers/offers.service";
 import {PostsService} from "../../service/posts/posts.service";
 import {UsersService} from "../../service/users/users.service";
@@ -34,7 +34,8 @@ import {of} from "rxjs";
     NgForOf,
     NgStyle,
     MatCardFooter,
-    NgOptimizedImage
+    NgOptimizedImage,
+    JsonPipe
   ],
   templateUrl: './user-get-offers.component.html',
   styleUrl: './user-get-offers.component.css'
@@ -55,36 +56,47 @@ export class UserGetOffersComponent implements OnInit {
   }
 
   getAllOffers() {
-    this.offersService.getOffers().subscribe((data: any) => {
+    const userId = localStorage.getItem('id');
+    if(userId === null) return;
+    this.offersService.getAllOffersByUserChangeId(userId).subscribe((data: any) => {
       data.forEach((offer: any) => {
-        if (offer.id_user_get === localStorage.getItem('id') && offer.status === "Pendiente") {
+        if(offer.status === 'Pendiente')
           this.offers.push(new Offers(
-            offer.id,
-            offer.id_user_offers,
-            offer.id_product_offers,
-            offer.id_user_get,
-            offer.id_product_get,
-            offer.status
-          ));
-        }
+              offer.id.toString(),
+              offer.productOwnId.toString(),
+              offer.productChangeId.toString(),
+              offer.status
+            )
+          )
       });
-      this.offers.forEach((offer: Offers) => {
-        this.postsService.getProductById(offer.id_product_get).subscribe((data: any) => {
-          offer.setProductGet = data;
-        });
-        this.postsService.getProductById(offer.id_product_offers).subscribe((data: any) => {
-          offer.setProductOffers = data;
-        });
-        this.usersService.getUserById(Number(offer.id_user_offers)).subscribe((data: any) => {
-          offer.setUserOffers = data;
-        });
+
+      this.offers.map((offer: any) => {
+        this.postsService.getProductById(offer.id_product_offers).subscribe((resPost: any) => {
+          offer.setProductOffers = resPost;
+
+          this.usersService.getUserById(Number(offer.product_offers.user_id)).subscribe((resUser: any) => {
+            offer.setUserOffers = resUser;
+            return offer
+          });
+
+        })
       });
+
+      this.offers.map((offer: any) => {
+        this.postsService.getProductById(offer.id_product_get).subscribe((resPost: any) => {
+
+          offer.setProductGet = resPost;
+        });
+
+      });
+
     });
   }
 
   setStatusAccepted(offerId: string) {
     this.offersService.updateOfferStatus(offerId, 'Aceptado').subscribe(() => {
       const offer = this.offers.find((offer: Offers) => offer.id === offerId);
+
       if (offer) {
         this.offers = this.offers.filter((offer: Offers) => offer.id !== offerId);
         this.dialog.open(DialogSuccessfulExchangeComponent, {

@@ -12,7 +12,8 @@ import {
   MatCardTitle
 } from "@angular/material/card";
 import {MatIcon} from "@angular/material/icon";
-import {NgForOf, NgStyle} from "@angular/common";
+import {JsonPipe, NgForOf, NgStyle} from "@angular/common";
+import {Products} from "../../model/products/products.model";
 
 @Component({
   selector: 'app-user-sent-offers',
@@ -26,7 +27,8 @@ import {NgForOf, NgStyle} from "@angular/common";
     MatIcon,
     NgForOf,
     NgStyle,
-    MatCardFooter
+    MatCardFooter,
+    JsonPipe
   ],
   templateUrl: './user-sent-offers.component.html',
   styleUrl: './user-sent-offers.component.css'
@@ -41,38 +43,44 @@ export class UserSentOffersComponent implements OnInit{
     this.getAllOffers();
   }
   getAllOffers(){
-    this.offersService.getOffers().subscribe((data: any) => {
+    const userId = localStorage.getItem('id');
+    if(userId === null) return;
+    this.offersService.getAllOffersByUserOwnId(userId).subscribe((data: any) => {
       data.forEach((offer: any) => {
-        if (offer.id_user_offers === localStorage.getItem('id')) {
-          this.offers.push(new Offers(
-              offer.id,
-              offer.id_user_offers,
-              offer.id_product_offers,
-              offer.id_user_get,
-              offer.id_product_get,
-              offer.status
-            )
+
+        this.offers.push(new Offers(
+            offer.id.toString(),
+            offer.productOwnId.toString(),
+            offer.productChangeId.toString(),
+            offer.status
           )
-        }
-    });
-      this.offers.map((offer: any) => {
-          this.postsService.getProductById(offer.id_product_get).subscribe((data: any) => {
-            offer.setProductGet = data;
-          })
+        )
       });
+
       this.offers.map((offer: any) => {
-        this.postsService.getProductById(offer.id_product_offers).subscribe((data: any) => {
-          offer.setProductOffers = data;
+        this.postsService.getProductById(offer.id_product_offers).subscribe((resPost: any) => {
+          offer.setProductOffers = resPost;
+          return offer
         })
       });
+
       this.offers.map((offer: any) => {
-        this.usersService.getUserById(offer.id_user_get).subscribe((data: any) => {
-          offer.setUserGet = data;
+        this.postsService.getProductById(offer.id_product_get).subscribe((resPost: any) => {
+
+          offer.setProductGet = resPost;
+
+          this.usersService.getUserById(Number(offer.product_get.user_id)).subscribe((resUser: any) => {
+            offer.setUserGet = resUser;
+            return offer
+          });
+
         });
+
       });
+
     });
   }
-  protected readonly Offers = Offers;
+
 
   getStatusStyles(status: string) {
     let styles = {};

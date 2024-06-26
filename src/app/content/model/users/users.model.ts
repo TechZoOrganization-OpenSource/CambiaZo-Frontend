@@ -1,23 +1,23 @@
 import {Products} from "../products/products.model";
 
 export class Users {
-  id: number;
+  id: string;
   name: string;
   email: string;
   phone:string;
   password: string;
-  membership: number;
+  membership: string;
   membership_date:string;
   img: string;
   favorites: Products[];
 
   constructor(
-    id: number,
+    id: string,
     name: string,
     email: string,
     phone: string,
     password: string,
-    membership: number,
+    membership: string,
     img: string,
     favorites: Products[]
   ){
