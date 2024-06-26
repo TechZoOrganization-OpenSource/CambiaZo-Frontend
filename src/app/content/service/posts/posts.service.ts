@@ -75,7 +75,6 @@ export class PostsService {
           userId: data.user_id,
           districtId: ids.districtId
         };
-        console.log(backendData)
         return this.http.post<any>(`${this.baseUrl}/api/v1/products`, backendData);
       })
     );
@@ -104,7 +103,6 @@ export class PostsService {
 
   getProductById(id: string): Observable<Products> {
     return this.http.get<any>(`${this.baseUrl}/api/v1/products/${id}`).pipe(
-      tap(response => console.log('Response:', response)), // Log the response
       switchMap(product => {
         const district$ = this.districtCache.get(product.districtId) || this.http.get<any>(`${this.baseUrl}/api/v1/districts/${product.districtId}`).pipe(
           shareReplay(1)
@@ -237,7 +235,6 @@ export class PostsService {
   /******************* Helper Methods **********************/
   private transformProduct(details: any): any {
     if (!details || !details.product) {
-      console.error('Product details are undefined');
       return;
     }
 
@@ -281,7 +278,6 @@ export class PostsService {
 
   private transformProduct2(product: any): any {
     if (!product) {
-      console.error('Product details are undefined');
       return;
     }
     const transformedProduct = {
@@ -307,7 +303,6 @@ export class PostsService {
     if (id) {
       return this.http.get<any>(`${this.baseUrl}/api/v1/countries/${id}`);
     } else {
-      console.error('Country ID is undefined');
       return of(null);
     }
   }

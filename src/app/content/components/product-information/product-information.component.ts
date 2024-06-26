@@ -70,27 +70,27 @@ export class ProductInformationComponent implements OnInit {
     return userId ? Number(userId) : null;
   }
 
-  /*
   addToFavorites(): void {
     const loggedInUserId = this.getLoggedInUserId();
     if (loggedInUserId) {
-      this.usersService.getUserById(loggedInUserId).subscribe((loggedInUser) => {
-        if (!loggedInUser.favorites.some((f: any) => f.product_id === this.product.id)) {
-          loggedInUser.favorites.push({ product_id: this.product.id });
-          this.usersService.putUser(loggedInUser.id, loggedInUser).subscribe((res) => {
-            console.log('Added to favorites:', res);
-            this.dialog.open(DialogFavoritesComponent);
-          });
-        } else {
-          console.log('Product is already in favorites');
+      const favoriteData = {
+        productId: Number(this.product.id),
+        userId: Number(loggedInUserId)
+      };
+      this.usersService.addFavoriteProduct(favoriteData).subscribe(
+        (res) => {
+          console.log('Added to favorites:', res);
+          this.dialog.open(DialogFavoritesComponent);
+        },
+        (error) => {
+          console.error('Error adding to favorites:', error);
         }
-      });
+      );
     } else {
       console.log('User is not logged in');
+      // Handle case where user is not logged in, maybe show login dialog
     }
   }
-  * */
-
 
   offer(): void {
     const loggedInUserId = this.getLoggedInUserId();

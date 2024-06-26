@@ -105,7 +105,6 @@ export class RegisterComponent {
         }
       );
     } else {
-      console.log('Form is invalid');
     }
   }
 }
