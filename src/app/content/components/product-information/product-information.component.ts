@@ -75,7 +75,7 @@ export class ProductInformationComponent implements OnInit {
     if (loggedInUserId) {
       const favoriteData = {
         productId: Number(this.product.id),
-        userId: loggedInUserId
+        userId: Number(loggedInUserId)
       };
       this.usersService.addFavoriteProduct(favoriteData).subscribe(
         (res) => {
