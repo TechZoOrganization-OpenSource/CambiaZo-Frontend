@@ -61,7 +61,7 @@ export class LatesPostsContentComponent implements OnInit{
       this.postService.getCategoriesProducts().subscribe((categories:any)=>{
         this.categories = categories
         this.items.map((item:Products)=>{
-          item.setCategory = categories.find((category:any)=>category.id === item.category_id).name
+          item.setCategory = categories.find((category:any)=>category.id === item.category_id)?.name
         })
       })
       this.loading = false;

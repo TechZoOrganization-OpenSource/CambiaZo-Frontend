@@ -79,7 +79,6 @@ export class ProductInformationComponent implements OnInit {
       };
       this.usersService.addFavoriteProduct(favoriteData).subscribe(
         (res) => {
-          console.log('Added to favorites:', res);
           this.dialog.open(DialogFavoritesComponent);
         },
         (error) => {
@@ -87,7 +86,6 @@ export class ProductInformationComponent implements OnInit {
         }
       );
     } else {
-      console.log('User is not logged in');
       // Handle case where user is not logged in, maybe show login dialog
     }
   }
