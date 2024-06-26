@@ -42,12 +42,23 @@ export class DialogChangeProfileComponent {
               private dialogRef: MatDialogRef<DialogChangeProfileComponent>){ }
 
   onChange(){
-    this.changeImageProfile().then((url)=>{
-      if(url.length)
-        this.usersService.changeProfileImage(this.data,url).subscribe(()=>{
-        this.dialogRef.close()
+    this.usersService.getUserById(this.data).subscribe(user => {
+      this.changeImageProfile().then((url)=>{
+        if(url.length) {
+          const changeImage = {
+            name: user.name,
+            password: user.password,
+            email: user.email,
+            phone: user.phone,
+            profilePicture: url,
+            membershipId: user.membership
+          };
+          this.usersService.changeProfileImage(this.data, changeImage).subscribe(()=>{
+            this.dialogRef.close()
+          })
+        }
       })
-    })
+    });
   }
 
   async changeImageProfile(){

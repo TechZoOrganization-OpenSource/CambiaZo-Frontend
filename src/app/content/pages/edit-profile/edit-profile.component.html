@@ -144,7 +144,6 @@
                   <ng-template #priceSection>
                     <p class="membership-price">${{ membership.price }}<span class="info-price">c/mes</span></p>
                   </ng-template>
-                  <p class="membership-date" *ngIf="membership.price !== 0">Tu plan se renueva el {{ user.membership_date }} </p>
                 </mat-card-subtitle>
               </mat-card-content>
               <mat-card-footer *ngIf="membership.price !== 0">
