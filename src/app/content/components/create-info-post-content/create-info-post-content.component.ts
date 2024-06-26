@@ -89,7 +89,6 @@ export class CreateInfoPostContentComponent implements OnInit{
       }
     });
 
-
   }
 
 
@@ -101,6 +100,7 @@ export class CreateInfoPostContentComponent implements OnInit{
           category.id = category.id.toString()
           return category
         })
+
 
       },error => console.log(error)
     )};
